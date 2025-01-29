@@ -1,0 +1,65 @@
+# Cursor Rules for Bitcoin API SDK
+
+## Project Overview
+This project is a Software Development Kit (SDK) designed to interact with Bitcoin APIs. It provides functionality to:
+- Connect and manage wallet connections.
+- Handle Bitcoin transactions (creation, signing, and broadcasting).
+- Offer utilities for interacting with Bitcoin's blockchain using `bitcoinjs-lib`.
+
+The SDK is built using the following technologies:
+- **Deno**: Lightweight runtime for TypeScript and JavaScript.
+- **Vite**: Frontend tooling for bundling and building.
+- **TypeScript**: Type-safe development.
+- **bitcoinjs-lib**: A library for handling Bitcoin transactions and addresses.
+
+## Goals
+- Simplify interaction with Bitcoin APIs for developers.
+- Ensure security and reliability when handling wallets and transactions.
+- Provide modular and reusable components for building Bitcoin-powered applications.
+
+## Rules and Best Practices
+1. **TypeScript Usage**:
+   - Always use strong typing for all functions and variables.
+   - Avoid using `any` unless absolutely necessary and document its use with comments.
+
+2. **Wallet Management**:
+   - Ensure the wallet connection logic supports multiple wallet types (e.g., Unisat, OKX, Leather).
+   - Do not auto-detect wallets; allow the user to choose the wallet they want to connect.
+
+3. **Deno API Usage**:
+   - Use Deno's built-in APIs for file handling, networking, and process control wherever applicable.
+   - Avoid using third-party modules for features already supported by Deno's standard library.
+
+4. **Security**:
+   - When signing transactions, ensure private keys are never exposed.
+   - Use SIGHASH flags appropriately for different transaction types.
+   - Validate all inputs when interacting with APIs or wallets.
+
+5. **Testing**:
+   - Write unit tests for all modules using Deno's built-in testing tools.
+   - Include integration tests for wallet connections and transaction handling.
+   - Mock APIs and wallet behaviors during testing to avoid relying on external dependencies.
+
+6. **File Structure**:
+   - Organize modules clearly:
+     - `src/`: Core SDK functionality.
+     - `tests/`: Unit and integration tests.
+     - `examples/`: Example usage for developers.
+   - Use consistent naming conventions for files and directories.
+
+## Developer Guidance
+- Always document public-facing methods and classes using JSDoc comments.
+- Follow the project's ESLint and Prettier configurations for consistent code style.
+- If adding a new wallet integration, ensure it adheres to the same interface as existing wallets.
+
+## Resources
+- [Deno Documentation](https://deno.land/manual)
+- [bitcoinjs-lib Documentation](https://github.com/bitcoinjs/bitcoinjs-lib)
+- [Vite Documentation](https://vitejs.dev/)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+
+## Example Prompts for Cursor
+- "Explain how the wallet connection logic works."
+- "Show an example of how to sign and broadcast a Bitcoin transaction."
+- "Write a test for the transaction signing module."
+- "How can I integrate a new wallet into the SDK?"
