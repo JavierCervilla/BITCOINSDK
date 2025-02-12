@@ -8,7 +8,7 @@ export interface InputToSign {
 	sighashTypes: number[];
 }
 
-export interface signPSBTOptions {
+export interface SignPSBTOptions {
 	broadcast?: boolean;
 	autoFinalized?: boolean;
 	inputsToSign?: InputToSign[];
@@ -19,7 +19,7 @@ interface WalletConfig {
 	connect: () => Promise<{ address: string; publicKey: string } | null>;
 	signPSBT: (
 		psbt: string,
-		options?: signPSBTOptions,
+		options?: SignPSBTOptions,
 	) => Promise<string | null>;
 	signMessage: (message: string) => Promise<string | null>;
 	pushTX: (txHex: string) => Promise<string | null>;
@@ -34,7 +34,7 @@ interface WalletContextProps {
 	disconnectWallet: () => void;
 	signPSBT: (
 		psbt: string,
-		options?: signPSBTOptions,
+		options?: SignPSBTOptions,
 	) => Promise<string | null>;
 	signMessage: (message: string) => Promise<string | null>;
 	pushTX?: (txHex: string) => Promise<string | null>;
@@ -43,6 +43,7 @@ interface WalletContextProps {
 interface WalletProviderProps {
 	children: ReactNode;
 	wallets: { [key: string]: WalletConfig };
+	theme: string;
 }
 interface LocalStoredWallets {
 	[providerKey: string]: {
@@ -56,6 +57,7 @@ const WalletContext = createContext<WalletContextProps | undefined>(undefined);
 export const WalletProvider: React.FC<WalletProviderProps> = ({
 	children,
 	wallets,
+	theme="bitcoin-dark",
 }: WalletProviderProps) => {
 	const [walletAddress, setWalletAddress] = useState<string | null>(null);
 	const [publicKey, setPublicKey] = useState<string | null>(null);
@@ -66,6 +68,10 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({
 		// Al inicializar el proveedor, intentar reconectar desde localStorage
 		connectWalletFromLocalStorage();
 	}, []);
+
+	useEffect(() => {
+		document.documentElement.setAttribute("data-theme", theme)
+	}, [theme])
 	// Connect wallet from local storage
 	const connectWalletFromLocalStorage = () => {
 		const storedWallets = localStorage.getItem("wallets");
@@ -130,7 +136,7 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({
 
 	const signPSBT = async (
 		psbt: string,
-		options?: signPSBTOptions,
+		options?: SignPSBTOptions,
 	): Promise<string | null> => {
 		try {
 			// Verifica que el proveedor de la billetera esté definido

@@ -1,254 +1,258 @@
 @import "tailwindcss";
 
 :root {
-    --color-primary: #d4af37;
-    --color-secondary: #2d2d2d;
-    --color-light: #f8f8f8;
-    --color-dark: #1b1b1b;
-    --color-hover: #c09330;
-    --color-text-hover: #ffffff;
+  --primary: #d4af37;
+  --secondary: #2d2d2d;
+  --light: #f8f8f8;
+  --dark: #1b1b1b;
+  --hover: #c09330;
+  --text-hover: #ffffff;
 }
 
-/* Temas */
 [data-theme="bitcoin-light"] {
-  --color-primary: #f7931a;
-  --color-secondary: #3a3a3a;
-  --color-light: #f5f5f5;
-  --color-dark: #121212;
-  --color-hover: #e07c1a;
-  --color-text-hover: #ffffff;
+  --primary: #f7931a;
+  --secondary: #3a3a3a;
+  --light: #f5f5f5;
+  --dark: #121212;
+  --hover: #e07c1a;
+  --text-hover: #ffffff;
 }
 
 [data-theme="bitcoin-dark"] {
-  --color-primary: #f7931a;
-  --color-secondary: #f5f5f5;
-  --color-light: #121212;
-  --color-dark: #f5f5f5;
-  --color-hover: #e07c1a;
-  --color-text-hover: #000000;
-}
-
-[data-theme="cyberpunk-light"] {
-  --color-primary: #00f2ff;
-  --color-secondary: #8a2be2;
-  --color-light: #f5f5f5;
-  --color-dark: #0a0a0a;
-  --color-hover: #00a3cc;
-  --color-text-hover: #000000;
-}
-
-[data-theme="cyberpunk-dark"] {
-  --color-primary: #00f2ff;
-  --color-secondary: #8a2be2;
-  --color-light: #222831;
-  --color-dark: #f5f5f5;
-  --color-hover: #00a3cc;
-  --color-text-hover: #ffffff;
+  --primary: #f7931a;
+  --secondary: #f5f5f5;
+  --light: #121212;
+  --dark: #f5f5f5;
+  --hover: #e07c1a;
+  --text-hover: #000000;
 }
 
 [data-theme="defi-light"] {
-  --color-primary: #25c552;
-  --color-secondary: #243c5a;
-  --color-light: #e3f6e8;
-  --color-dark: #0d1b2a;
-  --color-hover: #1da947;
-  --color-text-hover: #ffffff;
+  --primary: #25c552;
+  --secondary: #243c5a;
+  --light: #e3f6e8;
+  --dark: #0d1b2a;
+  --hover: #1da947;
+  --text-hover: #ffffff;
 }
 
 [data-theme="defi-dark"] {
-  --color-primary: #25c552;
-  --color-secondary: #e3f6e8;
-  --color-light: #0d1b2a;
-  --color-dark: #e3f6e8;
-  --color-hover: #1da947;
-  --color-text-hover: #000000;
+  --primary: #25c552;
+  --secondary: #e3f6e8;
+  --light: #0d1b2a;
+  --dark: #e3f6e8;
+  --hover: #1da947;
+  --text-hover: #000000;
 }
 
 [data-theme="elegant-light"] {
-  --color-primary: #bfa57a;
-  --color-secondary: #444444;
-  --color-light: #f7f7f7;
-  --color-dark: #1f1f1f;
-  --color-hover: #a58c65;
-  --color-text-hover: #ffffff;
+  --primary: #bfa57a;
+  --secondary: #444444;
+  --light: #f7f7f7;
+  --dark: #1f1f1f;
+  --hover: #a58c65;
+  --text-hover: #ffffff;
 }
 
 [data-theme="elegant-dark"] {
-  --color-primary: #bfa57a;
-  --color-secondary: #f7f7f7;
-  --color-light: #1f1f1f;
-  --color-dark: #f7f7f7;
-  --color-hover: #a58c65;
-  --color-text-hover: #000000;
-}
-
-[data-theme="sunset-light"] {
-  --color-primary: #ff9e80;
-  --color-secondary: #ffb74d;
-  --color-light: #f8f0e3;
-  --color-dark: #3c2a2a;
-  --color-hover: #ff6e40;
-  --color-text-hover: #ffffff;
-}
-
-[data-theme="sunset-dark"] {
-  --color-primary: #ff9e80;
-  --color-secondary: #f8f0e3;
-  --color-light: #3c2a2a;
-  --color-dark: #f8f0e3;
-  --color-hover: #ff6e40;
-  --color-text-hover: #000000;
-}
-
-[data-theme="aqua-light"] {
-  --color-primary: #008b8b;
-  --color-secondary: #007a7a;
-  --color-light: #dff6f5;
-  --color-dark: #004949;
-  --color-hover: #26a69a;
-  --color-text-hover: #ffffff;
-}
-
-[data-theme="aqua-dark"] {
-  --color-primary: #008b8b;
-  --color-secondary: #dff6f5;
-  --color-light: #004949;
-  --color-dark: #dff6f5;
-  --color-hover: #26a69a;
-  --color-text-hover: #000000;
+  --primary: #bfa57a;
+  --secondary: #f7f7f7;
+  --light: #1f1f1f;
+  --dark: #f7f7f7;
+  --hover: #a58c65;
+  --text-hover: #000000;
 }
 
 /* NUEVOS TEMAS */
 
 [data-theme="monochrome-light"] {
-    --color-primary: #333333;
-    --color-secondary: #666666;
-    --color-light: #f5f5f5;
-    --color-dark: #1a1a1a;
-    --color-hover: #4d4d4d;
-    --color-text-hover: #ffffff;
-  }
-  
-  [data-theme="monochrome-dark"] {
-    --color-primary: #cccccc;
-    --color-secondary: #999999;
-    --color-light: #1a1a1a;
-    --color-dark: #f5f5f5;
-    --color-hover: #b3b3b3;
-    --color-text-hover: #000000;
-  }
-  
-  [data-theme="pastel-light"] {
-    --color-primary: #a8d8ea;
-    --color-secondary: #aa96da;
-    --color-light: #fcfcfc;
-    --color-dark: #333333;
-    --color-hover: #95c8d8;
-    --color-text-hover: #ffffff;
-  }
-  
-  [data-theme="pastel-dark"] {
-    --color-primary: #aa96da;
-    --color-secondary: #a8d8ea;
-    --color-light: #333333;
-    --color-dark: #fcfcfc;
-    --color-hover: #9785c9;
-    --color-text-hover: #000000;
-  }
-  
-  [data-theme="earth-light"] {
-    --color-primary: #8d6e63;
-    --color-secondary: #6d4c41;
-    --color-light: #f5f5f5;
-    --color-dark: #3e2723;
-    --color-hover: #795548;
-    --color-text-hover: #ffffff;
-  }
-  
-  [data-theme="earth-dark"] {
-    --color-primary: #a1887f;
-    --color-secondary: #bcaaa4;
-    --color-light: #3e2723;
-    --color-dark: #f5f5f5;
-    --color-hover: #8d6e63;
-    --color-text-hover: #000000;
-  }
-  
-  [data-theme="nordic-light"] {
-    --color-primary: #607d8b;
-    --color-secondary: #78909c;
-    --color-light: #eceff1;
-    --color-dark: #263238;
-    --color-hover: #546e7a;
-    --color-text-hover: #ffffff;
-  }
-  
-  [data-theme="nordic-dark"] {
-    --color-primary: #90a4ae;
-    --color-secondary: #b0bec5;
-    --color-light: #263238;
-    --color-dark: #eceff1;
-    --color-hover: #78909c;
-    --color-text-hover: #000000;
-  }
+  --primary: #333333;
+  --secondary: #666666;
+  --light: #f5f5f5;
+  --dark: #1a1a1a;
+  --hover: #4d4d4d;
+  --text-hover: #ffffff;
+}
+
+[data-theme="monochrome-dark"] {
+  --primary: #cccccc;
+  --secondary: #999999;
+  --light: #1a1a1a;
+  --dark: #f5f5f5;
+  --hover: #b3b3b3;
+  --text-hover: #000000;
+}
+
+
+[data-theme="nordic-light"] {
+  --primary: #607d8b;
+  --secondary: #78909c;
+  --light: #eceff1;
+  --dark: #263238;
+  --hover: #546e7a;
+  --text-hover: #ffffff;
+}
+
+[data-theme="nordic-dark"] {
+  --primary: #90a4ae;
+  --secondary: #b0bec5;
+  --light: #263238;
+  --dark: #eceff1;
+  --hover: #78909c;
+  --text-hover: #000000;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
 
 /* Aplicar Tailwind con Variables */
 .bg-primary {
-  background-color: var(--color-primary);
+  background-color: var(--primary);
 }
 
 .text-primary {
-  color: var(--color-primary);
+  color: var(--primary);
 }
 
 .border-primary {
-  border-color: var(--color-primary);
+  border-color: var(--primary);
 }
 
 .bg-secondary {
-  background-color: var(--color-secondary);
+  background-color: var(--secondary);
 }
 
 .text-secondary {
-  color: var(--color-secondary);
+  color: var(--secondary);
 }
 
 .border-secondary {
-  border-color: var(--color-secondary);
+  border-color: var(--secondary);
 }
 
 .bg-light {
-  background-color: var(--color-light);
+  background-color: var(--light);
 }
 
 .text-light {
-  color: var(--color-light);
+  color: var(--light);
 }
 
 .border-light {
-  border-color: var(--color-light);
+  border-color: var(--light);
 }
 
 .bg-dark {
-  background-color: var(--color-dark);
+  background-color: var(--dark);
 }
 
 .text-dark {
-  color: var(--color-dark);
+  color: var(--dark);
 }
 
 .border-dark {
-  border-color: var(--color-dark);
+  border-color: var(--dark);
 }
 
 .bg-hover {
-  background-color: var(--color-hover);
+  background-color: var(--hover);
 }
 
 .text-hover {
-  color: var(--color-text-hover);
+  color: var(--text-hover);
 }
 
 .border-hover {
-  border-color: var(--color-hover);
+  border-color: var(--hover);
+}
+
+.hover\:bg-primary:hover {
+  background-color: var(--primary) !important;
+}
+
+.hover\:text-primary:hover {
+  color: var(--primary) !important;
+}
+
+.hover\:bg-secondary:hover {
+  background-color: var(--secondary) !important;
+}
+
+.hover\:text-secondary:hover {
+  color: var(--secondary) !important;
+}
+
+.hover\:bg-light:hover {
+  background-color: var(--light) !important;
+}
+
+.hover\:text-light:hover {
+  color: var(--light) !important;
+}
+
+.hover\:bg-dark:hover {
+  background-color: var(--dark) !important;
+}
+
+.hover\:text-dark:hover {
+  color: var(--dark) !important;
+}
+
+.hover\:border-primary:hover {
+  border-color: var(--primary) !important;
+}
+
+.hover\:border-secondary:hover {
+  border-color: var(--secondary) !important;
+}
+
+.hover\:border-light:hover {
+  border-color: var(--light) !important;
+}
+
+.hover\:border-dark:hover {
+  border-color: var(--dark) !important;
+}
+
+.via-primary {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--primary), var(--light)) !important; 
+}
+
+.via-secondary {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--secondary), var(--light)) !important;
+}
+
+.via-light {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--light), var(--light)) !important;
+}
+
+
+.via-dark {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--dark), var(--light)) !important;
+}
+
+.from-primary {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--primary), var(--light)) !important;
+}
+
+.from-secondary {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--secondary), var(--light)) !important;
+}
+
+.from-light {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--light), var(--light)) !important;
+}
+
+.from-dark {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--dark), var(--light)) !important;
+}
+
+.to-light {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--light), var(--light)) !important;
+}
+
+.to-dark {
+  background-image: linear-gradient(to bottom right, var(--dark), var(--dark), var(--light)) !important;
 }

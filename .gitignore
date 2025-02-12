@@ -4,3 +4,4 @@ dist
 *storybook.log
 scripts/imports.ts
 .vite
+.cache

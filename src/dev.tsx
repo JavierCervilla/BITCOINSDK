@@ -1,24 +1,15 @@
-import React, {  useEffect } from "react";
+import  React from "react";
 import ReactDOM from "react-dom/client";
-import { WalletProvider, useWallet } from "./context/walletContext.tsx";
-import ConnectWalletButton from "./components/ConnectWallet.tsx";
+import { WalletProvider } from "./context/walletContext.tsx";
 import { walletConfig } from "./index.ts";
 import "./styles/tailwind.css";
+import { OpenBookApp } from "@/components/OpenBookApp/OpenBookApp.component.tsx";
 
 
 function DevApp() {
-  const { walletAddress, walletProvider } = useWallet();
-
-  const theme = "bitcoin-dark";
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-light">
-      <ConnectWalletButton theme={theme} wallets={walletConfig} />
-    </div>
+    <OpenBookApp isOpen={true} onClose={() => {}} />
   );
 }
 

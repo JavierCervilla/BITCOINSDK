@@ -1,5 +1,5 @@
 import { WalletProvider, useWallet } from './context/walletContext.tsx';
-import ConnectWalletButton from './components/ConnectWallet.tsx';
+import ConnectWalletButton from '@/components/ConnectWallet/ConnectWallet.component.tsx';
 
 import { connectLeatherWallet, signPSBTWithLeather, signMessageWithLeather, pushTXWithLeather } from './providers/LeatherProvider.ts';
 import { connectUnisatWallet, signPSBTWithUnisat, pushTXUnisat, signMessageWithUnisat } from './providers/UnisatProvider.ts';
