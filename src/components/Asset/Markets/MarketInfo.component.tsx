@@ -41,7 +41,7 @@ function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mc
         <span className="text-primary">{asset}</span> Markets
       </h2>
       <div className="flex flex-row gap-4">
-        <p className="text-sm text-secondary">BTC Volume: <span className="text-primary">{volume.toLocaleString()} BTC ({Number(volume * btcPrice.USD).toLocaleString()} $)</span></p>
+        <p className="text-sm text-secondary">BTC Volume: <span className="text-primary">{volume.toLocaleString()} BTC <span className="text-xs text-secondary">({Number(volume * btcPrice.USD).toLocaleString()} $)</span></span></p>
         <p className="text-sm text-secondary">MarketCap: <span className="text-primary">{mcap.toLocaleString()} BTC <span className="text-secondary text-xs">({Number(mcap * btcPrice.USD).toLocaleString()} $)</span></span></p>
       </div>
       <Tabs.Root value={activeTab} onValueChange={handleTabChange}>

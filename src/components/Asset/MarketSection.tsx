@@ -73,7 +73,9 @@ interface GetBTCVolumeParams {
 
 function getBTCVolume({ atomicSwapSales, dispenses }: Readonly<GetBTCVolumeParams>) {
   const atomicSwapVolume = atomicSwapSales.reduce((acc, sale) => acc + Number(sale.total_price), 0) * 10 ** -8;
-  const dispenserVolume = dispenses.reduce((acc, dispense) => acc + Number(Number(dispense.dispense_quantity_normalized) * Number(dispense.dispenser.satoshirate_normalized)), 0) * 10 ** -8;
+  console.log(dispenses[0])
+  const dispenserVolume = dispenses.reduce((acc, dispense) => acc + Number(Number(dispense.dispense_quantity_normalized) * Number(dispense.dispenser.satoshirate_normalized)), 0);
+  console.log({atomicSwapVolume, dispenserVolume})
   return atomicSwapVolume + dispenserVolume;
 }
 
