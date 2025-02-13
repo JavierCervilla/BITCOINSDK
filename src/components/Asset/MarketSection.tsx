@@ -29,7 +29,7 @@ function getMarketCap({
   dispenses,
   atomicSwapSales,
   atomicSwapOrders
-}: GetMarketCapParams) {
+}: Readonly<GetMarketCapParams>) {
   if (!atomicSwapOrders.length && !dispensers.length) {
     const lastSale = [dispensers[0], atomicSwapSales[0]].sort((a, b) => b.block_index - a.block_index)[0]
     if (lastSale && 'unit_price' in lastSale && lastSale.unit_price) {
@@ -69,16 +69,15 @@ function getMarketCap({
 interface GetBTCVolumeParams {
   atomicSwapSales: OpenbookAPI.OpenbookAtomicSwap[]
   dispenses: XCPAPI.XCPAPIDispense[]
-  asset: string
 }
 
-function getBTCVolume({ atomicSwapSales, dispenses, asset }: GetBTCVolumeParams) {
+function getBTCVolume({ atomicSwapSales, dispenses }: Readonly<GetBTCVolumeParams>) {
   const atomicSwapVolume = atomicSwapSales.reduce((acc, sale) => acc + Number(sale.total_price), 0) * 10 ** -8;
   const dispenserVolume = dispenses.reduce((acc, dispense) => acc + Number(Number(dispense.dispense_quantity_normalized) * Number(dispense.dispenser.satoshirate_normalized)), 0) * 10 ** -8;
   return atomicSwapVolume + dispenserVolume;
 }
 
-export function MarketSection({ asset, supply }: MarketSectionProps) {
+export function MarketSection({ asset, supply }: Readonly<MarketSectionProps>) {
   const [swapSales, setSwapSales] = useState<OpenbookAPI.OpenbookAtomicSwap[]>([]);
   const [swapOrders, setSwapOrders] = useState<OpenbookAPI.OpenbookAtomicSwap[]>([]);
   const [dispenses, setDispenses] = useState<XCPAPI.XCPAPIDispenser[]>([]);
@@ -115,7 +114,6 @@ export function MarketSection({ asset, supply }: MarketSectionProps) {
       setVolume(getBTCVolume({
         atomicSwapSales: swapSalesData.result,
         dispenses: dispensesData,
-        asset
       }));
     } catch (error) {
       console.error("Error fetching data:", error);

@@ -15,7 +15,7 @@ interface SendActionProps {
   balance: XCPAPI.Balance;
 }
 
-export function UTXOSendAction({ balance }: SendActionProps): React.ReactNode {
+export function UTXOSendAction({ balance }: Readonly<SendActionProps>): React.ReactNode {
   const [recipient, setRecipient] = useState("");
   const [loading, setLoading] = useState(false);
   const { closeModal } = useModal();
@@ -65,7 +65,7 @@ export function UTXOSendAction({ balance }: SendActionProps): React.ReactNode {
         {
           content: (
             <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium text-primary">{error.message}</p>
+              <p className="text-sm font-medium text-primary">{error?.message}</p>
             </div>
           ),
           type: "error"

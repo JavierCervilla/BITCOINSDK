@@ -9,7 +9,7 @@ interface AtomicSwapItemProps {
   btcPrice: BTCPrice
 }
 
-function AtomicSwapItemComponent({ atomicSwap, btcPrice }: AtomicSwapItemProps) {
+function AtomicSwapItemComponent({ atomicSwap, btcPrice }: Readonly<AtomicSwapItemProps>) {
   const { walletAddress } = useWallet()
 
   return (

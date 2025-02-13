@@ -8,7 +8,7 @@ interface DispenseItemProps {
   btcPrice: BTCPrice
 }
 
-function DispenseItemComponent({ dispense, btcPrice }: DispenseItemProps) {
+function DispenseItemComponent({ dispense, btcPrice }: Readonly<DispenseItemProps>) {
   return (
     <div className="flex flex-col p-4 space-y-4 transition-colors border rounded-lg border-primary md:flex-row md:space-y-0 md:gap-2 md:justify-between">
       <div className="flex justify-between items-center md:flex-col md:w-1/5 md:items-start md:m-auto">

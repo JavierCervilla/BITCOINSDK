@@ -11,7 +11,7 @@ interface DispensersListProps {
   btcPrice: BTCPrice
 }
 
-function DispensersListComponent({ dispensers, isLoading, btcPrice }: DispensersListProps) {
+function DispensersListComponent({ dispensers, isLoading, btcPrice }: Readonly<DispensersListProps>) {
   const ROW_HEIGHT = useMemo(() => {
     if (typeof globalThis !== "undefined") {
       if (globalThis.innerWidth < 640) return 260;
@@ -50,7 +50,7 @@ function DispensersListComponent({ dispensers, isLoading, btcPrice }: Dispensers
           itemSize={ROW_HEIGHT}
           width="100%"
         >
-          {({ index, style }: { index: number; style: React.CSSProperties }) => {
+          {({ index, style }: Readonly<{ index: number; style: React.CSSProperties }>) => {
             const dispenser = dispensers[index]
             return (
               <div style={style}>

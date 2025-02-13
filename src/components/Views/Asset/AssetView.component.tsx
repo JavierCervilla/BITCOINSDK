@@ -4,8 +4,6 @@ import { Loader } from "@/components/Loader/Loader.component.tsx";
 import { bitcoinsdk } from "@/lib/index.ts";
 import { useParams } from "react-router-dom";
 import { Media } from "@/components/Asset/Media.component.tsx";
-import { MarketInfo } from "@/components/Asset/Markets/MarketInfo.component.tsx";
-import { RecentSales } from "../../Asset/RecentSales/RecentSales.component.tsx";
 import { AssetInfo } from "@/components/Asset/AssetInfo.component.tsx";
 import { BalanceSection } from "@/components/Asset/Balance/BalanceSection.component.tsx";
 import { MarketSection } from "@/components/Asset/MarketSection.tsx";
@@ -15,7 +13,7 @@ export function AssetView() {
   const [asset, setAsset] = useState<| null>(null);
   useEffect(() => {
     setIsLoading(true);
-    bitcoinsdk.counterparty.getAsset({ asset: assetid as string }).then((asset) => {
+    bitcoinsdk.counterparty.getAsset({ asset: assetid }).then((asset) => {
       setAsset(asset);
       setIsLoading(false);
     }).catch((error) => {
@@ -48,10 +46,10 @@ export function AssetView() {
             <AssetInfo asset={asset} />
           </div>
           <div className="flex flex-col gap-4 p-1 border border-secondary rounded-lg">
-            <BalanceSection asset={assetid as string} />
+            <BalanceSection asset={assetid} />
           </div>
         </div>
-        <MarketSection asset={assetid as string} supply={Number(asset?.supply_normalized) ?? 0} />
+        <MarketSection asset={assetid} supply={Number(asset?.supply_normalized) || 0} />
       </div>
     </div>
   )

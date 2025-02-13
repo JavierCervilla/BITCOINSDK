@@ -2,7 +2,7 @@ import { Media } from "@/components/Asset/Media.component.tsx";
 import type { XCPAssetBalance } from "@/types/openbook.d.ts";
 import { useNavigate } from "react-router-dom";
 
-export function Asset({ asset }: { asset: XCPAssetBalance }) {
+export function Asset({ asset }: Readonly<{ asset: XCPAssetBalance }>) {
   const navigate = useNavigate();
 
   function handleURLClick() {

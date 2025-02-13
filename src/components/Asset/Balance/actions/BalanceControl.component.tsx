@@ -9,7 +9,7 @@ interface BalanceControlProps {
   action: React.ReactNode
 }
 
-export function BalanceControl({ icon: Icon, label, action }: BalanceControlProps): React.ReactNode {
+export function BalanceControl({ icon: Icon, label, action }: Readonly<BalanceControlProps>): React.ReactNode {
   const { openModal } = useModal()
   const [showTooltip, setShowTooltip] = useState(false)
 

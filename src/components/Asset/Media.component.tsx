@@ -1,6 +1,5 @@
 import type React from "react";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import stampsLogo from "@/assets/stamps.svg";
 import type { Cip25JsonOutput, Media as IMedia } from "@/types/cip25.d.ts";
 import { openbook } from "@/lib/openbook/api.ts";
 import { Loader } from "@/components/Loader/Loader.component.tsx";
@@ -18,7 +17,7 @@ interface AssetImageProps {
 const STAMPS_ENDPOINT = "https://stamps.0.srcpad.pro/s";
 const XCP_ENDPOINT = "https://counterparty.s3.us-east-1.amazonaws.com";
 
-export const Media: React.FC<AssetImageProps> = ({ asset, className = "" }: AssetImageProps) => {
+export const Media: React.FC<AssetImageProps> = ({ asset, className = "" }: Readonly<AssetImageProps>) => {
   const { asset: assetName, description } = asset;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -185,14 +184,6 @@ export const Media: React.FC<AssetImageProps> = ({ asset, className = "" }: Asse
           <Loader className="w-8 h-8 animate-spin" />
         </div>
       )}
-
-      {/* {isStamps && (
-        <img
-          src={stampsLogo}
-          alt="stamps logo"
-          className="absolute bottom-2 left-2 w-10 h-10 rounded-full border-4 border-black shadow bg-secondary p-1"
-        />
-      )} */}
 
       {isStamps && (
         <div className="absolute bottom-2 left-2 w-10 h-10 rounded-full border-4 border-black shadow bg-secondary p-1">

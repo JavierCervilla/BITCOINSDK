@@ -2,7 +2,8 @@
   "tasks": {
     "dev": "deno run -A npm:vite --mode dev",
     "ladle": "deno run -A npm:@ladle/react dev",
-    "build": "deno run -A npm:vite build"
+    "build": "deno run -A npm:vite build",
+    "lint": "deno lint"
   },
   "compilerOptions": {
     "lib": ["ES2020", "DOM", "DOM.Iterable", "deno.ns"],

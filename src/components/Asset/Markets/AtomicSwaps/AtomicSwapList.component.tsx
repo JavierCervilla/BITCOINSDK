@@ -11,7 +11,7 @@ interface AtomicSwapListProps {
   btcPrice: BTCPrice
 }
 
-function AtomicSwapListComponent({ btcPrice, swaps, isLoading }: AtomicSwapListProps) {
+function AtomicSwapListComponent({ btcPrice, swaps, isLoading }: Readonly<AtomicSwapListProps>) {
   const ROW_HEIGHT = useMemo(() => {
     if (typeof globalThis !== "undefined") {
       if (globalThis.innerWidth < 640) return 260;
@@ -50,7 +50,7 @@ function AtomicSwapListComponent({ btcPrice, swaps, isLoading }: AtomicSwapListP
           itemSize={ROW_HEIGHT}
           width="100%"
         >
-          {({ index, style }: { index: number; style: React.CSSProperties }) => {
+          {({ index, style }: Readonly<{ index: number; style: React.CSSProperties }>) => {
             const swap = swaps[index]
             return (
               <div style={style}>

@@ -12,7 +12,7 @@ interface AtomicSwapListProps {
   btcPrice: BTCPrice
 }
 
-function AtomicSwapListComponent({ asset, swaps, isLoading, btcPrice }: AtomicSwapListProps) {
+function AtomicSwapListComponent({ asset, swaps, isLoading, btcPrice }: Readonly<AtomicSwapListProps>) {
   const ROW_HEIGHT = useMemo(() => {
     if (typeof globalThis !== "undefined") {
       if (globalThis.innerWidth < 640) return 260;

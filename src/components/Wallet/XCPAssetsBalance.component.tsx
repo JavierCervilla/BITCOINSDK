@@ -2,7 +2,7 @@ import type { XCPAssetBalance } from "@/types/openbook.d.ts";
 import { Asset } from "@/components/Asset/AssetCard.component.tsx";
 
 
-export function XCPAssetsBalance({ assets }: { assets: XCPAssetBalance[] }) {
+export function XCPAssetsBalance({ assets }: Readonly<{ assets: XCPAssetBalance[] }>) {
   if (!assets?.length) return null;
 
   return (

@@ -23,7 +23,7 @@ interface RecentSalesProps {
   isLoading: boolean
 }
 
-function RecentSalesComponent({ asset, btcPrice, swaps, dispenses, isLoading }: RecentSalesProps) {
+function RecentSalesComponent({ asset, btcPrice, swaps, dispenses, isLoading }: Readonly<RecentSalesProps>) {
   const [activeTab, setActiveTab] = useState("swaps");
 
   const handleTabChange = useCallback((value: string) => {

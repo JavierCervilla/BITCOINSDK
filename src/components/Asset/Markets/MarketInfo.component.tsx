@@ -24,7 +24,7 @@ interface MarketInfoProps {
   volume: number
 }
 
-function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mcap, volume }: MarketInfoProps) {
+function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mcap, volume }: Readonly<MarketInfoProps>) {
   const [activeTab, setActiveTab] = useState("swaps");
 
   const handleTabChange = useCallback((value: string) => {

@@ -13,7 +13,7 @@ interface DispensesListProps {
 
 
 
-const DispensesListComponent = ({ dispenses, isLoading, btcPrice }: DispensesListProps) => {
+const DispensesListComponent = ({ dispenses, isLoading, btcPrice }: Readonly<DispensesListProps>) => {
   
   const ROW_HEIGHT = useMemo(() => {
     if (typeof globalThis !== "undefined") {
@@ -52,7 +52,7 @@ const DispensesListComponent = ({ dispenses, isLoading, btcPrice }: DispensesLis
         itemSize={ROW_HEIGHT}
         width="100%"
       >
-        {({ index, style }: { index: number; style: React.CSSProperties }) => {
+        {({ index, style }: Readonly<{ index: number; style: React.CSSProperties }>) => {
           const dispense = dispenses[index];
           return (
             <div style={style}>
