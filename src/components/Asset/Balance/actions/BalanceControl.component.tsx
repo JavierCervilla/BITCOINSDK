@@ -6,10 +6,10 @@ import { useState } from "react"
 interface BalanceControlProps {
   icon: LucideIcon
   label: string
-  action: () => React.ReactNode
+  action: React.ReactNode
 }
 
-export function BalanceControl({ icon: Icon, label, action }: BalanceControlProps) {
+export function BalanceControl({ icon: Icon, label, action }: BalanceControlProps): React.ReactNode {
   const { openModal } = useModal()
   const [showTooltip, setShowTooltip] = useState(false)
 

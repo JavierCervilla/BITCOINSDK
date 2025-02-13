@@ -15,7 +15,7 @@ interface SendActionProps {
   balance: XCPAPI.Balance;
 }
 
-export function UTXOSendAction({ balance }: SendActionProps) {
+export function UTXOSendAction({ balance }: SendActionProps): React.ReactNode {
   const [recipient, setRecipient] = useState("");
   const [loading, setLoading] = useState(false);
   const { closeModal } = useModal();
