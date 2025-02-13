@@ -1,49 +1,35 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { cn } from "@/lib/utils/style.ts";
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 
 import type * as OpenbookAPI from "@/lib/openbook/api.d.ts"
 import type * as XCPAPI from "@/lib/counterparty/api.d.ts"
 
-import { bitcoinsdk } from "@/lib/index.ts"
 import { DispensesList } from "@/components/Asset/RecentSales/Dispense/DispenseList.component.tsx";
 import { AtomicSwapList } from "@/components/Asset/RecentSales/AtomicSwaps/AtomicSwapList.component.tsx";
 import type { BTCPrice } from "@/lib/bitcoin/api.d.ts";
+import { Loader } from "@/components/Loader/Loader.component.tsx";
+
 const tabs = [
   { value: "swaps", label: "Atomic Swaps" },
   { value: "dispenses", label: "Dispenses" },
 ] as const;
 
-export function RecentSales({ asset }: { asset: string }) {
+interface RecentSalesProps {
+  asset: string
+  btcPrice: BTCPrice
+  swaps: OpenbookAPI.OpenbookAtomicSwap[]
+  dispenses: XCPAPI.XCPAPIDispenser[]
+  isLoading: boolean
+}
+
+export function RecentSales({ asset, btcPrice, swaps, dispenses, isLoading }: RecentSalesProps) {
   const [activeTab, setActiveTab] = useState("swaps");
-  const [swaps, setSwaps] = useState<OpenbookAPI.OpenbookAtomicSwap[]>([]);
-  const [dispenses, setDispenses] = useState<XCPAPI.XCPAPIDispenser[]>([]);
-  const [btcPrice, setBtcPrice] = useState<BTCPrice | null>(null);
-  const [isLoading, setIsLoading] = useState(true)
-
-  const fetchData = useCallback(async () => {
-    setIsLoading(true)
-    try {
-      const [swapsData, dispensesData, btc_price] = await Promise.all([
-        bitcoinsdk.openbook.getAtomicSalesByAsset({ asset }),
-        bitcoinsdk.counterparty.getDispenses({ asset }),
-        bitcoinsdk.bitcoin.getBTCPrice()
-      ])
-      setSwaps(swapsData.result)
-      setDispenses(dispensesData)
-      setBtcPrice(btc_price)
-    } catch (error) {
-      console.error("Error fetching data:", error)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [asset])
-
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
 
 
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <div className="bg-light p-4 rounded-lg shadow-md text-dark w-full border border-secondary">

@@ -8,6 +8,7 @@ import { MarketInfo } from "@/components/Asset/Markets/MarketInfo.component.tsx"
 import { RecentSales } from "../../Asset/RecentSales/RecentSales.component.tsx";
 import { AssetInfo } from "@/components/Asset/AssetInfo.component.tsx";
 import { BalanceSection } from "@/components/Asset/Balance/BalanceSection.component.tsx";
+import { MarketSection } from "@/components/Asset/MarketSection.tsx";
 export function AssetView() {
   const { assetid } = useParams();
   const [isLoading, setIsLoading] = useState(false)
@@ -50,11 +51,7 @@ export function AssetView() {
             <BalanceSection asset={assetid as string} />
           </div>
         </div>
-
-        <div className="flex flex-col gap-4 w-full">
-          <MarketInfo asset={assetid as string} />
-          <RecentSales asset={assetid as string} />
-        </div>
+        <MarketSection asset={assetid as string} />
       </div>
     </div>
   )

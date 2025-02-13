@@ -27,7 +27,6 @@ async function composeAdapter(rawTransaction: string) {
     try {
         const psbt = new bitcoin.Psbt()
         const tx = bitcoin.Transaction.fromHex(rawTransaction)
-
         const inputsToSign: InputToSign[] = []
         let index = 0;
         for (const input of tx.ins) {
@@ -35,7 +34,6 @@ async function composeAdapter(rawTransaction: string) {
             const { result: raw_tx } = await rpc.getRawTransaction({ txid, verbose: false });
             const prevTx = bitcoin.Transaction.fromHex(raw_tx);
             const output = prevTx.outs[input.index];
-
             const address = bitcoin.address.fromOutputScript(output.script, bitcoin.networks.bitcoin);
             const isSegWit = output.script.length === 22 && output.script[0] === 0;
             psbt.addInput({
@@ -55,7 +53,6 @@ async function composeAdapter(rawTransaction: string) {
             })
             index++;
         }
-
         for (const output of tx.outs) {
             psbt.addOutput(output)
         }
@@ -68,7 +65,6 @@ async function composeAdapter(rawTransaction: string) {
         throw error
     }
 }
-
 
 export const counterparty = {
     getAsset: async ({ asset }: { asset: string }) => {
@@ -163,10 +159,9 @@ export const counterparty = {
             inputsToSign
         }
     },
-    detachFromUTXO: async ({ utxo, destination }: { asset: string, destination: string }) => {
-        const endpoint = new URL(`${CONFIG.COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/compose/attach`)
+    detachFromUTXO: async ({ utxo, destination }: { utxo: string, destination: string }) => {
+        const endpoint = new URL(`${CONFIG.COUNTERPARTY.ENDPOINT}/v2/utxos/${utxo}/compose/detach`)
         endpoint.searchParams.set("destination", destination);
-        endpoint.searchParams.set("utxo", utxo);
         endpoint.searchParams.set("verbose", "True");
         const response = await fetch(endpoint);
         const data = await response.json() as XCPAPI.XCPAPICompose<XCPAPI.XCPAPISendAsset>;

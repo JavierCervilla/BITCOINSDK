@@ -23,10 +23,9 @@ export function UTXODetachAction({ balance }: SendActionProps) {
   async function sendTransaction() {
     const params = {
       utxo: balance.utxo,
-      address: walletAddress as string,
-      amount: qty as number,
+      destination: walletAddress as string,
     };
-    const { psbt, inputsToSign } = await bitcoinsdk.counterparty.attachToUTXO(params)
+    const { psbt, inputsToSign } = await bitcoinsdk.counterparty.detachFromUTXO(params)
     const signedPsbt = await signPSBT(psbt, {
       inputsToSign,
       autoFinalized: false,

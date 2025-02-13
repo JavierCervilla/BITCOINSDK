@@ -14,6 +14,7 @@ export function AtomicSwapList({ btcPrice, swaps, isLoading }: AtomicSwapListPro
     return <Loader />
   }
 
+  console.log({ swaps })
   if (swaps.length === 0) {
     return <div className="text-center py-4 text-secondary">No Atomic swaps orders available</div>
   }
