@@ -82,7 +82,7 @@ function BalanceSectionContent({ asset }: { asset: string }) {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 sm:min-h-[calc(100vh-180px)] md:min-h-[180px]">
       <h2 className="font-bold text-lg flex items-center gap-2 text-primary">
         <Wallet className="w-5 h-5" />
         Your balance

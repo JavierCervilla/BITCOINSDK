@@ -17,7 +17,7 @@ export function AtomicSwapList({ asset, swaps, isLoading, btcPrice }: AtomicSwap
 
   if (swaps.length === 0) {
     return (
-      <div className="text-center py-4 text-secondary flex flex-col  gap-2 min-h-[calc(100vh-200px)] md:min-h-[200px]">
+      <div className="text-center py-4 text-secondary flex flex-col  gap-2">
         <span className="text-sm font-medium">No Atomic swaps sales available</span>
       </div>
     )

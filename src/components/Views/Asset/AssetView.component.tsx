@@ -39,11 +39,11 @@ export function AssetView() {
         <BookImage className="w-6 h-6" />
         {assetid}
       </h1>
-      <div className="flex flex-col lg:flex-row gap-4 max-h-[500px]">
+      <div className="flex flex-col lg:flex-row gap-4 max-h-[480px]">
         <div className="flex flex-col gap-4  min-w-1/3 lg:max-w-[400px] max-w-none">
-          <div className="flex flex-col gap-2 p-1 border border-secondary rounded-lg">
+          <div className="flex flex-col gap-2 p-1 border border-secondary rounded-lg ">
             <Media
-              className="w-full h-auto bg-transparent border-none rounded-lg transition-transform duration-300 group-hover:scale-110"
+              className="w-full h-auto bg-transparent border-none rounded-lg transition-transform duration-300 group-hover:scale-110 max-h-[390px]"
               asset={{ asset: asset?.asset, name: asset?.asset_longname, description: asset?.description }} />
             <AssetInfo asset={asset} />
           </div>

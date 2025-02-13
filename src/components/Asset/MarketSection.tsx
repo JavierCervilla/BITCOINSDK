@@ -32,11 +32,11 @@ function getMarketCap({
 }: GetMarketCapParams) {
   if (!atomicSwapOrders.length && !dispensers.length) {
     const lastSale = [dispensers[0], atomicSwapSales[0]].sort((a, b) => b.block_index - a.block_index)[0]
-    if ('unit_price' in lastSale && lastSale.unit_price) {
+    if (lastSale && 'unit_price' in lastSale && lastSale.unit_price) {
       const floor_price = lastSale.unit_price * 10 ** -8;
       return floor_price * supply;
     }
-    if ('satoshirate_normalized' in lastSale && lastSale.satoshirate_normalized) {
+    if (lastSale && 'satoshirate_normalized' in lastSale && lastSale.satoshirate_normalized) {
       const floor_price = Number(lastSale.satoshirate_normalized);
       return floor_price * supply;
     }

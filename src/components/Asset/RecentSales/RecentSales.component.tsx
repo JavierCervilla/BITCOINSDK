@@ -32,7 +32,7 @@ export function RecentSales({ asset, btcPrice, swaps, dispenses, isLoading }: Re
   }
 
   return (
-    <div className="bg-light p-4 rounded-lg shadow-md text-dark w-full border border-secondary">
+    <div className="bg-light p-4 rounded-lg shadow-md text-dark w-full border border-secondarysm:min-h-[calc(100vh-358px)] md:min-h-[358px]">
       <h2 className="font-bold text-lg">
         <span className="text-primary">{asset}</span> Recent Sales
       </h2>
