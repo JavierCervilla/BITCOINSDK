@@ -5,6 +5,7 @@ import type { Cip25JsonOutput, Media as IMedia } from "@/types/cip25.d.ts";
 import { openbook } from "@/lib/openbook/api.ts";
 import { Loader } from "@/components/Loader/Loader.component.tsx";
 import { PlaceholderSVG } from "@/components/Asset/Placeholder.component.tsx";
+import { Stamp } from "@/components/Stamp/Stamp.component.tsx";
 
 interface AssetImageProps {
   asset: {
@@ -39,7 +40,7 @@ export const Media: React.FC<AssetImageProps> = ({ asset, className = "" }: Asse
   const cip25Url = getUrl(description);
   const isStamps = useMemo(() => description?.toLowerCase().includes("stamp:"), [description]);
 
-  
+
   const preLoadImage = useCallback((src: string) => {
     return new Promise<void>((resolve, reject) => {
       const img = new Image();
@@ -185,12 +186,18 @@ export const Media: React.FC<AssetImageProps> = ({ asset, className = "" }: Asse
         </div>
       )}
 
-      {isStamps && (
+      {/* {isStamps && (
         <img
           src={stampsLogo}
           alt="stamps logo"
-          className="absolute bottom-2 left-2 w-10 h-10 rounded-full border-4 border-black shadow bg-dark p-1"
+          className="absolute bottom-2 left-2 w-10 h-10 rounded-full border-4 border-black shadow bg-secondary p-1"
         />
+      )} */}
+
+      {isStamps && (
+        <div className="absolute bottom-2 left-2 w-10 h-10 rounded-full border-4 border-black shadow bg-secondary p-1">
+          <Stamp primaryColor="text-light" secondaryColor="text-dark"  />
+        </div>
       )}
 
       {renderContent()}

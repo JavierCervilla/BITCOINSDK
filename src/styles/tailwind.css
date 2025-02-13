@@ -10,21 +10,39 @@
 }
 
 [data-theme="bitcoin-light"] {
-  --primary: #f7931a;
-  --secondary: #3a3a3a;
-  --light: #f5f5f5;
-  --dark: #121212;
+  --primary: #e07c1a;
+  --secondary: #2b261e;
+  --light: #e7d4be;
+  --dark: #1a1208;
   --hover: #e07c1a;
-  --text-hover: #ffffff;
+  --text-hover: #000000;
 }
 
 [data-theme="bitcoin-dark"] {
-  --primary: #f7931a;
+  --primary: #e07c1a;
   --secondary: #f5f5f5;
-  --light: #121212;
+  --light: #090603;
   --dark: #f5f5f5;
   --hover: #e07c1a;
   --text-hover: #000000;
+}
+
+[data-theme="NSID-light"] {
+  --primary: rgb(1,66,53);
+  --secondary: rgb(3, 28, 23);
+  --light: rgb(192, 211, 192);
+  --dark: rgb(3, 28, 23);
+  --hover: rgb(2, 103, 82);
+  --text-hover: rgb(182, 222, 182);
+}
+
+[data-theme="NSID-dark"] {
+  --primary: rgb(3, 114, 92);
+  --secondary: rgb(255,255,255);
+  --light: rgb(0, 9, 7);
+  --dark: rgb(255,255,255);
+  --hover: rgb(2, 103, 82);
+  --text-hover: rgb(255,255,255);
 }
 
 [data-theme="defi-light"] {

@@ -134,6 +134,19 @@ export const counterparty = {
             inputsToSign
         }
     },
+    sendAssetInUTXO: async ({ utxo, destination }: { utxo: string, destination: string }) => {
+        const endpoint = new URL(`${CONFIG.COUNTERPARTY.ENDPOINT}/v2/utxos/${utxo}/compose/movetoutxo`)
+        endpoint.searchParams.set("verbose", "True");
+        endpoint.searchParams.set("destination", destination);
+        const response = await fetch(endpoint);
+        const data = await response.json() as XCPAPI.XCPAPICompose<XCPAPI.XCPAPISendAsset>;
+        const { psbt, inputsToSign } = await composeAdapter(data.result.rawtransaction);
+        return {
+            ...data.result,
+            psbt: psbt,
+            inputsToSign
+        }
+    },
     attachToUTXO: async ({ asset, address, amount }: { asset: string, address: string, amount: number }) => {
         const endpoint = new URL(`${CONFIG.COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/compose/attach`)
         endpoint.searchParams.set("asset", asset);
