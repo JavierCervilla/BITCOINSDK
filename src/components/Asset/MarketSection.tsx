@@ -62,7 +62,6 @@ function getMarketCap({
   if (floor_price_dispenser > 0 && floor_price_atomic_swap > 0) {
     floor_price = Math.min(floor_price_dispenser, floor_price_atomic_swap);
   }
-  console.log({ floor_price })
 
   return (floor_price * supply) * 10 ** -8;
 }

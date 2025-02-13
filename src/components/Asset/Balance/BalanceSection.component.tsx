@@ -68,7 +68,6 @@ function BalanceSectionContent({ asset }: { asset: string }) {
     bitcoinsdk.counterparty
       .getTokenBalance({ asset: asset as string, address: walletAddress as string })
       .then((bal) => {
-        console.log(bal)
         setBalance(bal)
         setLoading(false)
       })

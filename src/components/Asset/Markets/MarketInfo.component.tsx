@@ -27,7 +27,6 @@ interface MarketInfoProps {
 export function MarketInfo({ asset, btcPrice, swaps, dispensers, isLoading, mcap, volume }: MarketInfoProps) {
   const [activeTab, setActiveTab] = useState("swaps");
 
-  console.log({ dispensers, swaps })
   if (isLoading) {
     return <Loader />
   }

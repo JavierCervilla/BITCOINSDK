@@ -14,7 +14,6 @@ export function AtomicSwapList({ btcPrice, swaps, isLoading }: AtomicSwapListPro
     return <Loader />
   }
 
-  console.log({ swaps })
   if (swaps.length === 0) {
     return (
       <div className="text-center py-4 text-secondary flex flex-col  gap-2 min-h-[calc(100vh-200px)] md:min-h-[200px]">
