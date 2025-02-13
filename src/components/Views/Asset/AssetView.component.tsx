@@ -4,8 +4,6 @@ import { Loader } from "@/components/Loader/Loader.component.tsx";
 import { bitcoinsdk } from "@/lib/index.ts";
 import { useParams } from "react-router-dom";
 import { Media } from "@/components/Asset/Media.component.tsx";
-import { MarketInfo } from "@/components/Asset/Markets/MarketInfo.component.tsx";
-import { RecentSales } from "../../Asset/RecentSales/RecentSales.component.tsx";
 import { AssetInfo } from "@/components/Asset/AssetInfo.component.tsx";
 import { BalanceSection } from "@/components/Asset/Balance/BalanceSection.component.tsx";
 import { MarketSection } from "@/components/Asset/MarketSection.tsx";
@@ -15,7 +13,7 @@ export function AssetView() {
   const [asset, setAsset] = useState<| null>(null);
   useEffect(() => {
     setIsLoading(true);
-    bitcoinsdk.counterparty.getAsset({ asset: assetid as string }).then((asset) => {
+    bitcoinsdk.counterparty.getAsset({ asset: assetid }).then((asset) => {
       setAsset(asset);
       setIsLoading(false);
     }).catch((error) => {
@@ -39,19 +37,19 @@ export function AssetView() {
         <BookImage className="w-6 h-6" />
         {assetid}
       </h1>
-      <div className="flex flex-col lg:flex-row gap-4 max-h-[500px]">
+      <div className="flex flex-col lg:flex-row gap-4 max-h-[480px]">
         <div className="flex flex-col gap-4  min-w-1/3 lg:max-w-[400px] max-w-none">
-          <div className="flex flex-col gap-2 p-1 border border-secondary rounded-lg">
+          <div className="flex flex-col gap-2 p-1 border border-secondary rounded-lg ">
             <Media
-              className="w-full h-auto bg-transparent border-none rounded-lg transition-transform duration-300 group-hover:scale-110"
+              className="w-full h-auto bg-transparent border-none rounded-lg transition-transform duration-300 group-hover:scale-110 max-h-[390px]"
               asset={{ asset: asset?.asset, name: asset?.asset_longname, description: asset?.description }} />
             <AssetInfo asset={asset} />
           </div>
           <div className="flex flex-col gap-4 p-1 border border-secondary rounded-lg">
-            <BalanceSection asset={assetid as string} />
+            <BalanceSection asset={assetid} />
           </div>
         </div>
-        <MarketSection asset={assetid as string} />
+        <MarketSection asset={assetid} supply={Number(asset?.supply_normalized) || 0} />
       </div>
     </div>
   )

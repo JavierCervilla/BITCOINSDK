@@ -15,14 +15,14 @@ interface SendActionProps {
   balance: XCPAPI.Balance;
 }
 
-export function UTXODetachAction({ balance }: SendActionProps) {
+export function UTXODetachAction({ balance }: Readonly<SendActionProps>) {
   const [loading, setLoading] = useState(false);
   const { closeModal } = useModal();
   const { walletAddress, signPSBT } = useWallet();
 
   async function sendTransaction() {
     const params = {
-      utxo: balance.utxo,
+      utxo: balance.utxo as string,
       destination: walletAddress as string,
     };
     const { psbt, inputsToSign } = await bitcoinsdk.counterparty.detachFromUTXO(params)

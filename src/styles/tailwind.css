@@ -1,34 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #d4af37;
-  --secondary: #2d2d2d;
-  --light: #f8f8f8;
-  --dark: #1b1b1b;
-  --hover: #c09330;
-  --text-hover: #ffffff;
+  --primary: rgb(212, 175, 55);
+  --secondary: rgb(45, 45, 45);
+  --light: rgb(248, 248, 248);
+  --dark: rgb(27, 27, 27);
+  --hover: rgb(192, 147, 48);
+  --text-hover: rgb(255, 255, 255);
 }
 
 [data-theme="bitcoin-light"] {
-  --primary: #e07c1a;
-  --secondary: #2b261e;
-  --light: #e7d4be;
-  --dark: #1a1208;
-  --hover: #e07c1a;
-  --text-hover: #000000;
+  --primary: rgb(224, 124, 26);
+  --secondary: rgb(43, 38, 30);
+  --light: rgb(231, 212, 190);
+  --dark: rgb(26, 18, 8);
+  --hover: rgb(224, 124, 26);
+  --text-hover: rgb(0, 0, 0);
 }
 
 [data-theme="bitcoin-dark"] {
-  --primary: #e07c1a;
-  --secondary: #f5f5f5;
-  --light: #090603;
-  --dark: #f5f5f5;
-  --hover: #e07c1a;
-  --text-hover: #000000;
+  --primary: rgb(224, 124, 26);
+  --secondary: rgb(245, 245, 245);
+  --light: rgb(9, 6, 3);
+  --dark: rgb(245, 245, 245);
+  --hover: rgb(224, 124, 26);
+  --text-hover: rgb(0, 0, 0);
 }
 
 [data-theme="NSID-light"] {
-  --primary: rgb(1,66,53);
+  --primary: rgb(1, 66, 53);
   --secondary: rgb(3, 28, 23);
   --light: rgb(192, 211, 192);
   --dark: rgb(3, 28, 23);
@@ -38,86 +38,86 @@
 
 [data-theme="NSID-dark"] {
   --primary: rgb(3, 114, 92);
-  --secondary: rgb(255,255,255);
+  --secondary: rgb(255, 255, 255);
   --light: rgb(0, 9, 7);
-  --dark: rgb(255,255,255);
+  --dark: rgb(255, 255, 255);
   --hover: rgb(2, 103, 82);
-  --text-hover: rgb(255,255,255);
+  --text-hover: rgb(255, 255, 255);
 }
 
 [data-theme="defi-light"] {
-  --primary: #25c552;
-  --secondary: #243c5a;
-  --light: #e3f6e8;
-  --dark: #0d1b2a;
-  --hover: #1da947;
-  --text-hover: #ffffff;
+  --primary: rgb(37, 197, 82);
+  --secondary: rgb(36, 60, 90);
+  --light: rgb(227, 246, 232);
+  --dark: rgb(13, 27, 42);
+  --hover: rgb(29, 169, 71);
+  --text-hover: rgb(255, 255, 255);
 }
 
 [data-theme="defi-dark"] {
-  --primary: #25c552;
-  --secondary: #e3f6e8;
-  --light: #0d1b2a;
-  --dark: #e3f6e8;
-  --hover: #1da947;
-  --text-hover: #000000;
+  --primary: rgb(37, 197, 82);
+  --secondary: rgb(227, 246, 232);
+  --light: rgb(13, 27, 42);
+  --dark: rgb(227, 246, 232);
+  --hover: rgb(29, 169, 71);
+  --text-hover: rgb(0, 0, 0);
 }
 
 [data-theme="elegant-light"] {
-  --primary: #bfa57a;
-  --secondary: #444444;
-  --light: #f7f7f7;
-  --dark: #1f1f1f;
-  --hover: #a58c65;
-  --text-hover: #ffffff;
+  --primary: rgb(191, 165, 122);
+  --secondary: rgb(68, 68, 68);
+  --light: rgb(247, 247, 247);
+  --dark: rgb(31, 31, 31);
+  --hover: rgb(165, 140, 101);
+  --text-hover: rgb(255, 255, 255);
 }
 
 [data-theme="elegant-dark"] {
-  --primary: #bfa57a;
-  --secondary: #f7f7f7;
-  --light: #1f1f1f;
-  --dark: #f7f7f7;
-  --hover: #a58c65;
-  --text-hover: #000000;
+  --primary: rgb(191, 165, 122);
+  --secondary: rgb(247, 247, 247);
+  --light: rgb(31, 31, 31);
+  --dark: rgb(247, 247, 247);
+  --hover: rgb(165, 140, 101);
+  --text-hover: rgb(0, 0, 0);
 }
 
 /* NUEVOS TEMAS */
 
 [data-theme="monochrome-light"] {
-  --primary: #333333;
-  --secondary: #666666;
-  --light: #f5f5f5;
-  --dark: #1a1a1a;
-  --hover: #4d4d4d;
-  --text-hover: #ffffff;
+  --primary: rgb(51, 51, 51);
+  --secondary: rgb(102, 102, 102);
+  --light: rgb(245, 245, 245);
+  --dark: rgb(26, 26, 26);
+  --hover: rgb(77, 77, 77);
+  --text-hover: rgb(255, 255, 255);
 }
 
 [data-theme="monochrome-dark"] {
-  --primary: #cccccc;
-  --secondary: #999999;
-  --light: #1a1a1a;
-  --dark: #f5f5f5;
-  --hover: #b3b3b3;
-  --text-hover: #000000;
+  --primary: rgb(204, 204, 204);
+  --secondary: rgb(153, 153, 153);
+  --light: rgb(26, 26, 26);
+  --dark: rgb(245, 245, 245);
+  --hover: rgb(179, 179, 179);
+  --text-hover: rgb(0, 0, 0);
 }
 
 
 [data-theme="nordic-light"] {
-  --primary: #607d8b;
-  --secondary: #78909c;
-  --light: #eceff1;
-  --dark: #263238;
-  --hover: #546e7a;
-  --text-hover: #ffffff;
+  --primary: rgb(96, 125, 139);
+  --secondary: rgb(120, 144, 156);
+  --light: rgb(236, 239, 241);
+  --dark: rgb(38, 50, 56);
+  --hover: rgb(84, 110, 122);
+  --text-hover: rgb(255, 255, 255);
 }
 
 [data-theme="nordic-dark"] {
-  --primary: #90a4ae;
-  --secondary: #b0bec5;
-  --light: #263238;
-  --dark: #eceff1;
-  --hover: #78909c;
-  --text-hover: #000000;
+  --primary: rgb(144, 164, 174);
+  --secondary: rgb(176, 190, 197);
+  --light: rgb(38, 50, 56);
+  --dark: rgb(236, 239, 241);
+  --hover: rgb(120, 144, 156);
+  --text-hover: rgb(0, 0, 0);
 }
 
 .pixelated {
@@ -274,3 +274,20 @@
 .to-dark {
   background-image: linear-gradient(to bottom right, var(--dark), var(--dark), var(--light)) !important;
 }
+
+.shadow-primary {
+  box-shadow: 0 0 10px var(--primary) !important;
+}
+
+.shadow-secondary {
+  box-shadow: 0 0 10px var(--secondary) !important;
+}
+
+.shadow-light {
+  box-shadow: 0 0 10px var(--light) !important;
+}
+
+.shadow-dark {
+  box-shadow: 0 0 10px var(--dark) !important;
+}
+

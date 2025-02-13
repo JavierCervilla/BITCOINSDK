@@ -4,7 +4,7 @@ import { Lock, Unlock } from "lucide-react";
 import type { XCPAPIAsset } from "@/lib/counterparty/api.d.ts";
 import {bitcoinsdk} from "@/lib/index.ts";
 
-export function AssetInfo({ asset }: { asset: XCPAPIAsset }) {
+export function AssetInfo({ asset }: Readonly<{ asset: XCPAPIAsset }>) {
   const [holders, setHolders] = useState(0)
 
   useEffect(() => {

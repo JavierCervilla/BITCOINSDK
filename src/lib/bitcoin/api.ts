@@ -1,6 +1,6 @@
 import { CONFIG } from "@/lib/config.ts";
 
-async function callRPC(method: string, params: any[]) {
+async function callRPC(method: string, params: unknown[]) {
     try{
         const rpcCall = {
             jsonrpc: "2.0",

@@ -25,6 +25,17 @@ export interface OpenbookAtomicSwap {
     service_fees: ServiceFee[]
 }
 
+export interface OpenbookAtomicSwapOrder {
+    txid: string
+    timestamp: string
+    price: number
+    psbt: string
+    status: string
+    seller: string
+    utxo: string
+    utxo_balance: UtxoBalance[]
+}
+
 export interface PaginatedResponse<T> {
     page: number
     limit: number

@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { ViewModal } from "@/components/Views/ViewModal/ViewModal.component.tsx"
 import { Header } from "@/components/Header/Header.component.tsx"
 
@@ -7,7 +7,7 @@ interface LayoutProps {
   onClose: () => void
 }
 
-export function Layout({ isOpen, onClose }: LayoutProps) {
+export function Layout({ isOpen, onClose }: Readonly<LayoutProps>) {
   return (
     <ViewModal isOpen={isOpen} onClose={onClose}>
       <div className="flex flex-col h-full">

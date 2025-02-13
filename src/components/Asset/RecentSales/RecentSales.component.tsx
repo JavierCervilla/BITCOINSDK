@@ -1,6 +1,6 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { cn } from "@/lib/utils/style.ts";
-import { useState } from "react";
+import { useState, memo, useCallback } from "react";
 
 import type * as OpenbookAPI from "@/lib/openbook/api.d.ts"
 import type * as XCPAPI from "@/lib/counterparty/api.d.ts"
@@ -23,20 +23,23 @@ interface RecentSalesProps {
   isLoading: boolean
 }
 
-export function RecentSales({ asset, btcPrice, swaps, dispenses, isLoading }: RecentSalesProps) {
+function RecentSalesComponent({ asset, btcPrice, swaps, dispenses, isLoading }: Readonly<RecentSalesProps>) {
   const [activeTab, setActiveTab] = useState("swaps");
 
+  const handleTabChange = useCallback((value: string) => {
+    setActiveTab(value);
+  }, []);
 
   if (isLoading) {
     return <Loader />
   }
 
   return (
-    <div className="bg-light p-4 rounded-lg shadow-md text-dark w-full border border-secondary">
+    <div className="bg-light p-4 rounded-lg shadow-md text-dark w-full border border-secondarysm:min-h-[calc(100vh-358px)] md:min-h-[358px]">
       <h2 className="font-bold text-lg">
         <span className="text-primary">{asset}</span> Recent Sales
       </h2>
-      <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
+      <Tabs.Root value={activeTab} onValueChange={handleTabChange}>
         <Tabs.List className="flex border-b border-secondary space-x-4">
           {tabs.map((tab) => (
             <Tabs.Trigger
@@ -62,3 +65,5 @@ export function RecentSales({ asset, btcPrice, swaps, dispenses, isLoading }: Re
     </div>
   );
 }
+
+export const RecentSales = memo(RecentSalesComponent)

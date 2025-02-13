@@ -13,7 +13,7 @@ interface SendActionProps {
   balance: XCPAPI.Balance;
 }
 
-export function UTXOAttachAction({ balance }: SendActionProps) {
+export function UTXOAttachAction({ balance }: Readonly<SendActionProps>) {
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const { closeModal } = useModal();
@@ -67,7 +67,7 @@ export function UTXOAttachAction({ balance }: SendActionProps) {
         {
           content: (
             <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium text-primary">{error.message}</p>
+              <p className="text-sm font-medium text-primary">{error?.message}</p>
             </div>
           ),
           type: "error"
