@@ -15,7 +15,11 @@ export function DispensesList({ dispenses, isLoading, btcPrice }: DispensesListP
   }
 
   if (dispenses.length === 0) {
-    return <div className="text-center py-4 text-secondary">No dispense sales available</div>
+    return (
+      <div className="text-center py-4 text-secondary flex flex-col  gap-2 min-h-[calc(100vh-200px)] md:min-h-[200px]">
+        <span className="text-sm font-medium">No Dispense sales available</span>
+      </div>
+    )
   }
 
   return (

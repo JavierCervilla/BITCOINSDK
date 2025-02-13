@@ -1,10 +1,10 @@
-import type { OpenbookAtomicSwap } from "@/lib/openbook/api.d.ts"
+import type { OpenbookAtomicSwapOrder } from "@/lib/openbook/api.d.ts"
 import { AtomicSwapItem } from "./AtomicSwapItem.component.tsx"
 import { Loader } from "@/components/Loader/Loader.component.tsx"
 import type { BTCPrice } from "@/lib/bitcoin/api.d.ts";
 
 interface AtomicSwapListProps {
-  swaps: OpenbookAtomicSwap[]
+  swaps: OpenbookAtomicSwapOrder[]
   isLoading: boolean
   btcPrice: BTCPrice
 }
@@ -16,7 +16,11 @@ export function AtomicSwapList({ btcPrice, swaps, isLoading }: AtomicSwapListPro
 
   console.log({ swaps })
   if (swaps.length === 0) {
-    return <div className="text-center py-4 text-secondary">No Atomic swaps orders available</div>
+    return (
+      <div className="text-center py-4 text-secondary flex flex-col  gap-2 min-h-[calc(100vh-200px)] md:min-h-[200px]">
+        <span className="text-sm font-medium">No Atomic swaps orders available</span>
+      </div>
+    )
   }
 
   return (

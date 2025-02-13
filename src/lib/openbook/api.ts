@@ -77,7 +77,7 @@ export const openbook = {
         const endpoint = new URL(`${CONFIG.OPENBOOK.ENDPOINT}/api/v1/orders/asset/${asset}`)
         const data = await fetch(endpoint)
         const atomic_swaps = await data.json()
-        return atomic_swaps as OpenbookAPI.PaginatedResponse<OpenbookAPI.OpenbookAtomicSwap>
+        return atomic_swaps as OpenbookAPI.PaginatedResponse<OpenbookAPI.OpenbookAtomicSwapOrder>
     },
     utils: {
         getCIP25JSON: async ({ cip25Url }: { cip25Url: string }) => {

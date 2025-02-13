@@ -17,13 +17,14 @@ const tabs = [
 interface MarketInfoProps {
   asset: string
   btcPrice: BTCPrice
-  swaps: OpenbookAPI.OpenbookAtomicSwap[]
+  swaps: OpenbookAPI.OpenbookAtomicSwapOrder[]
   dispensers: XCPAPI.XCPAPIDispenser[]
   isLoading: boolean
+  mcap: number
+  volume: number
 }
 
-
-export function MarketInfo({ asset, btcPrice, swaps, dispensers, isLoading }: MarketInfoProps) {
+export function MarketInfo({ asset, btcPrice, swaps, dispensers, isLoading, mcap, volume }: MarketInfoProps) {
   const [activeTab, setActiveTab] = useState("swaps");
 
   console.log({ dispensers, swaps })
@@ -37,8 +38,8 @@ export function MarketInfo({ asset, btcPrice, swaps, dispensers, isLoading }: Ma
         <span className="text-primary">{asset}</span> Markets
       </h2>
       <div className="flex flex-row gap-4">
-        <p className="text-sm text-secondary">BTC Volume: <span className="text-primary">0.00 BTC</span></p>
-        <p className="text-sm text-secondary">MarketCap: <span className="text-primary">0.00 BTC</span></p>
+        <p className="text-sm text-secondary">BTC Volume: <span className="text-primary">{volume.toLocaleString()} BTC ({Number(volume * btcPrice.USD).toLocaleString()} $)</span></p>
+        <p className="text-sm text-secondary">MarketCap: <span className="text-primary">{mcap.toLocaleString()} BTC <span className="text-secondary text-xs">({Number(mcap * btcPrice.USD).toLocaleString()} $)</span></span></p>
       </div>
       <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
         <Tabs.List className="flex border-b border-secondary space-x-4">

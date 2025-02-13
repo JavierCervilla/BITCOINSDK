@@ -51,7 +51,7 @@ export function AssetView() {
             <BalanceSection asset={assetid as string} />
           </div>
         </div>
-        <MarketSection asset={assetid as string} />
+        <MarketSection asset={assetid as string} supply={Number(asset?.supply_normalized) ?? 0} />
       </div>
     </div>
   )
