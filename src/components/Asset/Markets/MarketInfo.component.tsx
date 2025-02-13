@@ -1,6 +1,6 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { cn } from "@/lib/utils/style.ts";
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { DispensersList } from "@/components/Asset/Markets/Dispensers/DispenserList.component.tsx";
 import { AtomicSwapList } from "@/components/Asset/Markets/AtomicSwaps/AtomicSwapList.component.tsx";
 import type { BTCPrice } from "@/lib/bitcoin/api.d.ts";
@@ -24,8 +24,12 @@ interface MarketInfoProps {
   volume: number
 }
 
-export function MarketInfo({ asset, btcPrice, swaps, dispensers, isLoading, mcap, volume }: MarketInfoProps) {
+function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mcap, volume }: MarketInfoProps) {
   const [activeTab, setActiveTab] = useState("swaps");
+
+  const handleTabChange = useCallback((value: string) => {
+    setActiveTab(value);
+  }, []);
 
   if (isLoading) {
     return <Loader />
@@ -40,7 +44,7 @@ export function MarketInfo({ asset, btcPrice, swaps, dispensers, isLoading, mcap
         <p className="text-sm text-secondary">BTC Volume: <span className="text-primary">{volume.toLocaleString()} BTC ({Number(volume * btcPrice.USD).toLocaleString()} $)</span></p>
         <p className="text-sm text-secondary">MarketCap: <span className="text-primary">{mcap.toLocaleString()} BTC <span className="text-secondary text-xs">({Number(mcap * btcPrice.USD).toLocaleString()} $)</span></span></p>
       </div>
-      <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
+      <Tabs.Root value={activeTab} onValueChange={handleTabChange}>
         <Tabs.List className="flex border-b border-secondary space-x-4">
           {tabs.map((tab) => (
             <Tabs.Trigger
@@ -66,3 +70,5 @@ export function MarketInfo({ asset, btcPrice, swaps, dispensers, isLoading, mcap
     </div>
   );
 }
+
+export const MarketInfo = memo(MarketInfoComponent)

@@ -1,3 +1,5 @@
+import { useMemo, memo } from "react"
+import { FixedSizeList as List } from "react-window";
 import type { OpenbookAtomicSwapOrder } from "@/lib/openbook/api.d.ts"
 import { AtomicSwapItem } from "./AtomicSwapItem.component.tsx"
 import { Loader } from "@/components/Loader/Loader.component.tsx"
@@ -9,7 +11,17 @@ interface AtomicSwapListProps {
   btcPrice: BTCPrice
 }
 
-export function AtomicSwapList({ btcPrice, swaps, isLoading }: AtomicSwapListProps) {
+function AtomicSwapListComponent({ btcPrice, swaps, isLoading }: AtomicSwapListProps) {
+  const ROW_HEIGHT = useMemo(() => {
+    if (typeof globalThis !== "undefined") {
+      if (globalThis.innerWidth < 640) return 260;
+      if (globalThis.innerWidth < 1024) return 70;
+      return 75;
+    }
+    return 75;
+  }, []);
+  const MAX_HEIGHT = 400;
+
   if (isLoading) {
     return <Loader />
   }
@@ -32,10 +44,24 @@ export function AtomicSwapList({ btcPrice, swaps, isLoading }: AtomicSwapListPro
           <span className="text-sm font-medium w-1/5">Date</span>
           <span className="text-sm font-medium w-1/5">Action</span>
         </div>
-        {swaps.map((swap) => (
-          <AtomicSwapItem btcPrice={btcPrice} key={swap.txid} atomicSwap={swap} />
-        ))}
+        <List
+          height={MAX_HEIGHT}
+          itemCount={swaps.length}
+          itemSize={ROW_HEIGHT}
+          width="100%"
+        >
+          {({ index, style }: { index: number; style: React.CSSProperties }) => {
+            const swap = swaps[index]
+            return (
+              <div style={style}>
+                <AtomicSwapItem btcPrice={btcPrice} key={swap.txid} atomicSwap={swap} />
+              </div>
+            )
+          }}
+        </List>
       </div>
     </div>
   )
 }
+
+export const AtomicSwapList = memo(AtomicSwapListComponent)
