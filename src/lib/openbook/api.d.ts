@@ -1,3 +1,9 @@
+export interface InputsToSign {
+    index: number
+    sighashTypes: number[]
+    address: string
+}
+
 export interface ServiceFee {
     address: string
     fee: string
@@ -33,6 +39,7 @@ export interface OpenbookAtomicSwapOrder {
     status: string
     seller: string
     utxo: string
+    block_index: number
     utxo_balance: UtxoBalance[]
 }
 
@@ -42,4 +49,43 @@ export interface PaginatedResponse<T> {
     total: number
     totalPages: number
     result: T[]
+}
+
+export interface OpenbookCancelOrder {
+    psbt: string
+    inputsToSign: InputsToSign[]
+    fee: string
+    btc_in: string
+    btc_out: string
+    btc_change: string
+    expectedFee: number
+    vSize: number
+    baseSize: number
+}
+
+export interface OpenbookPsbtForListOrder {
+    price: number
+    psbt: string
+    seller: string
+    utxo: string
+    inputsToSign: InputsToSign[]
+}
+
+export interface OpenbookPsbtForBuyOrder {
+    psbt: string,
+    inputsToSign: InputsToSign[],
+    fee: bigint,
+    btc_in: bigint,
+    btc_out: bigint,
+
+    expectedFee: number,
+    baseSize: number,
+    vSize: number,
+}
+
+export interface OpenbookMempoolFees {
+    fastestFee: number
+    halfHourFee: number
+    hourFee: number
+    minimumFee: number
 }

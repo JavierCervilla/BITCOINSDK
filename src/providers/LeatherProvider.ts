@@ -1,7 +1,8 @@
 // src/providers/LeatherProvider.ts
-
-import type { connectWalletReturn } from "@/WalletConnect/index.ts";
-import type { signPSBTOptions } from "@/WalletConnect/context/walletContext.tsx";
+// Importa el archivo para asegurarte de que Deno lo procese
+import "@/types/global.d.ts";
+import type { connectWalletReturn } from "@/index.ts";
+import type { SignPSBTOptions } from "@/context/walletContext.tsx";
 
 type leatherAccount = {
   address: string;
@@ -43,12 +44,12 @@ export const signMessageWithLeather = async (message: string) => {
 
 export const signPSBTWithLeather = async (
   psbt: string,
-  options: signPSBTOptions,
+  options: SignPSBTOptions,
 ): Promise<string | null> => {
   if (typeof globalThis !== "undefined" && globalThis.LeatherProvider) {
     try {
       const { inputsToSign, broadcast } = options;
-      const requestParams = {
+      const requestParams: LeatherProvider.SignPsbtRequestParams = {
         hex: psbt,
         broadcast: broadcast,
       };
@@ -56,7 +57,9 @@ export const signPSBTWithLeather = async (
         requestParams.allowedSighash = inputsToSign[0].sighashTypes
         requestParams.signAtIndex = inputsToSign.map((input) => input.index)
       }
+      console.log({requestParams})
       const signedPsbt = await globalThis.LeatherProvider.request('signPsbt', requestParams);
+      console.log({signedPsbt})
       return signedPsbt.result.hex;
     } catch (error) {
       console.error("Error signing PSBT with Leather Wallet:", error);

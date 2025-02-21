@@ -104,7 +104,8 @@ export function UTXODetachAction({ balance }: Readonly<SendActionProps>) {
         </button>
 
         <p className="text-xs text-center text-secondary mt-4">
-          This action will detach the asset from the specified UTXO and return it to your wallet.
+          This action will detach the asset from the specified UTXO and return it to your wallet. <br />
+          <span className="text-sm text-primary font-medium">If you have an active order in this UTXO, it will be cancelled.</span>
         </p>
       </div>
     </form>

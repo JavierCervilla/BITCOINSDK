@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import type * as XCPAPI from "@/lib/counterparty/api.d.ts"
+import type * as OpenbookAPI from "@/lib/openbook/api.d.ts";
 import { bitcoinsdk } from "@/lib/index.ts"
 import { useWallet } from "@/index.ts"
 import { Link, Unlink, Wallet, Send, BadgeDollarSign } from "lucide-react"
@@ -12,8 +13,10 @@ import { UTXOAttachAction } from "@/components/Asset/Balance/actions/UTXOAttach.
 import { UTXODetachAction } from "@/components/Asset/Balance/actions/UTXODetach.component.tsx"
 import { ModalProvider } from "@/context/modalContext.tsx"
 import { Modal } from "@/components/Modal/Modal.component.tsx"
+import { ListUTXOAction } from "@/components/Asset/Balance/actions/UtxoList.component.tsx";
+import { CancelOrderAction } from "@/components/Asset/Balance/actions/CancelOrder.component.tsx";
 
-function AccountBalanceControls({ balance }: Readonly<{ balance: XCPAPI.Balance }>) {
+function AccountBalanceControls({ balance, btcPrice }: Readonly<{ balance: XCPAPI.Balance, btcPrice: number }>) {
   const { walletAddress } = useWallet()
   if (!walletAddress) return null
 
@@ -25,7 +28,7 @@ function AccountBalanceControls({ balance }: Readonly<{ balance: XCPAPI.Balance 
   )
 }
 
-function UtxoBalanceControls({ balance }: Readonly<{ balance: XCPAPI.Balance }>) {
+function UtxoBalanceControls({ balance, btcPrice, orders }: Readonly<{ balance: XCPAPI.Balance, btcPrice: number, orders: OpenbookAPI.OpenbookAtomicSwapOrder[] }>) {
   const { walletAddress } = useWallet()
   if (!walletAddress) return null
 
@@ -33,12 +36,18 @@ function UtxoBalanceControls({ balance }: Readonly<{ balance: XCPAPI.Balance }>)
     <div className="flex items-center gap-2">
       <BalanceControl icon={Send} label="Send" action={<UTXOSendAction balance={balance} />} />
       <BalanceControl icon={Unlink} label="Detach from UTXO" action={<UTXODetachAction balance={balance} />} />
-      <BalanceControl icon={BadgeDollarSign} label="Sell Item" action={<div>Sell Item Action</div>} />
+      {
+        orders.length > 0 && orders.find(order => order.utxo === balance.utxo) ?
+        null  
+        : (
+            <BalanceControl icon={BadgeDollarSign} label="Sell Item" action={<ListUTXOAction balance={balance} btcPrice={btcPrice} />} />
+          )
+      }
     </div>
   )
 }
 
-function BalanceItem({ balance }: Readonly<{ balance: XCPAPI.Balance }>) {
+function BalanceItem({ balance, btcPrice, orders }: Readonly<{ balance: XCPAPI.Balance; btcPrice: number, orders: OpenbookAPI.OpenbookAtomicSwapOrder[] }>) {
   return (
     <div className="flex flex-col items-start sm:items-center border border-secondary rounded-lg w-full justify-between bg-light transition-colors">
       <h4 className="text-left w-full flex gap-2 text-xs text-primary font-medium px-2 py-1 border-b border-secondary">
@@ -55,28 +64,38 @@ function BalanceItem({ balance }: Readonly<{ balance: XCPAPI.Balance }>) {
           </div>
         </div>
         <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-          {balance.utxo ? <UtxoBalanceControls balance={balance} /> : <AccountBalanceControls balance={balance} />}
+          {balance.utxo ? <UtxoBalanceControls balance={balance} btcPrice={btcPrice} orders={orders} /> : <AccountBalanceControls btcPrice={btcPrice} balance={balance} />}
         </div>
       </div>
     </div>
   )
 }
 
-function BalanceSectionContent({ asset }: Readonly<{ asset: string }>) {
+function BalanceSectionContent({ asset, btcPrice }: Readonly<{ asset: string, btcPrice: number, orders: OpenbookAPI.OpenbookAtomicSwapOrder[] }>) {
   const [loading, setLoading] = useState(false)
   const [balance, setBalance] = useState<XCPAPI.Balance[] | null>(null)
+  const [orders, setOrders] = useState<OpenbookAPI.OpenbookAtomicSwapOrder[] | null>(null)
   const { walletAddress } = useWallet()
 
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const [assetBalance, swapOrdersData] = await Promise.all([
+        bitcoinsdk.counterparty.getTokenBalance({ asset: asset, address: walletAddress as string }),
+        bitcoinsdk.openbook.getAtomicSwapOrdersByAsset({ asset }),
+      ]);
+      setBalance(assetBalance)
+      setOrders(swapOrdersData.result.filter(order => order.status === "active"));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [asset, walletAddress]);
+
   useEffect(() => {
-    if (!walletAddress) return
-    setLoading(true)
-    bitcoinsdk.counterparty
-      .getTokenBalance({ asset: asset, address: walletAddress as string })
-      .then((bal) => {
-        setBalance(bal)
-        setLoading(false)
-      })
-  }, [asset, walletAddress])
+    fetchData()
+  }, [fetchData])
 
   if (loading) {
     return <Loader />
@@ -94,17 +113,17 @@ function BalanceSectionContent({ asset }: Readonly<{ asset: string }>) {
       </h2>
       <div className="flex flex-col gap-2 p-1 max-h-[145px] overflow-y-auto">
         {balance?.map((bal: XCPAPI.Balance, index: number) => (
-          <BalanceItem key={`${bal.asset}-${index}`} balance={bal} />
+          <BalanceItem key={`${bal.asset}-${index}`} balance={bal} btcPrice={btcPrice} orders={orders} />
         ))}
       </div>
     </div>
   )
 }
 
-export function BalanceSection({ asset }: Readonly<{ asset: string }>) {
+export function BalanceSection({ asset, btcPrice }: Readonly<{ asset: string, btcPrice: number }>) {
   return (
     <ModalProvider>
-      <BalanceSectionContent asset={asset} />
+      <BalanceSectionContent asset={asset} btcPrice={btcPrice} />
       <Modal />
     </ModalProvider>
   )

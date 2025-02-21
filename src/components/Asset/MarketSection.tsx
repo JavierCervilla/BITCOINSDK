@@ -10,6 +10,7 @@ import { MarketInfo } from "@/components/Asset/Markets/MarketInfo.component.tsx"
 interface MarketSectionProps {
   asset: string
   supply: number
+  btcPrice: BTCPrice
 }
 
 
@@ -79,12 +80,12 @@ function getBTCVolume({ atomicSwapSales, dispenses }: Readonly<GetBTCVolumeParam
   return atomicSwapVolume + dispenserVolume;
 }
 
-export function MarketSection({ asset, supply }: Readonly<MarketSectionProps>) {
+export function MarketSection({ asset, supply, btcPrice }: Readonly<MarketSectionProps>) {
   const [swapSales, setSwapSales] = useState<OpenbookAPI.OpenbookAtomicSwap[]>([]);
   const [swapOrders, setSwapOrders] = useState<OpenbookAPI.OpenbookAtomicSwap[]>([]);
   const [dispenses, setDispenses] = useState<XCPAPI.XCPAPIDispenser[]>([]);
   const [dispensers, setDispensers] = useState<XCPAPI.XCPAPIDispenser[]>([]);
-  const [btcPrice, setBtcPrice] = useState<BTCPrice | null>(null);
+
   const [mcap, setMcap] = useState<number | null>(null);
   const [volume, setVolume] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -92,19 +93,17 @@ export function MarketSection({ asset, supply }: Readonly<MarketSectionProps>) {
   const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const [swapSalesData, dispensesData, swapOrdersData, dispensersData, btc_price] = await Promise.all([
+      const [swapSalesData, dispensesData, swapOrdersData, dispensersData] = await Promise.all([
         bitcoinsdk.openbook.getAtomicSalesByAsset({ asset }),
         bitcoinsdk.counterparty.getDispenses({ asset }),
         bitcoinsdk.openbook.getAtomicSwapOrdersByAsset({ asset }),
         bitcoinsdk.counterparty.getDispensers({ asset }),
-        bitcoinsdk.bitcoin.getBTCPrice(),
       ]);
 
       setSwapSales(swapSalesData.result);
       setDispenses(dispensesData);
-      setSwapOrders(swapOrdersData.result);
+      setSwapOrders(swapOrdersData.result.filter(order => order.status === "active"));
       setDispensers(dispensersData);
-      setBtcPrice(btc_price);
       setMcap(getMarketCap({
         asset,
         supply,

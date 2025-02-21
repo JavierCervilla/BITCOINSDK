@@ -34,7 +34,7 @@ export const signPSBTWithUnisat = async (
     try {
       if (options) {
         const opt = {};
-
+        console.log(options)
         if ("autoFinalized" in options) opt.autoFinalized = options.autoFinalized;
         if ("inputsToSign" in options) opt.toSignInputs = options.inputsToSign;
         const signedPsbt = await globalThis.unisat.signPsbt(psbt, opt);

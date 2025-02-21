@@ -124,7 +124,8 @@ export function UTXOSendAction({ balance }: Readonly<SendActionProps>): React.Re
         </button>
 
         <p className="text-xs text-center text-secondary mt-4">
-          Please double-check the recipient address before sending.
+          Please double-check the recipient address before sending.<br />
+          <span className="text-sm text-primary font-medium">If you have an active order in this UTXO, it will be cancelled.</span>
         </p>
       </div>
     </form>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { BookImage } from "lucide-react"
 import { Loader } from "@/components/Loader/Loader.component.tsx";
 import { bitcoinsdk } from "@/lib/index.ts";
@@ -7,25 +7,30 @@ import { Media } from "@/components/Asset/Media.component.tsx";
 import { AssetInfo } from "@/components/Asset/AssetInfo.component.tsx";
 import { BalanceSection } from "@/components/Asset/Balance/BalanceSection.component.tsx";
 import { MarketSection } from "@/components/Asset/MarketSection.tsx";
+import type { BTCPrice } from "@/lib/bitcoin/api.d.ts";
+
 export function AssetView() {
   const { assetid } = useParams();
   const [isLoading, setIsLoading] = useState(false)
   const [asset, setAsset] = useState<| null>(null);
-  useEffect(() => {
-    setIsLoading(true);
-    bitcoinsdk.counterparty.getAsset({ asset: assetid }).then((asset) => {
-      setAsset(asset);
-      setIsLoading(false);
-    }).catch((error) => {
-      console.error(error);
-      setIsLoading(false);
-    });
+  const [btcPrice, setBtcPrice] = useState<BTCPrice | null>(null);
 
-    return () => {
-      setIsLoading(false);
-    };
+
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
+    const [btcPrice, asset] = await Promise.all([
+      bitcoinsdk.openbook.getBTCPrice(),
+      bitcoinsdk.counterparty.getAsset({ asset: assetid as string })
+    ]);
+    console.log({btcPrice})
+    setAsset(asset);
+    setBtcPrice(btcPrice);
+    setIsLoading(false);
   }, [assetid]);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   if (isLoading) {
     return <Loader />
@@ -46,10 +51,10 @@ export function AssetView() {
             <AssetInfo asset={asset} />
           </div>
           <div className="flex flex-col gap-4 p-1 border border-secondary rounded-lg">
-            <BalanceSection asset={assetid} />
+            <BalanceSection asset={assetid as string} btcPrice={btcPrice || 0} />
           </div>
         </div>
-        <MarketSection asset={assetid} supply={Number(asset?.supply_normalized) || 0} />
+        <MarketSection asset={assetid as string} supply={Number(asset?.supply_normalized) || 0} btcPrice={btcPrice || 0} />
       </div>
     </div>
   )

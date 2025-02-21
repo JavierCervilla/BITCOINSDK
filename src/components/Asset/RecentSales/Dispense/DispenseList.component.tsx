@@ -3,12 +3,12 @@ import { FixedSizeList as List } from "react-window";
 import type { XCPAPIDispenser } from "@/lib/counterparty/api.d.ts";
 import { DispenseItem } from "./DispenseItem.component.tsx";
 import { Loader } from "@/components/Loader/Loader.component.tsx";
-import type { BTCPrice } from "@/lib/bitcoin/api.d.ts";
+
 
 interface DispensesListProps {
   dispenses: XCPAPIDispenser[];
   isLoading: boolean;
-  btcPrice: BTCPrice;
+  btcPrice: number;
 }
 
 

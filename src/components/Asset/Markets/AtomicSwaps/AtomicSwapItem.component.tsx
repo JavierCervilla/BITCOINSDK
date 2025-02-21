@@ -1,8 +1,12 @@
 import { memo } from "react"
 import type { OpenbookAtomicSwapOrder, UtxoBalance } from "@/lib/openbook/api.d.ts"
 import type { BTCPrice } from "@/lib/bitcoin/api.d.ts"
-import { useWallet } from "@/index.ts"
+import {  useWallet } from "@/index.ts"
 import { short_address } from "@/lib/utils/index.ts"
+import { CancelOrderAction } from "@/components/Asset/Balance/actions/CancelOrder.component.tsx";
+import { ConnectWalletAction } from "@/components/ConnectWallet/ConnectWalletAction.component.tsx";
+import { UTXOBuyOrderAction } from "@/components/Asset/Balance/actions/UTXOBuy.component.tsx";
+
 
 interface AtomicSwapItemProps {
   atomicSwap: OpenbookAtomicSwapOrder
@@ -39,7 +43,7 @@ function AtomicSwapItemComponent({ atomicSwap, btcPrice }: Readonly<AtomicSwapIt
             {atomicSwap.price.toLocaleString()} sats
           </span>
           <span className="text-xs font-mono text-secondary truncate block" title={atomicSwap.price.toString()}>
-            ${(atomicSwap.price * 10 ** -8 * btcPrice.USD).toLocaleString()}
+            ${(atomicSwap.price * 10 ** -8 * btcPrice).toLocaleString()}
           </span>
         </div>
       </div>
@@ -63,12 +67,20 @@ function AtomicSwapItemComponent({ atomicSwap, btcPrice }: Readonly<AtomicSwapIt
 
       <div className="flex justify-between items-center md:flex-col md:w-1/5 md:items-start md:m-auto">
         <span className="text-sm font-medium text-secondary md:hidden">Action</span>
-        <button
-          className="cursor-pointer text-sm text-primary rounded-lg p-2 bg-light border border-primary hover:bg-primary hover:text-light transition-colors font-mono truncate"
-          type="button"
-        >
-          {atomicSwap.seller === walletAddress ? "Cancel" : "Buy"}
-        </button>
+        {walletAddress && walletAddress === atomicSwap.seller && atomicSwap.status === "active" && (
+          <CancelOrderAction order={atomicSwap} />
+        )}
+        {walletAddress && walletAddress !== atomicSwap.seller && atomicSwap.status === "active" && (
+          <UTXOBuyOrderAction order={atomicSwap} />
+        )}
+        {!walletAddress && (
+          <ConnectWalletAction />
+        )}
+        {atomicSwap.status !== "active" && (
+          <span className="w-full capitalize ml-10 sm:ml-2 text-sm text-primary rounded-lg p-2 bg-warning border border-primary text-light bg-primary transition-colors text-center font-mono truncate">
+            {atomicSwap.status}
+          </span>
+        )}
       </div>
     </div>
   )

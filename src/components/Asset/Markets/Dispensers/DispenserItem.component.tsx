@@ -44,7 +44,7 @@ function DispenserItemComponent({ dispenser, btcPrice }: Readonly<DispenserItemP
             {dispenser.satoshi_price.toLocaleString()} sats
           </span>
           <span className="text-xs font-mono text-secondary truncate block" title={dispenser.price.toString()}>
-            ${(dispenser.satoshi_price * 10 ** -8 * btcPrice.USD).toLocaleString()}
+            ${(dispenser.satoshi_price * 10 ** -8 * btcPrice).toLocaleString()}
           </span>
         </div>
       </div>
@@ -59,7 +59,7 @@ function DispenserItemComponent({ dispenser, btcPrice }: Readonly<DispenserItemP
             {dispenser.satoshirate.toLocaleString()} sats
           </span>
           <span className="text-xs font-mono text-secondary truncate block" title={dispenser.price.toString()}>
-            ${(dispenser.satoshirate * 10 ** -8 * btcPrice.USD).toLocaleString()}
+            ${(dispenser.satoshirate * 10 ** -8 * btcPrice).toLocaleString()}
           </span>
         </div>
       </div>

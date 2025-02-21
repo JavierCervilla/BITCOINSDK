@@ -35,8 +35,8 @@ export const bitcoin = {
         const data = await callRPC("getrawtransaction", [txid, verbose])
         return data
     },
-    getBTCPrice: async() =>{
-        const endpoint = new URL('https://mempool.space/api/v1/prices')
+    getMempoolFee: async () => {
+        const endpoint = new URL('https://mempool.space/api/v1/fees/recommended')
         const data = await fetch(endpoint)
         const json = await data.json()
         return json

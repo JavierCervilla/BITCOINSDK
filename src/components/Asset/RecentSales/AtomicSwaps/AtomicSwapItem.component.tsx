@@ -39,7 +39,7 @@ function AtomicSwapItemComponent({ atomicSwap, btcPrice, asset }: Readonly<Atomi
             className="text-xs font-mono text-secondary truncate block"
             title={atomicSwap.unit_price.toLocaleString()}
           >
-            ${(atomicSwap.unit_price * 10 ** -8 * btcPrice.USD).toLocaleString()}
+            ${(atomicSwap.unit_price * 10 ** -8 * btcPrice).toLocaleString()}
           </span>
         </div>
       </div>
@@ -51,7 +51,7 @@ function AtomicSwapItemComponent({ atomicSwap, btcPrice, asset }: Readonly<Atomi
             {atomicSwap.total_price.toLocaleString()} sats
           </span>
           <span className="text-xs font-mono text-secondary truncate block" title={atomicSwap.total_price.toString()}>
-            ${(atomicSwap.total_price * 10 ** -8 * btcPrice.USD).toLocaleString()}
+            ${(atomicSwap.total_price * 10 ** -8 * btcPrice).toLocaleString()}
           </span>
         </div>
       </div>

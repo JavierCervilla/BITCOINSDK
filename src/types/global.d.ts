@@ -1,12 +1,12 @@
 import type { ReactElement } from 'react'
 import type { HTMLAttributes, ButtonHTMLAttributes, ImgHTMLAttributes } from 'react'
 
-import type { LeatherProvider } from '@leather-wallet/types';
+import type { LeatherProvider } from '@leather.io/rpc';
 import type { InputToSign } from "@/context/walletContext.tsx";
 
 declare global {
   namespace JSX {
-    interface Element extends ReactElement {}
+    interface Element extends ReactElement { }
     interface IntrinsicElements {
       div: HTMLAttributes<HTMLDivElement>;
       span: HTMLAttributes<HTMLSpanElement>;
@@ -53,4 +53,4 @@ declare global {
   }
 }
 
-export {} 
+export {}
