@@ -14,7 +14,7 @@ interface SendActionProps {
   balance: XCPAPI.Balance;
 }
 
-export function AccountSendAction({ balance }: SendActionProps) {
+export function AccountSendAction({ balance }: Readonly<SendActionProps>) {
   const [amount, setAmount] = useState("");
   const [recipient, setRecipient] = useState("");
   const [loading, setLoading] = useState(false);

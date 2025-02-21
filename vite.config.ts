@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import dts from "vite-plugin-dts";
 import path from 'node:path';
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode: _mode }) => {
   return {
     plugins: [react(), tailwindcss(), dts({ insertTypesEntry: true })],
     css: {

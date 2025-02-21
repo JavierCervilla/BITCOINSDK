@@ -5,42 +5,66 @@ import bitcoinsdk from "@/lib/index.ts";
 import * as bitcoin from "bitcoinjs-lib";
 import { Loader } from "@/components/Loader/Loader.component.tsx";
 import { showToast } from "@/components/Toast/Toast.component.tsx";
-import { Link } from 'lucide-react'
+import { BadgeDollarSign } from 'lucide-react'
 
 import type * as XCPAPI from "@/lib/counterparty/api.d.ts";
+import { short_address } from "@/lib/utils/index.ts";
 
-interface SendActionProps {
+interface ListUTXOActionProps {
   balance: XCPAPI.Balance;
+  btcPrice: number;
 }
 
-export function UTXOAttachAction({ balance }: Readonly<SendActionProps>) {
-  const [amount, setAmount] = useState("");
+export function ListUTXOAction({ balance, btcPrice }: Readonly<ListUTXOActionProps>) {
+  const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
   const { closeModal } = useModal();
   const { walletAddress, signPSBT } = useWallet();
 
-  function validateAttachParams() {
-    if (!amount) throw new Error("Amount is required");
-    if (Number(amount) <= 0 || Number.isNaN(Number(amount))) throw new Error("Amount must be greater than 0");
-    if (Number(amount) > Number(balance.qty_normalized)) throw new Error("Amount exceeds available balance");
+  function validateListOrderParams() {
+    if (!balance.utxo) throw new Error("UTXO is required");
+    if (!walletAddress) throw new Error("Seller is required");
+    if (!price) throw new Error("Price is required");
+    if (Number(price) <= 0 || Number.isNaN(Number(price))) throw new Error("Price must be greater than 0");
   }
 
   async function sendTransaction() {
-    validateAttachParams();
-    const qty = balance.divisible ? Number(amount) * 10 ** 8 : Number(amount);
-    const params = {
-      asset: balance.asset as string,
-      address: walletAddress as string,
-      amount: qty as number,
+    validateListOrderParams();
+    const paramsForListingPsbt = {
+      utxo: balance.utxo as string,
+      seller: walletAddress as string,
+      price: Number(price),
     };
-    const { psbt, inputsToSign } = await bitcoinsdk.counterparty.attachToUTXO(params)
+    const { psbt, inputsToSign } = await bitcoinsdk.openbook.getPsbtForListOrder(paramsForListingPsbt)
+    console.log({ psbt, inputsToSign })
     const signedPsbt = await signPSBT(psbt, {
       inputsToSign,
       autoFinalized: false,
-      broadcast: true,
+      broadcast: false,
     });
     if (!signedPsbt) throw new Error("Failed to sign PSBT");
-    const tx = bitcoin.Psbt.fromHex(signedPsbt);
+
+    console.log({ signedPsbt })
+    const feeRate = await bitcoinsdk.openbook.utils.getMempoolFees();
+    const params = {
+      utxo: balance.utxo as string,
+      seller: walletAddress as string,
+      price: Number(price),
+      feeRate: feeRate?.fastestFee || 2,
+      psbt: signedPsbt
+    }
+    const { psbt: psbtForListing, inputsToSign: inputsToSignForListing } = await bitcoinsdk.openbook.getPsbtForSubmitOrderOnchain(params)
+    console.log({
+      psbtForListing,
+      inputsToSignForListing
+    })
+    const signedPsbtForListing = await signPSBT(psbtForListing, {
+      inputsToSign: inputsToSignForListing,
+      autoFinalized: false,
+      broadcast: true,
+    });
+
+    const tx = bitcoin.Psbt.fromHex(signedPsbtForListing as string);
     const txHex = tx.finalizeAllInputs().extractTransaction().toHex();
     const { result: txid } = await bitcoinsdk.bitcoin.sendRawTransaction({ txHex });
     if (!txid) throw new Error("Failed to send transaction");
@@ -79,10 +103,6 @@ export function UTXOAttachAction({ balance }: Readonly<SendActionProps>) {
     }
   };
 
-  const handleSetMaxAmount = () => {
-    setAmount(Number(balance.qty_normalized).toString())
-  }
-
   if (loading) return <Loader />;
 
   return (
@@ -92,46 +112,39 @@ export function UTXOAttachAction({ balance }: Readonly<SendActionProps>) {
     >
       <div className="space-y-6">
         <div className="text-center">
-          <Link className="w-12 h-12 text-primary mx-auto mb-2" />
-          <h1 className="text-2xl font-bold text-primary">Attach to UTXO</h1>
+          <BadgeDollarSign className="w-12 h-12 text-primary mx-auto mb-2" />
+          <h1 className="text-2xl font-bold text-primary">List Order</h1>
+          <p className="text-sm text-secondary mt-1">UTXO: {short_address(balance.utxo as string)}</p>
           <p className="text-sm text-secondary mt-1">Asset: {balance.asset}</p>
+          <p className="text-sm text-secondary mt-1">Qty: {balance.qty_normalized}</p>
         </div>
         <div>
           <label htmlFor="amount" className="block text-sm font-medium text-secondary mb-1">
-            Amount to attach to UTXO
+            Price for listing
           </label>
           <div className="relative flex items-center">
             <input
               type="number"
-              id="amount"
-              min={balance.divisible ? 0.00000001 : 1}
-              max={Number(balance.qty_normalized)}
-              step={balance.divisible ? 0.00000001 : 1}
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              id="price"
+              step={1}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
               className="block w-full rounded-md border border-secondary bg-light/10 text-primary p-2 pr-16 shadow-sm focus:border-primary focus:ring-1 focus:ring-primary transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               placeholder="0.00"
             />
-            <button
-              type="button"
-              onClick={handleSetMaxAmount}
-              className="absolute right-2 px-2 py-1 text-xs font-semibold text-primary bg-light cursor-pointer border border-primary rounded hover:bg-primary hover:text-light transition-colors"
-            >
-              Max: {Number(balance.qty_normalized)}
-            </button>
           </div>
           <p className="mt-1 text-xs text-secondary">
-            Max: {Number(balance.qty_normalized)} {balance.asset}
+            {Number(price)} sats (${Number(Number(price) * btcPrice * 10 ** -8).toFixed(2)})
           </p>
         </div>
         <button
           type="submit"
           className="w-full cursor-pointer bg-primary text-light border border-primary rounded-md py-3 px-4 text-lg font-semibold hover:bg-primary/90 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
         >
-          Attach to UTXO
+          List Utxo for sell
         </button>
         <p className="text-xs text-center text-secondary mt-4">
-          Attaching to a UTXO will lock the asset to a specific Bitcoin transaction output.
+          Listing an UTXO will make it available for purchase by other users.
         </p>
       </div>
     </form>

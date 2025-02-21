@@ -15,14 +15,14 @@ interface SendActionProps {
   balance: XCPAPI.Balance;
 }
 
-export function UTXODetachAction({ balance }: SendActionProps) {
+export function UTXODetachAction({ balance }: Readonly<SendActionProps>) {
   const [loading, setLoading] = useState(false);
   const { closeModal } = useModal();
   const { walletAddress, signPSBT } = useWallet();
 
   async function sendTransaction() {
     const params = {
-      utxo: balance.utxo,
+      utxo: balance.utxo as string,
       destination: walletAddress as string,
     };
     const { psbt, inputsToSign } = await bitcoinsdk.counterparty.detachFromUTXO(params)
@@ -104,7 +104,8 @@ export function UTXODetachAction({ balance }: SendActionProps) {
         </button>
 
         <p className="text-xs text-center text-secondary mt-4">
-          This action will detach the asset from the specified UTXO and return it to your wallet.
+          This action will detach the asset from the specified UTXO and return it to your wallet. <br />
+          <span className="text-sm text-primary font-medium">If you have an active order in this UTXO, it will be cancelled.</span>
         </p>
       </div>
     </form>

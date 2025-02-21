@@ -15,7 +15,7 @@ interface SendActionProps {
   balance: XCPAPI.Balance;
 }
 
-export function UTXOSendAction({ balance }: SendActionProps) {
+export function UTXOSendAction({ balance }: Readonly<SendActionProps>): React.ReactNode {
   const [recipient, setRecipient] = useState("");
   const [loading, setLoading] = useState(false);
   const { closeModal } = useModal();
@@ -65,7 +65,7 @@ export function UTXOSendAction({ balance }: SendActionProps) {
         {
           content: (
             <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium text-primary">{error.message}</p>
+              <p className="text-sm font-medium text-primary">{error?.message}</p>
             </div>
           ),
           type: "error"
@@ -124,7 +124,8 @@ export function UTXOSendAction({ balance }: SendActionProps) {
         </button>
 
         <p className="text-xs text-center text-secondary mt-4">
-          Please double-check the recipient address before sending.
+          Please double-check the recipient address before sending.<br />
+          <span className="text-sm text-primary font-medium">If you have an active order in this UTXO, it will be cancelled.</span>
         </p>
       </div>
     </form>

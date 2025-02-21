@@ -1,6 +1,5 @@
 import type React from "react";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import stampsLogo from "@/assets/stamps.svg";
 import type { Cip25JsonOutput, Media as IMedia } from "@/types/cip25.d.ts";
 import { openbook } from "@/lib/openbook/api.ts";
 import { Loader } from "@/components/Loader/Loader.component.tsx";
@@ -13,12 +12,13 @@ interface AssetImageProps {
     description?: string;
   };
   className?: string;
+  showStampIcon?: boolean;
 }
 
 const STAMPS_ENDPOINT = "https://stamps.0.srcpad.pro/s";
 const XCP_ENDPOINT = "https://counterparty.s3.us-east-1.amazonaws.com";
 
-export const Media: React.FC<AssetImageProps> = ({ asset, className = "" }: AssetImageProps) => {
+export const Media: React.FC<AssetImageProps> = ({ asset, className = "", showStampIcon = true }: Readonly<AssetImageProps>) => {
   const { asset: assetName, description } = asset;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -186,15 +186,7 @@ export const Media: React.FC<AssetImageProps> = ({ asset, className = "" }: Asse
         </div>
       )}
 
-      {/* {isStamps && (
-        <img
-          src={stampsLogo}
-          alt="stamps logo"
-          className="absolute bottom-2 left-2 w-10 h-10 rounded-full border-4 border-black shadow bg-secondary p-1"
-        />
-      )} */}
-
-      {isStamps && (
+      {isStamps && showStampIcon && (
         <div className="absolute bottom-2 left-2 w-10 h-10 rounded-full border-4 border-black shadow bg-secondary p-1">
           <Stamp primaryColor="text-light" secondaryColor="text-dark"  />
         </div>

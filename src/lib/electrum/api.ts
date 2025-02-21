@@ -1,7 +1,6 @@
 import { CONFIG } from "@/lib/config.ts";
-import { address2ScriptHash } from "@/lib/utils/bitcoin.ts";
 
-async function callRPC(method: string, params: any[]) {
+export async function callRPC(method: string, params: unknown[]) {
     try{
         const rpcCall = {
             jsonrpc: "2.0",

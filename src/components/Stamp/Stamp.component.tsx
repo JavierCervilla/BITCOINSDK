@@ -1,17 +1,15 @@
-// @ts-nocheck
+//@ts-nocheck: reason: this is a simple component and we don't need to check it
 import type React from "react"
 
 interface StampProps {
   primaryColor?: string
   secondaryColor?: string
-  size?: number
 }
 
-export const Stamp: React.FC<StampProps> = ({
+export function Stamp({
   primaryColor = "text-primary",
   secondaryColor = "text-secondary",
-  className = "w-10 h-10"
-}) => {
+}): React.FC<StampProps>{
   return (
     <svg
       title="Stamp"

@@ -2,7 +2,7 @@ import { Media } from "@/components/Asset/Media.component.tsx";
 import type { XCPAssetBalance } from "@/types/openbook.d.ts";
 import { useNavigate } from "react-router-dom";
 
-export function Asset({ asset }: { asset: XCPAssetBalance }) {
+export function Asset({ asset }: Readonly<{ asset: XCPAssetBalance }>) {
   const navigate = useNavigate();
 
   function handleURLClick() {
@@ -13,9 +13,9 @@ export function Asset({ asset }: { asset: XCPAssetBalance }) {
     <button
       type="button"
       onClick={handleURLClick}
-      className="block aspect-[4/5] group hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+      className="block aspect-[4/5] group hover:scale-[1.02] transition-all duration-300 cursor-pointer rounded-lg"
     >
-      <div className="h-full bg-gradient-to-br from-primary via-secondary to-primary shadow-lg overflow-hidden transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-primary/50 rounded-lg">
+      <div className="h-full bg-gradient-to-br from-primary via-secondary to-primary shadow-lg overflow-hidden transition-all duration-300 group-hover:scale-[1.02]  rounded-lg">
         <div className="h-full flex flex-col p-3">
           <div className="flex-1 flex items-center justify-center bg-light  rounded-lg overflow-hidden backdrop-blur-sm">
             <Media asset={asset} className="w-full h-full bg-transparent border-none rounded-lg transition-transform duration-300 group-hover:scale-110" />

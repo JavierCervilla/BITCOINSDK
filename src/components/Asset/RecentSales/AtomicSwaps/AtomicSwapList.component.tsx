@@ -1,3 +1,5 @@
+import { memo, useMemo } from "react"
+import { FixedSizeList as List } from "react-window";
 import type { OpenbookAtomicSwap } from "@/lib/openbook/api.d.ts"
 import { AtomicSwapItem } from "./AtomicSwapItem.component.tsx"
 import { Loader } from "@/components/Loader/Loader.component.tsx"
@@ -10,13 +12,27 @@ interface AtomicSwapListProps {
   btcPrice: BTCPrice
 }
 
-export function AtomicSwapList({ asset, swaps, isLoading, btcPrice }: AtomicSwapListProps) {
+function AtomicSwapListComponent({ asset, swaps, isLoading, btcPrice }: Readonly<AtomicSwapListProps>) {
+  const ROW_HEIGHT = useMemo(() => {
+    if (typeof globalThis !== "undefined") {
+      if (globalThis.innerWidth < 640) return 260;
+      if (globalThis.innerWidth < 1024) return 70;
+      return 75;
+    }
+    return 75;
+  }, []);
+  const MAX_HEIGHT = 400;
+
   if (isLoading) {
     return <Loader />
   }
 
   if (swaps.length === 0) {
-    return <div className="text-center py-4 text-secondary">No dispense sales available</div>
+    return (
+      <div className="text-center py-4 text-secondary flex flex-col  gap-2">
+        <span className="text-sm font-medium">No Atomic swaps sales available</span>
+      </div>
+    )
   }
 
   return (
@@ -29,10 +45,24 @@ export function AtomicSwapList({ asset, swaps, isLoading, btcPrice }: AtomicSwap
           <span className="text-sm font-medium w-1/5">Date</span>
           <span className="text-sm font-medium w-1/5">Tx</span>
         </div>
-        {swaps.map((swap) => (
-          <AtomicSwapItem btcPrice={btcPrice} key={swap.txid} atomicSwap={swap} asset={asset} />
-        ))}
+        <List
+          height={MAX_HEIGHT}
+          itemCount={swaps.length}
+          itemSize={ROW_HEIGHT}
+          width="100%"
+        >
+          {({ index, style }: { index: number; style: React.CSSProperties }) => {
+            const swap = swaps[index];
+            return (
+              <div style={style}>
+                <AtomicSwapItem btcPrice={btcPrice} key={swap.txid} atomicSwap={swap} asset={asset} />
+              </div>
+            )
+          }}
+        </List>
       </div>
     </div>
   )
 }
+
+export const AtomicSwapList = memo(AtomicSwapListComponent)
