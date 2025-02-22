@@ -1,7 +1,7 @@
 import { walletConfig, WalletProvider } from "@/index.ts";
 import { Loader } from "@/components/Loader/Loader.component.tsx"
 import ThemeSelector from "@/components/ThemeSelector/ThemeSelector.component.tsx";
-import "@/styles/tailwind.css"
+import "@styles/tailwind.css"
 
 export function LoaderStory() {
   return (

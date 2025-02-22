@@ -14,9 +14,8 @@ import { UTXODetachAction } from "@/components/Asset/Balance/actions/UTXODetach.
 import { ModalProvider } from "@/context/modalContext.tsx"
 import { Modal } from "@/components/Modal/Modal.component.tsx"
 import { ListUTXOAction } from "@/components/Asset/Balance/actions/UtxoList.component.tsx";
-import { CancelOrderAction } from "@/components/Asset/Balance/actions/CancelOrder.component.tsx";
 
-function AccountBalanceControls({ balance, btcPrice }: Readonly<{ balance: XCPAPI.Balance, btcPrice: number }>) {
+function AccountBalanceControls({ balance, btcPrice: _btcPrice }: Readonly<{ balance: XCPAPI.Balance, btcPrice: number }>) {
   const { walletAddress } = useWallet()
   if (!walletAddress) return null
 
@@ -38,8 +37,8 @@ function UtxoBalanceControls({ balance, btcPrice, orders }: Readonly<{ balance: 
       <BalanceControl icon={Unlink} label="Detach from UTXO" action={<UTXODetachAction balance={balance} />} />
       {
         orders.length > 0 && orders.find(order => order.utxo === balance.utxo) ?
-        null  
-        : (
+          null
+          : (
             <BalanceControl icon={BadgeDollarSign} label="Sell Item" action={<ListUTXOAction balance={balance} btcPrice={btcPrice} />} />
           )
       }

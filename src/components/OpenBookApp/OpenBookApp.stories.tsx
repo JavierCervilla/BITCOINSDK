@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { OpenBookApp } from "./OpenBookApp.component.tsx"
-import "@/styles/tailwind.css"
+import "@styles/tailwind.css"
 import ThemeSelector from "@/components/ThemeSelector/ThemeSelector.component.tsx"
 
 export const OpenBookAppStory = () => {
@@ -15,6 +15,7 @@ export const OpenBookAppStory = () => {
 
       <div className="flex flex-col items-center gap-4">
         <button 
+          type="button"
           onClick={() => setIsOpen(true)}
           className="bg-primary text-light px-6 py-3 rounded-xl font-semibold hover:bg-hover transition-all duration-300 transform hover:scale-105"
         >

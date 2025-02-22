@@ -1,5 +1,5 @@
 import { WalletProvider, walletConfig } from "@/index.ts";
-import "@/styles/tailwind.css"
+import "@styles/tailwind.css"
 import ThemeSelector from "@/components/ThemeSelector/ThemeSelector.component.tsx";
 
 export const ConnectWalletCTAStorie = () => {

@@ -4,9 +4,7 @@ import type { MarketData } from "@/types/openbook.d.ts";
 import type * as OpenbookAPI from "./api.d.ts"
 
 // @ts-ignore : No default export
-import bitcoinIcon from "@/assets/bitcoin.png?url"
-// @ts-ignore : No default export
-import counterpartyIcon from "@/assets/counterparty.png?url"
+import { counterpartyImg, bitcoinImg } from "@/assets/index.ts";
 
 function BTCBalanceAdapter(data: { balance: boolean, value: number }[]) {
     const balance = data.reduce((acc: number, item: { balance: boolean, value: number }) => {
@@ -18,7 +16,7 @@ function BTCBalanceAdapter(data: { balance: boolean, value: number }[]) {
 
 function marketDataAdapter(data: MarketData[]) {
     return data.map((item: MarketData) => {
-        const icon = item.id === "bitcoin" ? bitcoinIcon : counterpartyIcon
+        const icon = item.id === "bitcoin" ? bitcoinImg : counterpartyImg
         return {
             ...item,
             icon

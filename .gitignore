@@ -5,3 +5,4 @@ dist
 scripts/imports.ts
 .vite
 .cache
+npm

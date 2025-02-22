@@ -6,10 +6,7 @@ import { connectUnisatWallet, signPSBTWithUnisat, pushTXUnisat, signMessageWithU
 import { connectOKXWallet, signPSBTWithOKX, pushTXOKX, signMessageWithOKX } from './providers/OKXProvider.ts';
 import { connectTapWallet, signMessageWithTapWallet, signPSBTWithTapWallet, pushTXTapWallet } from "./providers/TapWalletProvider.ts";
 
-import leatherIcon from './assets/leather.png';
-import unisatIcon from './assets/unisat.png';
-import tapwalletIcon from './assets/tapwallet.png';
-import okxIcon from './assets/okx.png';
+import { leatherImg, unisatImg, tapWalletImg, okxImg } from "@/assets/index.ts";
 
 export const UNIVERSE_WALLET_LABEL = "🆄🅽🅸🆅🅴🆁🆂🅴";
 
@@ -21,7 +18,7 @@ export interface connectWalletReturn {
 const walletConfig = {
   Leather: {
     label: 'Leather',
-    icon: leatherIcon,
+    icon: leatherImg,
     connect: connectLeatherWallet,
     signMessage: signMessageWithLeather,
     signPSBT: signPSBTWithLeather,
@@ -29,7 +26,7 @@ const walletConfig = {
   },
   Unisat: {
     label: 'Unisat',
-    icon: unisatIcon,
+    icon: unisatImg,
     connect: connectUnisatWallet,
     signMessage: signMessageWithUnisat,
     signPSBT: signPSBTWithUnisat,
@@ -37,7 +34,7 @@ const walletConfig = {
   },
   OKX: {
     label: 'OKX',
-    icon: okxIcon,
+    icon: okxImg,
     connect: connectOKXWallet,
     signMessage: signMessageWithOKX,
     signPSBT: signPSBTWithOKX,
@@ -45,7 +42,7 @@ const walletConfig = {
   },
   "🆄🅽🅸🆅🅴🆁🆂🅴": {
     label: UNIVERSE_WALLET_LABEL,
-    icon: tapwalletIcon,
+    icon: tapWalletImg,
     connect: connectTapWallet,
     signMessage: signMessageWithTapWallet,
     signPSBT: signPSBTWithTapWallet,

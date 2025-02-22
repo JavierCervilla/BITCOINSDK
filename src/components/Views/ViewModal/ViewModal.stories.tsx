@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ViewModal } from "./ViewModal.component.tsx"
-import "@/styles/tailwind.css"
+import "@styles/tailwind.css"
 import ThemeSelector from "@/components/ThemeSelector/ThemeSelector.component.tsx";
 import { WalletProvider, walletConfig } from "@/index.ts";
 import { MemoryRouter } from 'react-router-dom';
