@@ -1,7 +1,7 @@
 // src/providers/LeatherProvider.ts
 // Importa el archivo para asegurarte de que Deno lo procese
 import "@/types/global.d.ts";
-import type { connectWalletReturn } from "@/index.ts";
+import type { ConnectWalletReturn } from "@/index.ts";
 import type { SignPSBTOptions } from "@/context/walletContext.tsx";
 
 type leatherAccount = {
@@ -13,7 +13,7 @@ type leatherAccount = {
 }
 
 
-export const connectLeatherWallet = async (): Promise<connectWalletReturn | null> => {
+export const connectLeatherWallet = async (): Promise<ConnectWalletReturn | null> => {
   if (typeof globalThis !== "undefined" && globalThis.LeatherProvider) {
     try {
       const { result } = await globalThis.LeatherProvider.request("getAddresses");

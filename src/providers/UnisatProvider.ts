@@ -1,9 +1,9 @@
 // src/providers/UnisatProvider.ts
 
-import type { connectWalletReturn } from "@/index.ts";
+import type { ConnectWalletReturn } from "@/index.ts";
 import type { signPSBTOptions } from "@/context/walletContext.tsx";
 
-export const connectUnisatWallet = async (): Promise<connectWalletReturn | null> => {
+export const connectUnisatWallet = async (): Promise<ConnectWalletReturn | null> => {
   if (typeof globalThis !== "undefined" && globalThis.unisat) {
     try {
       const accounts = await globalThis.unisat.requestAccounts();

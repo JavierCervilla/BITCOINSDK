@@ -13,7 +13,7 @@ export const ViewModalStorie = () => {
       <ThemeSelector />
       <MemoryRouter>
         <WalletProvider theme="elegant-dark" wallets={walletConfig}>
-          <button className="bg-primary cursor-pointer text-light p-2 rounded-md max-w-fit mx-auto" onClick={() => setIsOpen(true)}>
+          <button type="button" className="bg-primary cursor-pointer text-light p-2 rounded-md max-w-fit mx-auto" onClick={() => setIsOpen(true)}>
             Open Modal
           </button>
           <ViewModal isOpen={isOpen} onClose={() => { setIsOpen(false) }}>

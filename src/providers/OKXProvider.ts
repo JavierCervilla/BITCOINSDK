@@ -1,9 +1,9 @@
 // src/providers/OKXProvider.ts
 
-import type { connectWalletReturn } from "@/WalletConnect/index.ts";
+import type { ConnectWalletReturn } from "@/WalletConnect/index.ts";
 import type { signPSBTOptions } from "@/WalletConnect/context/walletContext.tsx";
 
-export const connectOKXWallet = async (): Promise<connectWalletReturn | null> => {
+export const connectOKXWallet = async (): Promise<ConnectWalletReturn | null> => {
   if (typeof globalThis !== "undefined" && globalThis.okxwallet) {
     try {
       const result = await globalThis.okxwallet.bitcoin.connect();

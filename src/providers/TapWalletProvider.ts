@@ -1,9 +1,9 @@
 // src/providers/TapWalletProvider.ts
 
-import type { connectWalletReturn } from "@/WalletConnect/index.ts";
+import type { ConnectWalletReturn } from "@/WalletConnect/index.ts";
 import type { signPSBTOptions } from "@/WalletConnect/context/walletContext.tsx";
 
-export const connectTapWallet = async (): Promise<connectWalletReturn | null> => {
+export const connectTapWallet = async (): Promise<ConnectWalletReturn | null> => {
   if (typeof globalThis !== "undefined" && globalThis.tapwallet) {
     try {
       const accounts = await globalThis.tapwallet.requestAccounts();

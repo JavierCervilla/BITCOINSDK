@@ -10,7 +10,7 @@ import { leatherImg, unisatImg, tapWalletImg, okxImg } from "@/assets/index.ts";
 
 export const UNIVERSE_WALLET_LABEL = "🆄🅽🅸🆅🅴🆁🆂🅴";
 
-export interface connectWalletReturn {
+export interface ConnectWalletReturn {
   address: string;
   publicKey: string;
 }

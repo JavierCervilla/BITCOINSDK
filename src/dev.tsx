@@ -9,7 +9,7 @@ import { OpenBookApp } from "@/components/OpenBookApp/OpenBookApp.component.tsx"
 function DevApp() {
 
   return (
-    <OpenBookApp isOpen={true} onClose={() => {}} />
+    <OpenBookApp isOpen onClose={() => {}} />
   );
 }
 

@@ -26,7 +26,7 @@ const CryptoInfo: React.FC<{ data: MarketData }> = ({ data }) => {
           })}
         </span>
         <div className={cn("flex text-xs items-center", isPositive ? "text-green-500" : "text-red-500")}>
-          <TrendIcon className={"w-4 h-4"} />
+          <TrendIcon className="w-4 h-4" />
           <span className="text-sm font-medium">{Math.abs(data.price_change_percentage_24h).toFixed(2)}%</span>
         </div>
       </div>
