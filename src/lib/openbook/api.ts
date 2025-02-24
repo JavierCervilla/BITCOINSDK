@@ -1,4 +1,4 @@
-import { bitcoinsdk } from "@/lib/index.ts"
+import {getConfig} from "@/lib/config.ts"
 import type { MarketData } from "@/types/openbook.d.ts";
 
 import type * as OpenbookAPI from "./api.d.ts"
@@ -31,25 +31,25 @@ function btcPriceAdapter(data: MarketData[]) {
 
 export const openbook = {
     getMarketData: async () => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/market`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/market`)
         const data = await fetch(endpoint)
         const mkdata = await data.json()
         return marketDataAdapter(mkdata)
     },
     getUTXOS: async ({ address }: { address: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/xcp/utxos/${address}`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/xcp/utxos/${address}`)
         const data = await fetch(endpoint)
         const json = await data.json()
         return json.utxos
     },
     getBTCBalance: async ({ address }: { address: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/xcp/utxos/${address}`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/xcp/utxos/${address}`)
         const data = await fetch(endpoint)
         const json = await data.json()
         return BTCBalanceAdapter(json.utxos)
     },
     getAtomicSales: async ({ limit, page }: { limit?: number, page?: number }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/atomic-swaps`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/atomic-swaps`)
         endpoint.searchParams.set("limit", limit?.toString() || "100")
         endpoint.searchParams.set("page", page?.toString() || "1")
         const data = await fetch(endpoint)
@@ -57,7 +57,7 @@ export const openbook = {
         return atomic_swaps as OpenbookAPI.PaginatedResponse<OpenbookAPI.OpenbookAtomicSwap>
     },
     getAtomicSalesByAsset: async ({ asset, limit, page }: { asset: string, limit?: number, page?: number }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/atomic-swaps/asset/${asset}`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/atomic-swaps/asset/${asset}`)
         endpoint.searchParams.set("limit", limit?.toString() || "100")
         endpoint.searchParams.set("page", page?.toString() || "1")
         const data = await fetch(endpoint)
@@ -65,7 +65,7 @@ export const openbook = {
         return atomic_swaps as OpenbookAPI.PaginatedResponse<OpenbookAPI.OpenbookAtomicSwap>
     },
     getAtomicSalesByAddress: async ({ address, limit, page }: { address: string, limit?: number, page?: number }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/atomic-swaps/address/${address}`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/atomic-swaps/address/${address}`)
         endpoint.searchParams.set("limit", limit?.toString() || "100")
         endpoint.searchParams.set("page", page?.toString() || "1")
         const data = await fetch(endpoint)
@@ -73,13 +73,13 @@ export const openbook = {
         return atomic_swaps as OpenbookAPI.PaginatedResponse<OpenbookAPI.OpenbookAtomicSwap>
     },
     getAtomicSaleByTxId: async ({ txid }: { txid: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/atomic-swaps/tx/${txid}`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/atomic-swaps/tx/${txid}`)
         const data = await fetch(endpoint)
         const atomic_swap = await data.json()
         return atomic_swap as OpenbookAPI.PaginatedResponse<OpenbookAPI.OpenbookAtomicSwap>
     },
     getAtomicSwapOrders: async ({ limit, page }: { limit?: number, page?: number }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/orders`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/orders`)
         endpoint.searchParams.set("limit", limit?.toString() || "1000")
         endpoint.searchParams.set("page", page?.toString() || "1")
         const data = await fetch(endpoint)
@@ -87,13 +87,13 @@ export const openbook = {
         return atomic_swaps as OpenbookAPI.PaginatedResponse<OpenbookAPI.OpenbookAtomicSwapOrder>
     },
     getAtomicSwapOrdersByAsset: async ({ asset }: { asset: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/orders/asset/${asset}`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/orders/asset/${asset}`)
         const data = await fetch(endpoint)
         const atomic_swaps = await data.json();
         return atomic_swaps as OpenbookAPI.PaginatedResponse<OpenbookAPI.OpenbookAtomicSwapOrder>
     },
     cancelAtomicSwap: async ({ id, feeRate }: { id: string, feeRate: number }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/orders/cancel`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/orders/cancel`)
         const data = await fetch(endpoint, {
             method: "POST",
             headers: {
@@ -108,7 +108,7 @@ export const openbook = {
         return atomic_swap as OpenbookAPI.OpenbookCancelOrder
     },
     getPsbtForListOrder: async ({ utxo, seller, price }: { utxo: string, seller: string, price: number }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/orders/list/sign`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/orders/list/sign`)
         const data = await fetch(endpoint, {
             method: "POST",
             headers: {
@@ -120,7 +120,7 @@ export const openbook = {
         return atomic_swap as OpenbookAPI.OpenbookPsbtForListOrder
     },
     getPsbtForSubmitOrderOnchain: async ({ utxo, seller, price, feeRate, psbt }: { utxo: string, seller: string, price: number, feeRate: number, psbt: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/orders/list/submit`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/orders/list/submit`)
         const data = await fetch(endpoint, {
             method: "POST",
             headers: {
@@ -137,7 +137,7 @@ export const openbook = {
         feeRate: number;
         serviceFee: OpenbookAPI.ServiceFee[] | [];
     }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/orders/buy`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/orders/buy`)
         const data = await fetch(endpoint, {
             method: "POST",
             headers: {
@@ -149,7 +149,7 @@ export const openbook = {
         return atomic_swap as OpenbookAPI.OpenbookPsbtForBuyOrder
     },
     getBTCPrice: async() =>{
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/market`)
+        const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/market`)
         const data = await fetch(endpoint)
         const mkdata = await data.json()
         return btcPriceAdapter(mkdata)
@@ -157,7 +157,7 @@ export const openbook = {
     utils: {
         getCIP25JSON: async ({ cip25Url }: { cip25Url: string }) => {
             try {
-                const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/utils/cip25?url=${cip25Url}`)
+                const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/utils/cip25?url=${cip25Url}`)
                 const data = await fetch(endpoint)
                 const cip25 = await data.json()
                 return cip25
@@ -167,7 +167,7 @@ export const openbook = {
         },
         getMempoolFees: async () => {
             try {
-                const endpoint = new URL(`${bitcoinsdk.CONFIG().OPENBOOK.ENDPOINT}/api/v1/utils/mempool-fees`)
+                const endpoint = new URL(`${getConfig().OPENBOOK.ENDPOINT}/api/v1/utils/mempool-fees`)
                 const data = await fetch(endpoint)
                 const mempoolFees = await data.json()
                 return mempoolFees as OpenbookAPI.OpenbookMempoolFees

@@ -1,4 +1,4 @@
-import { bitcoinsdk } from "@/lib/index.ts"
+import {getConfig} from "@/lib/config.ts";
 import type * as XCPAPI from "./api.d.ts";
 import * as hex from "@/lib/utils/hex.ts";
 import { bitcoin as rpc } from "@/lib/bitcoin/api.ts";
@@ -68,14 +68,14 @@ async function composeAdapter(rawTransaction: string) {
 
 export const counterparty = {
     getAsset: async ({ asset }: { asset: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}`)
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}`)
         endpoint.searchParams.set("verbose", "true")
         const response = await fetch(endpoint)
         const data = await response.json() as { result: XCPAPI.XCPAPIAsset }
         return data.result;
     },
     getHoldersCount: async ({ asset }: { asset: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/holders`)
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/holders`)
         endpoint.searchParams.set("verbose", "true")
         endpoint.searchParams.set("limit", "0")
         const response = await fetch(endpoint)
@@ -83,7 +83,7 @@ export const counterparty = {
         return data.result_count as number;
     },
     getDispenses: async ({ asset }: { asset: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/dispenses`)
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/dispenses`)
         endpoint.searchParams.set("verbose", "true")
         endpoint.searchParams.set("limit", "10000")
         const response = await fetch(endpoint)
@@ -91,7 +91,7 @@ export const counterparty = {
         return data.result;
     },
     getDispensers: async ({ asset }: { asset: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/dispensers`)
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/dispensers`)
         endpoint.searchParams.set("verbose", "true")
         endpoint.searchParams.set("limit", "10000")
         endpoint.searchParams.set("status", "open")
@@ -100,21 +100,21 @@ export const counterparty = {
         return data.result;
     },
     getBalance: async ({ address }: { address: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/balances`)
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/balances`)
         endpoint.searchParams.set("verbose", "true")
         const data = await fetch(endpoint)
         const balances = await data.json() as { result: XCPAPI.XCPAPIBalance[] }
         return balanceAdapter(balances.result)
     },
     getTokenBalance: async ({ asset, address }: { asset: string, address: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/balances/${asset}`);
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/balances/${asset}`);
         endpoint.searchParams.set("verbose", "true")
         const data = await fetch(endpoint)
         const balances = await data.json() as { result: XCPAPI.XCPAPIBalance[] }
         return balanceAdapter(balances.result)
     },
     sendAsset: async ({ asset, address, destination, amount }: { asset: string, address: string, destination: string, amount: number }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/compose/send`)
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/compose/send`)
         endpoint.searchParams.set("asset", asset);
         endpoint.searchParams.set("use_enhanced_send", "true");
         endpoint.searchParams.set("address", address);
@@ -131,7 +131,7 @@ export const counterparty = {
         }
     },
     sendAssetInUTXO: async ({ utxo, destination }: { utxo: string, destination: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/utxos/${utxo}/compose/movetoutxo`)
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/utxos/${utxo}/compose/movetoutxo`)
         endpoint.searchParams.set("verbose", "True");
         endpoint.searchParams.set("destination", destination);
         const response = await fetch(endpoint);
@@ -144,7 +144,7 @@ export const counterparty = {
         }
     },
     attachToUTXO: async ({ asset, address, amount }: { asset: string, address: string, amount: number }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/compose/attach`)
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/compose/attach`)
         endpoint.searchParams.set("asset", asset);
         endpoint.searchParams.set("address", address);
         endpoint.searchParams.set("verbose", "True");
@@ -160,7 +160,7 @@ export const counterparty = {
         }
     },
     detachFromUTXO: async ({ utxo, destination }: { utxo: string, destination: string }) => {
-        const endpoint = new URL(`${bitcoinsdk.CONFIG().COUNTERPARTY.ENDPOINT}/v2/utxos/${utxo}/compose/detach`)
+        const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/utxos/${utxo}/compose/detach`)
         endpoint.searchParams.set("destination", destination);
         endpoint.searchParams.set("verbose", "True");
         const response = await fetch(endpoint);

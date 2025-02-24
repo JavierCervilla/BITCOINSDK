@@ -45,6 +45,8 @@ export const CONFIG = {
     BITCOIN: BITCOIN_CONFIG(),
 };
 
+export const getConfig = () => CONFIG;
+
 export function initConfig(customConfig: Partial<typeof CONFIG> = {}) {
     Object.assign(CONFIG, {
         ...customConfig,

@@ -6,7 +6,7 @@ import type * as OpenbookAPI from "@/lib/openbook/api.d.ts"
 import type * as XCPAPI from "@/lib/counterparty/api.d.ts"
 
 import { DispensesList } from "@/components/Asset/RecentSales/Dispense/DispenseList.component.tsx";
-import { AtomicSwapList } from "@/components/Asset/RecentSales/AtomicSwaps/AtomicSwapList.component.tsx";
+import { RecentSalesAtomicSwapList } from "@/components/Asset/RecentSales/AtomicSwaps/AtomicSwapList.component.tsx";
 import type { BTCPrice } from "@/lib/bitcoin/api.d.ts";
 import { Loader } from "@/components/Loader/Loader.component.tsx";
 
@@ -56,7 +56,7 @@ function RecentSalesComponent({ asset, btcPrice, swaps, dispenses, isLoading }: 
         </Tabs.List>
 
         <Tabs.Content value="swaps" className="mt-4 bg-light p-2 rounded-md text-dark text-sm">
-          <AtomicSwapList asset={asset} btcPrice={btcPrice} swaps={swaps} isLoading={isLoading} />
+          <RecentSalesAtomicSwapList asset={asset} btcPrice={btcPrice} swaps={swaps} isLoading={isLoading} />
         </Tabs.Content>
         <Tabs.Content value="dispenses" className="mt-4 bg-light p-2 rounded-md text-dark text-sm">
           <DispensesList btcPrice={btcPrice} dispenses={dispenses} isLoading={isLoading} />

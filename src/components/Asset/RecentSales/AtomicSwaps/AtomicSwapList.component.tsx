@@ -1,7 +1,7 @@
 import { memo, useMemo } from "react"
 import { FixedSizeList as List } from "react-window";
 import type { OpenbookAtomicSwap } from "@/lib/openbook/api.d.ts"
-import { AtomicSwapItem } from "./AtomicSwapItem.component.tsx"
+import { RecentSalesAtomicSwapItem } from "./AtomicSwapItem.component.tsx"
 import { Loader } from "@/components/Loader/Loader.component.tsx"
 import type { BTCPrice } from "@/lib/bitcoin/api.d.ts";
 
@@ -12,7 +12,7 @@ interface AtomicSwapListProps {
   btcPrice: BTCPrice
 }
 
-function AtomicSwapListComponent({ asset, swaps, isLoading, btcPrice }: Readonly<AtomicSwapListProps>) {
+function RecentSalesAtomicSwapListComponent({ asset, swaps, isLoading, btcPrice }: Readonly<AtomicSwapListProps>) {
   const ROW_HEIGHT = useMemo(() => {
     if (typeof globalThis !== "undefined") {
       if (globalThis.innerWidth < 640) return 260;
@@ -55,7 +55,7 @@ function AtomicSwapListComponent({ asset, swaps, isLoading, btcPrice }: Readonly
             const swap = swaps[index];
             return (
               <div style={style}>
-                <AtomicSwapItem btcPrice={btcPrice} key={swap.txid} atomicSwap={swap} asset={asset} />
+                <RecentSalesAtomicSwapItem btcPrice={btcPrice} key={swap.txid} atomicSwap={swap} asset={asset} />
               </div>
             )
           }}
@@ -65,4 +65,4 @@ function AtomicSwapListComponent({ asset, swaps, isLoading, btcPrice }: Readonly
   )
 }
 
-export const AtomicSwapList = memo(AtomicSwapListComponent)
+export const RecentSalesAtomicSwapList = memo(RecentSalesAtomicSwapListComponent)
