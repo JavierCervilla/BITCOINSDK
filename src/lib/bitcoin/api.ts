@@ -1,4 +1,4 @@
-import { CONFIG } from "@/lib/config.ts";
+import { bitcoinsdk } from "@/lib/index.ts"
 
 async function callRPC(method: string, params: unknown[]) {
     try{
@@ -8,8 +8,8 @@ async function callRPC(method: string, params: unknown[]) {
             method: method,
             params: params
         }
-        const auth = btoa(`${CONFIG.BITCOIN.RPC_USER}:${CONFIG.BITCOIN.RPC_PASSWORD}`)
-        const response = await fetch(CONFIG.BITCOIN.ENDPOINT, {
+        const auth = btoa(`${bitcoinsdk.CONFIG().BITCOIN.RPC_USER}:${bitcoinsdk.CONFIG().BITCOIN.RPC_PASSWORD}`)
+        const response = await fetch(bitcoinsdk.CONFIG().BITCOIN.ENDPOINT, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

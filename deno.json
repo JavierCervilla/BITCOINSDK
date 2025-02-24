@@ -3,6 +3,7 @@
     "dev": "deno run -A npm:vite --mode dev",
     "ladle": "deno run -A npm:@ladle/react dev",
     "build": "deno run -A src/build.ts",
+    "npm": "cd npm &&npm publish --access public",
     "lint": "deno lint"
   },
   "compilerOptions": {
