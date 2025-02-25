@@ -50,5 +50,3 @@ declare global {
     tapwallet?: TapWallet;
   }
 }
-
-export {};
