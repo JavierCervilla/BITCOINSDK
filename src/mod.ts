@@ -1,2 +1,2 @@
-export * from "./index.ts"
-export * from "./components/index.ts"
+export * from "@/core/index.ts"
+export * from "@/ui/components/index.ts"
