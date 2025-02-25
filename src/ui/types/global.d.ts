@@ -5,7 +5,6 @@ import type { InputToSign } from "@/ui/context/walletContext.tsx";
 
 declare global {
   namespace JSX {
-    interface Element extends ReactElement { }
     interface IntrinsicElements {
       div: HTMLAttributes<HTMLDivElement>;
       span: HTMLAttributes<HTMLSpanElement>;

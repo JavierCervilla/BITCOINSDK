@@ -1,5 +1,6 @@
 import { X } from "lucide-react"
 
+
 import { useModal } from "@/ui/context/modalContext.tsx"
 
 export function Modal() {
