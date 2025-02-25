@@ -1,5 +1,3 @@
-//TODO: Refactor for using without the provider name in function importin * from provider and calling functions as provider.function
-
 import { WalletProvider, useWallet } from '@/ui/context/walletContext.tsx';
 import ConnectWalletButton from '@/ui/components/ConnectWallet/ConnectWallet.component.tsx';
 

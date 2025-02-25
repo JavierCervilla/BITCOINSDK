@@ -10,7 +10,7 @@ async function main() {
         shims: { deno: true }, // Agrega compatibilidad con Deno en Node.js
         package: {
             name: "bitcoinsdk",
-            version: "0.1.0",
+            version: "0.1.5",
             description: "Bitcoin SDK to integrate Bitcoin wallets to your app and get access to The OpenBook Protocol in your project",
             license: "MIT",
             repository: {
