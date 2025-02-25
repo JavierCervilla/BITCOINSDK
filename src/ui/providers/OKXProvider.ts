@@ -1,12 +1,13 @@
-// src/providers/OKXProvider.ts
+import { bitcoinsdk } from "@/core/index.ts";
 
-import type { ConnectWalletReturn } from "@/WalletConnect/index.ts";
-import type { signPSBTOptions } from "@/WalletConnect/context/walletContext.tsx";
+import type { ConnectWalletReturn } from "@/ui/index.ts";
+import type { SignPSBTOptions } from "@/ui/context/walletContext.tsx";
 
 export const connectWallet = async (): Promise<ConnectWalletReturn | null> => {
-  if (typeof globalThis !== "undefined" && globalThis.okxwallet) {
+  const okxwallet = (globalThis as GlobalThis).okxwallet;
+  if (typeof globalThis !== "undefined" && okxwallet) {
     try {
-      const result = await globalThis.okxwallet.bitcoin.connect();
+      const result = await okxwallet.bitcoin.connect();
       return result;
     } catch (error) {
       console.error("Error connecting to OKX Wallet:", error);
@@ -18,25 +19,29 @@ export const connectWallet = async (): Promise<ConnectWalletReturn | null> => {
 };
 
 export const signMessage = async (message: string) => {
-  const okx = globalThis.okxwallet;
-  const signature = await okx.bitcoin.signMessage(message);
-  return signature;
+  const okxwallet = (globalThis as GlobalThis).okxwallet;
+  if (typeof globalThis !== "undefined" && okxwallet) {
+    const signature = await okxwallet.bitcoin.signMessage(message);
+    return signature;
+  }
+  throw new Error("OKX Wallet not installed");
 };
 
 export const signPSBT = async (
   psbt: string,
-  options: signPSBTOptions,
+  options: SignPSBTOptions,
 ): Promise<string | null> => {
-  if (typeof globalThis !== "undefined" && globalThis.okxwallet && globalThis.okxwallet.bitcoin) {
+  const okxwallet = (globalThis as GlobalThis).okxwallet;
+  if (typeof globalThis !== "undefined" && okxwallet && okxwallet.bitcoin) {
     try {
       if (options) {
         const opt = {}
         if ("autoFinalized" in options) opt.autoFinalized =options.autoFinalized;
         if ("inputsToSign" in options) opt.toSignInputs= options.inputsToSign;
-        const signedPsbt = await globalThis.okxwallet.bitcoin.signPsbt(psbt, opt);
+        const signedPsbt = await okxwallet.bitcoin.signPsbt(psbt, opt);
         return signedPsbt;
       }
-      const signedPsbt = await globalThis.okxwallet.bitcoin.signPsbt(psbt);
+      const signedPsbt = await okxwallet.bitcoin.signPsbt(psbt);
       return signedPsbt;
     } catch (error) {
       console.error("Error signing PSBT with OKX Wallet:", error);
@@ -47,16 +52,6 @@ export const signPSBT = async (
   }
 };
 
-export const pushTX = async (txHex: string): Promise<string | null> => {
-  if (typeof globalThis !== "undefined" && globalThis.unisat) {
-    try {
-      const txId = await globalThis.okxwallet.bitcoin.pushPsbt(txHex);
-      return txId;
-    } catch (error) {
-      console.error("Error pushing TX with Unisat Wallet:", error);
-      return null;
-    }
-  } else {
-    throw new Error("Unisat Wallet not installed");
-  }
+export const pushTX = async (txHex: string) => {
+  return await bitcoinsdk.bitcoin.sendRawTransaction({ txHex });
 };

@@ -1,8 +1,7 @@
-import type { ReactElement } from 'react'
-import type { HTMLAttributes, ButtonHTMLAttributes, ImgHTMLAttributes } from 'react'
-
+import type { ReactElement } from 'react';
+import type { HTMLAttributes, ButtonHTMLAttributes, ImgHTMLAttributes } from 'react';
 import type { LeatherProvider } from '@leather.io/rpc';
-import type { InputToSign } from "@/context/walletContext.tsx";
+import type { InputToSign } from "@/ui/context/walletContext.tsx";
 
 declare global {
   namespace JSX {
@@ -18,6 +17,7 @@ declare global {
       iframe: HTMLAttributes<HTMLIFrameElement>;
     }
   }
+  
   interface TapWallet {
     requestAccounts: () => Promise<string[]>;
     signMessage: (message: string) => Promise<string>;
@@ -45,7 +45,7 @@ declare global {
     };
   }
 
-  interface globalThis {
+  interface GlobalThis {
     LeatherProvider?: LeatherProvider;
     unisat?: Unisat;
     okxwallet?: OkxWallet;
@@ -53,4 +53,4 @@ declare global {
   }
 }
 
-export {}
+export {};

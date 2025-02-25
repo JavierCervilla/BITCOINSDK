@@ -1,24 +1,24 @@
+import bitcoinsdk from "@/core/index.ts";
+
+import LeatherProvider from "@leather-wallet/types"
 import type { ConnectWalletReturn } from "@/ui/index.ts";
 import type { SignPSBTOptions } from "@/ui/context/walletContext.tsx";
-import bitcoinsdk from "@/core/index.ts";
 import "@/ui/types/global.d.ts";
-
-type leatherAccount = {
-  address: string;
-  type: string;
-  derivationPath: string;
-  publicKey: string;
-  symbol: string;
-}
 
 
 export const connectWallet = async (): Promise<ConnectWalletReturn | null> => {
-  if (typeof globalThis !== "undefined" && globalThis.LeatherProvider) {
+  const LeatherProvider = (globalThis as GlobalThis).LeatherProvider;
+  if (typeof globalThis !== "undefined" && LeatherProvider) {
     try {
-      const { result } = await globalThis.LeatherProvider.request("getAddresses");
-      const address = result.addresses.find((account: leatherAccount) => account.type === 'p2wpkh').address;
-      const publicKey = result.addresses.find((account: leatherAccount) => account.type === 'p2wpkh').publicKey;
-      return { address, publicKey };
+      const { result } = await LeatherProvider.request("getAddresses");
+      if (result && result.addresses.length > 0) {
+        const account = result.addresses.find((account) => account.type === 'p2wpkh');
+        if (account) {
+          const address = account.address;
+          const publicKey = account.publicKey;
+          return { address, publicKey };
+        }
+      }
     } catch (error) {
       console.error("Error connecting to Leather Wallet:", error);
       return null;
@@ -26,18 +26,23 @@ export const connectWallet = async (): Promise<ConnectWalletReturn | null> => {
   } else {
     throw new Error("Leather Wallet not installed");
   }
+  return null;
 };
 
 export const signMessage = async (message: string) => {
-  const { result } = await globalThis.LeatherProvider.request(
-    "signMessage",
-    {
-      message,
-      paymentType: "p2wpkh",
-      network: "mainnet",
-    },
-  );
-  return result.signature;
+  const LeatherProvider = (globalThis as GlobalThis).LeatherProvider;
+  if (typeof globalThis !== "undefined" && LeatherProvider) {
+    const { result } = await LeatherProvider.request(
+      "signMessage",
+      {
+        message,
+        paymentType: "p2wpkh",
+        network: "mainnet",
+      },
+    );
+    return result.signature;
+  }
+  throw new Error("Leather Wallet not installed");
 };
 
 
@@ -45,7 +50,8 @@ export const signPSBT = async (
   psbt: string,
   options: SignPSBTOptions,
 ): Promise<string | null> => {
-  if (typeof globalThis !== "undefined" && globalThis.LeatherProvider) {
+  const LeatherProvider = (globalThis as GlobalThis).LeatherProvider;
+  if (typeof globalThis !== "undefined" && LeatherProvider) {
     try {
       const { inputsToSign, broadcast } = options;
       const requestParams: LeatherProvider.SignPsbtRequestParams = {
@@ -56,9 +62,7 @@ export const signPSBT = async (
         requestParams.allowedSighash = inputsToSign[0].sighashTypes
         requestParams.signAtIndex = inputsToSign.map((input) => input.index)
       }
-      console.log({ requestParams })
-      const signedPsbt = await globalThis.LeatherProvider.request('signPsbt', requestParams);
-      console.log({ signedPsbt })
+      const signedPsbt = await LeatherProvider.request('signPsbt', requestParams);
       return signedPsbt.result.hex;
     } catch (error) {
       console.error("Error signing PSBT with Leather Wallet:", error);
