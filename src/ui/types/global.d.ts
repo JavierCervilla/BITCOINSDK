@@ -1,4 +1,3 @@
-import type { ReactElement } from 'react';
 import type { HTMLAttributes, ButtonHTMLAttributes, ImgHTMLAttributes } from 'react';
 import type { LeatherProvider } from '@leather.io/rpc';
 import type { InputToSign } from "@/ui/context/walletContext.tsx";
