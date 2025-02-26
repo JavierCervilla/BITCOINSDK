@@ -1,9 +1,10 @@
-import { WalletProvider, walletConfig } from "@/ui/index.ts";
+import React from "react";
+import { WalletProvider, walletConfig } from "../../../ui/index.ts";
 
-import { ThemeSelector } from "@/ui/components/ThemeSelector/ThemeSelector.component.tsx";
-import { ConnectWalletCTA } from "@/ui/components/ConnectWallet/ConnectWalletCTA.component.tsx";
+import { ThemeSelector } from "../../../ui/components/ThemeSelector/ThemeSelector.component.tsx";
+import { ConnectWalletCTA } from "../../../ui/components/ConnectWallet/ConnectWalletCTA.component.tsx";
 
-import "@styles/tailwind.css"
+import "../../../ui/styles/tailwind.css"
 
 export const ConnectWalletCTAStorie = () => {
   return (

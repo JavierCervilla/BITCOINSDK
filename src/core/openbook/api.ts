@@ -1,7 +1,7 @@
-import { getConfig } from "@/core/config.ts"
-import { counterpartyImg, bitcoinImg } from "@/assets/index.ts";
+import { getConfig } from "../config.ts"
+import { counterpartyImg, bitcoinImg } from "../../assets/index.ts";
 
-import type * as OpenbookAPI from "@/core//openbook/api.d.ts"
+import type * as OpenbookAPI from "../openbook/api.d.ts"
 
 function BTCBalanceAdapter(data: { balance: boolean, value: number }[]) {
     const balance = data.reduce((acc: number, item: { balance: boolean, value: number }) => {

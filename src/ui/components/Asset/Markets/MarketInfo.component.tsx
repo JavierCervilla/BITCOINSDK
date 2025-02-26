@@ -1,13 +1,14 @@
+import React from "react";
 import { useState, useCallback, memo } from "react";
 import * as Tabs from "@radix-ui/react-tabs";
 
-import { cn } from "@/ui/utils/style.ts";
-import { DispensersList } from "@/ui/components/Asset/Markets/Dispensers/DispenserList.component.tsx";
-import { AtomicSwapList } from "@/ui/components/Asset/Markets/AtomicSwaps/AtomicSwapList.component.tsx";
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx";
+import { cn } from "../../../../ui/utils/style.ts";
+import { DispensersList } from "../../../../ui/components/Asset/Markets/Dispensers/DispenserList.component.tsx";
+import { AtomicSwapList } from "../../../../ui/components/Asset/Markets/AtomicSwaps/AtomicSwapList.component.tsx";
+import { Loader } from "../../../../ui/components/Loader/Loader.component.tsx";
 
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts";
-import type * as XCPAPI from "@/core/counterparty/api.d.ts";
+import type * as OpenbookAPI from "../../../../core/openbook/api.d.ts";
+import type * as XCPAPI from "../../../../core/counterparty/api.d.ts";
 
 const tabs = [
   { value: "swaps", label: "Atomic Swaps" },

@@ -1,9 +1,10 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { Lock, Unlock } from "lucide-react";
 
-import { bitcoinsdk } from "@/core/index.ts";
+import { bitcoinsdk } from "../../../core/index.ts";
 
-import type * as XCPAPI from "@/core/counterparty/api.d.ts";
+import type * as XCPAPI from "../../../core/counterparty/api.d.ts";
 
 export function AssetInfo({ asset }: Readonly<{ asset: XCPAPI.XCPAPIAsset }>) {
   const [holders, setHolders] = useState(0)

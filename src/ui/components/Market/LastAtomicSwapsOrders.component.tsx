@@ -1,14 +1,15 @@
+import React from "react";
 import { memo, useEffect, useState, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import { ShoppingCart } from "lucide-react"
 
-import bitcoinsdk from "@/core/index.ts"
+import bitcoinsdk from "../../../core/index.ts"
 
-import { Media } from "@/ui/components/Asset/Media.component.tsx"
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx";
+import { Media } from "../../../ui/components/Asset/Media.component.tsx"
+import { Loader } from "../../../ui/components/Loader/Loader.component.tsx";
 
-import type * as XCPAPI from "@/core/counterparty/api.d.ts"
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts"
+import type * as XCPAPI from "../../../core/counterparty/api.d.ts"
+import type * as OpenbookAPI from "../../../core/openbook/api.d.ts"
 
 interface LastAtomicSwapsOrdersProps {
   lastOrders: OpenbookAPI.OpenbookAtomicSwapOrder[]

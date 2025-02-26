@@ -1,8 +1,9 @@
+import React from "react";
 import { memo } from "react"
 
-import { short_address } from "@/ui/utils/index.ts"
+import { short_address } from "../../../../../ui/utils/index.ts"
 
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts"
+import type * as OpenbookAPI from "../../../../../core/openbook/api.d.ts"
 
 interface AtomicSwapItemProps {
   atomicSwap: OpenbookAPI.OpenbookAtomicSwap

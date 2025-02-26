@@ -1,16 +1,17 @@
+import React from "react";
 import { useState, useEffect, useCallback } from "react"
 import { BookImage } from "lucide-react"
 import { useParams } from "react-router-dom";
 
-import { bitcoinsdk } from "@/core/index.ts";
+import { bitcoinsdk } from "../../../../core/index.ts";
 
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx";
-import { Media } from "@/ui/components/Asset/Media.component.tsx";
-import { AssetInfo } from "@/ui/components/Asset/AssetInfo.component.tsx";
-import { BalanceSection } from "@/ui/components/Asset/Balance/BalanceSection.component.tsx";
-import { MarketSection } from "@/ui/components/Asset/MarketSection.tsx";
+import { Loader } from "../../../../ui/components/Loader/Loader.component.tsx";
+import { Media } from "../../../../ui/components/Asset/Media.component.tsx";
+import { AssetInfo } from "../../../../ui/components/Asset/AssetInfo.component.tsx";
+import { BalanceSection } from "../../../../ui/components/Asset/Balance/BalanceSection.component.tsx";
+import { MarketSection } from "../../../../ui/components/Asset/MarketSection.tsx";
 
-import type { BTCPrice } from "@/core/bitcoin/api.d.ts";
+import type { BTCPrice } from "../../../../core/bitcoin/api.d.ts";
 
 export function AssetView() {
   const { assetid } = useParams();

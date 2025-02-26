@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ButtonHTMLAttributes, ImgHTMLAttributes } from 'react';
 import type { LeatherProvider } from '@leather.io/rpc';
-import type { InputToSign } from "@/ui/context/walletContext.tsx";
+import type { InputToSign } from "../context/walletContext.tsx";
 
 declare global {
   namespace JSX {

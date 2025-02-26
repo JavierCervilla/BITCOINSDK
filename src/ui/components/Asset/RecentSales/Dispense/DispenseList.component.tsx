@@ -1,10 +1,11 @@
+import React from "react";
 import { memo, useMemo } from "react";
 import { FixedSizeList as List } from "react-window";
 
 import { DispenseItem } from "./DispenseItem.component.tsx";
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx";
+import { Loader } from "../../../../../ui/components/Loader/Loader.component.tsx";
 
-import type * as XCPAPI from "@/core/counterparty/api.d.ts";
+import type * as XCPAPI from "../../../../../core/counterparty/api.d.ts";
 
 interface DispensesListProps {
   dispenses: XCPAPI.XCPAPIDispenser[];

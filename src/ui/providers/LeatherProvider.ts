@@ -1,9 +1,9 @@
-import bitcoinsdk from "@/core/index.ts";
+import bitcoinsdk from "../../core/index.ts";
 
 import LeatherProvider from "@leather-wallet/types"
-import type { ConnectWalletReturn } from "@/ui/index.ts";
-import type { SignPSBTOptions } from "@/ui/context/walletContext.tsx";
-import "@/ui/types/global.d.ts";
+import type { ConnectWalletReturn } from "../index.ts";
+import type { SignPSBTOptions } from "../context/walletContext.tsx";
+
 
 
 export const connectWallet = async (): Promise<ConnectWalletReturn | null> => {

@@ -1,11 +1,12 @@
+import React from "react";
 import { useMemo, memo } from "react"
 import { FixedSizeList as List } from "react-window";
 
-import { AtomicSwapItem } from "@/ui/components/Asset/Markets/AtomicSwaps/AtomicSwapItem.component.tsx"
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx"
+import { AtomicSwapItem } from "../../../../../ui/components/Asset/Markets/AtomicSwaps/AtomicSwapItem.component.tsx"
+import { Loader } from "../../../../../ui/components/Loader/Loader.component.tsx"
 
-import type * as BTCAPI from "@/core/bitcoin/api.d.ts"
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts"
+import type * as BTCAPI from "../../../../../core/bitcoin/api.d.ts"
+import type * as OpenbookAPI from "../../../../../core/openbook/api.d.ts"
 
 interface AtomicSwapListProps {
   swaps: OpenbookAPI.OpenbookAtomicSwapOrder[]

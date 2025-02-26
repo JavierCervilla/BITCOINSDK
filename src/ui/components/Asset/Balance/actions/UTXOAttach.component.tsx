@@ -1,15 +1,16 @@
+import React from "react";
 import { useState } from "react";
 import * as bitcoin from "bitcoinjs-lib";
 import { Link } from 'lucide-react'
 
-import bitcoinsdk from "@/core/index.ts";
+import bitcoinsdk from "../../../../../core/index.ts";
 
-import { useModal } from "@/ui/context/modalContext.tsx";
-import { useWallet } from "@/ui/index.ts";
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx";
-import { showToast } from "@/ui/components/Toast/Toast.component.tsx";
+import { useModal } from "../../../../../ui/context/modalContext.tsx";
+import { useWallet } from "../../../../../ui/index.ts";
+import { Loader } from "../../../../../ui/components/Loader/Loader.component.tsx";
+import { showToast } from "../../../../../ui/components/Toast/Toast.component.tsx";
 
-import type * as XCPAPI from "@/core/counterparty/api.d.ts";
+import type * as XCPAPI from "../../../../../core/counterparty/api.d.ts";
 
 interface SendActionProps {
   balance: XCPAPI.Balance;

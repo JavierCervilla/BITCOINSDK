@@ -1,11 +1,11 @@
 import  React from "react";
 import ReactDOM from "react-dom/client";
 
-import { WalletProvider } from "@/ui/context/walletContext.tsx";
-import { walletConfig } from "@/ui/index.ts";
-import { OpenBookApp } from "@/ui/components/OpenBookApp/OpenBookApp.component.tsx";
+import { WalletProvider } from "./context/walletContext.tsx";
+import { walletConfig } from "./index.ts";
+import { OpenBookApp } from "./components/OpenBookApp/OpenBookApp.component.tsx";
 
-import "@/ui/styles/tailwind.css";
+import "./styles/tailwind.css";
 
 function DevApp() {
 

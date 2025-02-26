@@ -1,9 +1,9 @@
 import * as bitcoin from "bitcoinjs-lib"
 
-import { getConfig } from "@/core/config.ts";
-import { bitcoin as rpc } from "@/core/bitcoin/api.ts";
-import type * as XCPAPI from "@/core/counterparty/api.d.ts";
-import * as hex from "@/core/utils/hex.ts";
+import { getConfig } from "../config.ts";
+import { bitcoin as rpc } from "../bitcoin/api.ts";
+import type * as XCPAPI from "../counterparty/api.d.ts";
+import * as hex from "../utils/hex.ts";
 
 
 function balanceAdapter(data: XCPAPI.XCPAPIBalance[]) {
@@ -80,7 +80,7 @@ export const counterparty = {
         endpoint.searchParams.set("limit", "0")
         const response = await fetch(endpoint)
         const data = await response.json() as { result_count: number }
-        return data.result_count as number;
+        return data.result_count;
     },
     getDispenses: async ({ asset }: { asset: string }) => {
         const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/dispenses`)

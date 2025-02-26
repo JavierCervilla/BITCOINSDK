@@ -1,8 +1,9 @@
+import React from "react";
 import { memo } from "react"
 
-import { short_address } from "@/ui/utils/index.ts"
+import { short_address } from "../../../../../ui/utils/index.ts"
 
-import type * as XCPAPI from "@/core/counterparty/api.d.ts"
+import type * as XCPAPI from "../../../../../core/counterparty/api.d.ts"
 
 interface DispenseItemProps {
   dispense: XCPAPI.XCPAPIDispense

@@ -1,10 +1,11 @@
+import React from "react";
 import { memo, useMemo } from "react"
 import { FixedSizeList as List } from "react-window";
 
-import { RecentSalesAtomicSwapItem } from "@/ui/components/Asset/RecentSales/AtomicSwaps/AtomicSwapItem.component.tsx"
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx"
+import { RecentSalesAtomicSwapItem } from "../../../../../ui/components/Asset/RecentSales/AtomicSwaps/AtomicSwapItem.component.tsx"
+import { Loader } from "../../../../../ui/components/Loader/Loader.component.tsx"
 
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts"
+import type * as OpenbookAPI from "../../../../../core/openbook/api.d.ts"
 
 interface AtomicSwapListProps {
   asset: string

@@ -1,4 +1,4 @@
-import { getConfig } from '@/core/config.ts'
+import { getConfig } from '../config.ts'
 
 export async function callRPC(method: string, params: unknown[]) {
     try {

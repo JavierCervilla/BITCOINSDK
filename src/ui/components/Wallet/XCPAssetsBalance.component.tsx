@@ -1,6 +1,7 @@
-import { Asset } from "@/ui/components/Asset/AssetCard.component.tsx";
+import React from "react";
+import { Asset } from "../../../ui/components/Asset/AssetCard.component.tsx";
 
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts";
+import type * as OpenbookAPI from "../../../core/openbook/api.d.ts";
 
 export function XCPAssetsBalance({ assets }: Readonly<{ assets: OpenbookAPI.XCPAssetBalance[] }>) {
   if (!assets?.length) return null;

@@ -1,13 +1,14 @@
+import React from "react";
 import { useState } from "react";
 import * as bitcoin from "bitcoinjs-lib";
 
-import bitcoinsdk from "@/core/index.ts";
+import bitcoinsdk from "../../../../../core/index.ts";
 
-import { useWallet } from "@/ui/index.ts";
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx";
-import { showToast } from "@/ui/components/Toast/Toast.component.tsx";
+import { useWallet } from "../../../../../ui/index.ts";
+import { Loader } from "../../../../../ui/components/Loader/Loader.component.tsx";
+import { showToast } from "../../../../../ui/components/Toast/Toast.component.tsx";
 
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts";
+import type * as OpenbookAPI from "../../../../../core/openbook/api.d.ts";
 
 
 interface CancelOrderActionProps {

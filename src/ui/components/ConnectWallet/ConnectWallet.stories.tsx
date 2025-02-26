@@ -1,7 +1,8 @@
-import { WalletProvider, walletConfig } from "@/index.ts";
+import React from "react";
+import { WalletProvider, walletConfig } from "../../index.ts";
 import { ConnectWalletButton } from "./ConnectWallet.component.tsx"
-import "@styles/tailwind.css"
-import ThemeSelector from "@/components/ThemeSelector/ThemeSelector.component.tsx";
+import "../../../ui/styles/tailwind.css"
+import ThemeSelector from "../../../ui/components/ThemeSelector/ThemeSelector.component.tsx";
 
 export const ConnectWalletStorie = () => {
   return (

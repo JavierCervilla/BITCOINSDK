@@ -1,8 +1,8 @@
+import React from "react";
 import { useState } from "react"
-import type React from "react"
 import type { LucideIcon } from "lucide-react"
 
-import { useModal } from "@/ui/context/modalContext.tsx"
+import { useModal } from "../../../../context/modalContext.tsx"
 
 interface BalanceControlProps {
   icon: LucideIcon

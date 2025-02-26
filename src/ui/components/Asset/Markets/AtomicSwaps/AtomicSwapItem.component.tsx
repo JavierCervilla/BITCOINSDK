@@ -1,19 +1,18 @@
+import React from "react";
 import { memo } from "react"
 
-import {  useWallet } from "@/ui/index.ts"
-import { short_address } from "@/ui/utils/index.ts"
-import { CancelOrderAction } from "@/ui/components/Asset/Balance/actions/CancelOrder.component.tsx";
-import { ConnectWalletAction } from "@/ui/components/ConnectWallet/ConnectWalletAction.component.tsx";
-import { UTXOBuyOrderAction } from "@/ui/components/Asset/Balance/actions/UTXOBuy.component.tsx";
+import {  useWallet } from "../../../../../ui/index.ts"
+import { short_address } from "../../../../../ui/utils/index.ts"
+import { CancelOrderAction } from "../../../../../ui/components/Asset/Balance/actions/CancelOrder.component.tsx";
+import { ConnectWalletAction } from "../../../../../ui/components/ConnectWallet/ConnectWalletAction.component.tsx";
+import { UTXOBuyOrderAction } from "../../../../../ui/components/Asset/Balance/actions/UTXOBuy.component.tsx";
 
 
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts"
-//import type * as BTCAPI from "@/core/bitcoin/api.d.ts"
+import type * as OpenbookAPI from "../../../../../core/openbook/api.d.ts"
+
 
 interface AtomicSwapItemProps {
   atomicSwap: OpenbookAPI.OpenbookAtomicSwapOrder
-  //TODO: check types
-  //btcPrice: BTCAPI.BTCPrice 
   btcPrice: number
 }
 

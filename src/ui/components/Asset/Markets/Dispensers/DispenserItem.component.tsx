@@ -1,6 +1,7 @@
+import React from "react";
 import { memo } from "react"
 
-import type * as XCPAPI from "@/core/counterparty/api.d.ts"
+import type * as XCPAPI from "../../../../../core/counterparty/api.d.ts"
 
 
 interface DispenserItemProps {

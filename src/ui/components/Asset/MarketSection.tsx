@@ -1,13 +1,14 @@
+import React from "react";
 import { useState, useEffect, useCallback } from "react";
 
-import { bitcoinsdk } from "@/core/index.ts";
+import { bitcoinsdk } from "../../../core/index.ts";
 
-import { RecentSales } from "@/ui/components/Asset/RecentSales/RecentSales.component.tsx";
-import { MarketInfo } from "@/ui/components/Asset/Markets/MarketInfo.component.tsx";
+import { RecentSales } from "../../../ui/components/Asset/RecentSales/RecentSales.component.tsx";
+import { MarketInfo } from "../../../ui/components/Asset/Markets/MarketInfo.component.tsx";
 
-import type * as XCPAPI from "@/core/counterparty/api.d.ts";
-import type * as BTCAPI from "@/core/bitcoin/api.d.ts";
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts";
+import type * as XCPAPI from "../../../core/counterparty/api.d.ts";
+import type * as BTCAPI from "../../../core/bitcoin/api.d.ts";
+import type * as OpenbookAPI from "../../../core/openbook/api.d.ts";
 
 interface MarketSectionProps {
   asset: string

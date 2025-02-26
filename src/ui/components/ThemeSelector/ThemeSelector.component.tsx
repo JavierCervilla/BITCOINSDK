@@ -1,8 +1,9 @@
+import React from "react";
 import { useState, useEffect } from "react"
 import * as Select from '@radix-ui/react-select'
 import { Sun, Moon, Check, ChevronDown } from "lucide-react"
 
-import { themes, toggleTheme } from "@/ui/utils/style.ts"
+import { themes, toggleTheme } from "../../../ui/utils/style.ts"
 
 interface ThemeSelectorProps {
   variant?: 'simple' | 'full'

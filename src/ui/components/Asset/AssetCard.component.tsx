@@ -1,8 +1,9 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Media } from "@/ui/components/Asset/Media.component.tsx";
+import { Media } from "../../../ui/components/Asset/Media.component.tsx";
 
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts";
+import type * as OpenbookAPI from "../../../core/openbook/api.d.ts";
 
 export function Asset({ asset }: Readonly<{ asset: OpenbookAPI.XCPAssetBalance }>) {
   const navigate = useNavigate();

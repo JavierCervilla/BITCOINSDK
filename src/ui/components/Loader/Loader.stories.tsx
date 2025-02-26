@@ -1,7 +1,8 @@
-import { walletConfig, WalletProvider } from "@/index.ts";
-import { Loader } from "@/components/Loader/Loader.component.tsx"
-import ThemeSelector from "@/components/ThemeSelector/ThemeSelector.component.tsx";
-import "@styles/tailwind.css"
+import React from "react";
+import { walletConfig, WalletProvider } from "../../../ui/index.ts";
+import { Loader } from "../../../ui/components/Loader/Loader.component.tsx"
+import ThemeSelector from "../../../ui/components/ThemeSelector/ThemeSelector.component.tsx";
+import "../../../ui/styles/tailwind.css"
 
 export function LoaderStory() {
   return (

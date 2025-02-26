@@ -1,14 +1,14 @@
 //TODO: Extract from this omponent the images url
-import type React from "react";
+import React from "react";
 import { useState, useEffect, useCallback, useMemo } from "react";
 
-import { openbook } from "@/core/openbook/api.ts";
+import { openbook } from "../../../core/openbook/api.ts";
 
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx";
-import { PlaceholderSVG } from "@/ui/components/Asset/Placeholder.component.tsx";
-import { Stamp } from "@/ui/components/Stamp/Stamp.component.tsx";
+import { Loader } from "../../../ui/components/Loader/Loader.component.tsx";
+import { PlaceholderSVG } from "../../../ui/components/Asset/Placeholder.component.tsx";
+import { Stamp } from "../../../ui/components/Stamp/Stamp.component.tsx";
 
-import type { Cip25JsonOutput, Media as IMedia } from "@/core/types/cip25.d.ts";
+import type { Cip25JsonOutput, Media as IMedia } from "../../../core/types/cip25.d.ts";
 
 interface AssetImageProps {
   asset: {

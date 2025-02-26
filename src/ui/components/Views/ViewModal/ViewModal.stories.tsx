@@ -1,8 +1,9 @@
+import React from "react";
 import { useState } from "react";
 import { ViewModal } from "./ViewModal.component.tsx"
-import "@styles/tailwind.css"
-import ThemeSelector from "@/components/ThemeSelector/ThemeSelector.component.tsx";
-import { WalletProvider, walletConfig } from "@/index.ts";
+import "../../../../ui/styles/tailwind.css"
+import ThemeSelector from "../../../../ui/components/ThemeSelector/ThemeSelector.component.tsx";
+import { WalletProvider, walletConfig } from "../../../../ui/index.ts";
 import { MemoryRouter } from 'react-router-dom';
 
 export const ViewModalStorie = () => {

@@ -1,13 +1,14 @@
+import React from "react";
 import { useEffect, useState } from "react"
 import { WalletIcon } from "lucide-react"
 
-import { bitcoinsdk } from "@/core/index.ts";
+import { bitcoinsdk } from "../../../../core/index.ts";
 
-import { useWallet } from "@/ui/context/walletContext.tsx"
+import { useWallet } from "../../../../ui/context/walletContext.tsx"
 
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx";
-import { ConnectWalletCTA } from "@/ui/components/ConnectWallet/ConnectWalletCTA.component.tsx";
-import { XCPAssetsBalance } from "@/ui/components/Wallet/XCPAssetsBalance.component.tsx";
+import { Loader } from "../../../../ui/components/Loader/Loader.component.tsx";
+import { ConnectWalletCTA } from "../../../../ui/components/ConnectWallet/ConnectWalletCTA.component.tsx";
+import { XCPAssetsBalance } from "../../../../ui/components/Wallet/XCPAssetsBalance.component.tsx";
 
 export function WalletView() {
   const { connected, walletAddress } = useWallet()
@@ -18,8 +19,8 @@ export function WalletView() {
     if (!walletAddress) return
     setIsLoading(true)
     Promise.all([
-      bitcoinsdk.counterparty.getBalance({ address: walletAddress as string }),
-      bitcoinsdk.openbook.getBTCBalance({ address: walletAddress as string })
+      bitcoinsdk.counterparty.getBalance({ address: walletAddress  }),
+      bitcoinsdk.openbook.getBTCBalance({ address: walletAddress  })
     ]).then(([xcpData, btcData]) => {
       setBalance({
         BTC: btcData,

@@ -1,7 +1,8 @@
+import React from "react";
 import { Settings as SettingsIcon, Palette } from "lucide-react"
 
-import { useWallet } from "@/ui/context/walletContext.tsx"
-import { ThemeSelector } from "@/ui/components/ThemeSelector/ThemeSelector.component.tsx"
+import { useWallet } from "../../../../ui/context/walletContext.tsx"
+import { ThemeSelector } from "../../../../ui/components/ThemeSelector/ThemeSelector.component.tsx"
 
 export function SettingsView() {
   const { connected } = useWallet()

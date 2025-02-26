@@ -1,7 +1,7 @@
+import React from "react";
 import { X } from "lucide-react"
 
-
-import { useModal } from "@/ui/context/modalContext.tsx"
+import { useModal } from "../../../ui/context/modalContext.tsx"
 
 export function Modal() {
   const { isOpen, closeModal, modalContent } = useModal()

@@ -1,7 +1,8 @@
+import React from "react";
 import { Wallet, LogOut } from "lucide-react"
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 
-import { useWallet } from "@/ui/context/walletContext.tsx"
+import { useWallet } from "../../../ui/context/walletContext.tsx"
 
 interface ConnectWalletButtonProps {
   readonly className?: string

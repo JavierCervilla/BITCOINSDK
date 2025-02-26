@@ -1,21 +1,22 @@
+import React from "react";
 import { useState, useEffect, useCallback } from "react"
 import { Link, Unlink, Wallet, Send, BadgeDollarSign } from "lucide-react"
 
-import type * as XCPAPI from "@/core/counterparty/api.d.ts"
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts";
-import { bitcoinsdk } from "@/core/index.ts"
+import type * as XCPAPI from "../../../../core/counterparty/api.d.ts"
+import type * as OpenbookAPI from "../../../../core/openbook/api.d.ts";
+import { bitcoinsdk } from "../../../../core/index.ts"
 
-import { useWallet } from "@/ui/index.ts"
-import { short_address } from "@/ui/utils/index.ts"
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx"
-import { BalanceControl } from "@/ui/components/Asset/Balance/actions/BalanceControl.component.tsx"
-import { AccountSendAction } from "@/ui/components/Asset/Balance/actions/AccountSend.component.tsx"
-import { UTXOSendAction } from "@/ui/components/Asset/Balance/actions/UTXOSend.component.tsx"
-import { UTXOAttachAction } from "@/ui/components/Asset/Balance/actions/UTXOAttach.component.tsx"
-import { UTXODetachAction } from "@/ui/components/Asset/Balance/actions/UTXODetach.component.tsx"
-import { ModalProvider } from "@/ui/context/modalContext.tsx"
-import { Modal } from "@/ui/components/Modal/Modal.component.tsx"
-import { ListUTXOAction } from "@/ui/components/Asset/Balance/actions/UtxoList.component.tsx";
+import { useWallet } from "../../../../ui/index.ts"
+import { short_address } from "../../../../ui/utils/index.ts"
+import { Loader } from "../../../../ui/components/Loader/Loader.component.tsx"
+import { BalanceControl } from "../../../../ui/components/Asset/Balance/actions/BalanceControl.component.tsx"
+import { AccountSendAction } from "../../../../ui/components/Asset/Balance/actions/AccountSend.component.tsx"
+import { UTXOSendAction } from "../../../../ui/components/Asset/Balance/actions/UTXOSend.component.tsx"
+import { UTXOAttachAction } from "../../../../ui/components/Asset/Balance/actions/UTXOAttach.component.tsx"
+import { UTXODetachAction } from "../../../../ui/components/Asset/Balance/actions/UTXODetach.component.tsx"
+import { ModalProvider } from "../../../../ui/context/modalContext.tsx"
+import { Modal } from "../../../../ui/components/Modal/Modal.component.tsx"
+import { ListUTXOAction } from "../../../../ui/components/Asset/Balance/actions/UTXOList.component.tsx";
 
 function AccountBalanceControls({ balance, btcPrice: _btcPrice }: Readonly<{ balance: XCPAPI.Balance, btcPrice: number }>) {
   const { walletAddress } = useWallet()

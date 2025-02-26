@@ -1,7 +1,8 @@
+import React from "react";
 import { Outlet } from "react-router-dom"
 
-import { ViewModal } from "@/ui/components/Views/ViewModal/ViewModal.component.tsx"
-import { Header } from "@/ui/components/Header/Header.component.tsx"
+import { ViewModal } from "../../../ui/components/Views/ViewModal/ViewModal.component.tsx"
+import { Header } from "../../../ui/components/Header/Header.component.tsx"
 
 interface LayoutProps {
   isOpen: boolean

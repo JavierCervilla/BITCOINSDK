@@ -1,15 +1,16 @@
+import React from "react";
 import { useState, useEffect, useCallback } from "react"
 import { TrendingUp, TrendingDown, Wallet } from "lucide-react"
 
-import { bitcoinsdk } from "@/core/index.ts"
+import { bitcoinsdk } from "../../../core/index.ts"
 
-import { ConnectWalletButton } from "@/ui/components/ConnectWallet/ConnectWallet.component.tsx"
-import { walletConfig } from "@/ui/index.ts"
-import { useWallet } from "@/ui/context/walletContext.tsx"
-import { HamburgerMenu } from "@/ui/components/HamburgerMenu/HamburgerMenu.component.tsx"
-import { cn } from "@/ui/utils/style.ts";
+import { ConnectWalletButton } from "../../../ui/components/ConnectWallet/ConnectWallet.component.tsx"
+import { walletConfig } from "../../../ui/index.ts"
+import { useWallet } from "../../../ui/context/walletContext.tsx"
+import { HamburgerMenu } from "../../../ui/components/HamburgerMenu/HamburgerMenu.component.tsx"
+import { cn } from "../../../ui/utils/style.ts";
 
-import type * as OpenbookAPI from "@/core/openbook/api.d.ts"
+import type * as OpenbookAPI from "../../../core/openbook/api.d.ts"
 
 const CryptoInfo: React.FC<{ data: OpenbookAPI.MarketData }> = ({ data }) => {
   const isPositive = data.price_change_percentage_24h >= 0

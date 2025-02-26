@@ -1,16 +1,19 @@
 import { build, emptyDir } from "https://deno.land/x/dnt/mod.ts";
 
-
 async function main() {
     await emptyDir("./npm");
 
     await build({
-        entryPoints: ["./src/mod.ts"],
+        entryPoints: [
+            { name: ".", path: "./src/mod.ts" }, // Exporta el módulo principal
+            { name: "./core", path: "./src/core/index.ts" }, // Exporta el módulo core
+            { name: "./ui", path: "./src/ui/index.ts" } // Exporta el módulo UI
+        ],
         outDir: "./npm",
-        shims: { deno: true }, // Agrega compatibilidad con Deno en Node.js
+        shims: { deno: true },
         package: {
             name: "bitcoinsdk",
-            version: "0.1.6",
+            version: "0.2.0",
             description: "Bitcoin SDK to integrate Bitcoin wallets to your app and get access to The OpenBook Protocol in your project",
             license: "MIT",
             repository: {
@@ -25,14 +28,57 @@ async function main() {
             },
             publishConfig: {
                 access: "public"
+            },
+            exports: {
+                ".": {
+                    "import": "./esm/mod.js",
+                    "require": "./cjs/mod.js"
+                },
+                "./core": {
+                    "import": "./esm/core/index.js",
+                    "require": "./cjs/core/index.js"
+                },
+                "./ui": {
+                    "import": "./esm/ui/index.js",
+                    "require": "./cjs/ui/index.js"
+                }
+            },
+            dependencies: {
+                "@leather-wallet/types": "^0.2.1",
+                "@leather.io/rpc": "^2.5.13",
+                "@radix-ui/react-dropdown-menu": "^2.1.6",
+                "@radix-ui/react-select": "^2.1.6",
+                "@radix-ui/react-slot": "^1.1.1",
+                "@radix-ui/react-tabs": "^1.1.3",
+                "@tailwindcss/postcss": "^4.0.4",
+                "@tailwindcss/vite": "^4.0.0",
+                "autoprefixer": "^10.4.20",
+                "bitcoinjs-lib": "^7.0.0-rc.0",
+                "class-variance-authority": "^0.7.1",
+                "clsx": "^2.1.1",
+                "lucide-react": "^0.474.0",
+                "react-hot-toast": "^2.5.1",
+                "react-router-dom": "^7.1.3",
+                "react-window": "^1.8.11",
+                "tailwind-merge": "^2.6.0",
+                "tailwindcss": "^4.0.0",
+                "tailwindcss-animate": "^1.0.7"
+            },
+            peerDependencies: {
+                "react": "^19.0.0",
+                "react-dom": "^19.0.0"
             }
         },
         typeCheck: false,
-        declaration: true,
+        declaration: 'inline',
         test: false,
+        postBuild: async () => {
+            //Deno.copyFileSync("LICENSE", "npm/LICENSE");
+            Deno.copyFileSync("README.md", "npm/README.md");
+        }
     });
 
     console.log("✅ Build completado. Ahora puedes publicar en NPM.");
 }
 
-main()
+main();

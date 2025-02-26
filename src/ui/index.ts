@@ -1,12 +1,12 @@
-import { WalletProvider, useWallet } from '@/ui/context/walletContext.tsx';
-import ConnectWalletButton from '@/ui/components/ConnectWallet/ConnectWallet.component.tsx';
+import { WalletProvider, useWallet } from './context/walletContext.tsx';
+import ConnectWalletButton from './components/ConnectWallet/ConnectWallet.component.tsx';
 
-import * as LeatherProvider from '@/ui/providers/LeatherProvider.ts';
-import * as UnisatProvider from '@/ui/providers/UnisatProvider.ts';
-import * as OKXProvider from '@/ui/providers/OKXProvider.ts';
-import * as TapWalletProvider from "@/ui/providers/TapWalletProvider.ts";
+import * as LeatherProvider from './providers/LeatherProvider.ts';
+import * as UnisatProvider from './providers/UnisatProvider.ts';
+import * as OKXProvider from './providers/OKXProvider.ts';
+import * as TapWalletProvider from "./providers/TapWalletProvider.ts";
 
-import { leatherImg, unisatImg, tapWalletImg, okxImg } from "@/assets/index.ts";
+import { leatherImg, unisatImg, tapWalletImg, okxImg } from "../assets/index.ts";
 
 export const UNIVERSE_WALLET_LABEL = "🆄🅽🅸🆅🅴🆁🆂🅴";
 

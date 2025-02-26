@@ -1,9 +1,10 @@
-import { walletConfig, WalletProvider } from "@/ui/index.ts";
+import React from "react";
+import { walletConfig, WalletProvider } from "../../../ui/index.ts";
 
-import { Header } from "@/ui/components/Header/Header.component.tsx"
-import ThemeSelector from "@/ui/components/ThemeSelector/ThemeSelector.component.tsx";
+import { Header } from "../../../ui/components/Header/Header.component.tsx"
+import ThemeSelector from "../../../ui/components/ThemeSelector/ThemeSelector.component.tsx";
 
-import "@styles/tailwind.css"
+import "../../../ui/styles/tailwind.css"
 
 export function HeaderStory() {
   return (

@@ -1,12 +1,13 @@
+import React from "react";
 import { useEffect, useState } from "react"
 import {  BarChart2 } from "lucide-react"
 
-import { openbook } from "@/core/openbook/api.ts"
+import { openbook } from "../../../../core/openbook/api.ts"
 
-import { Loader } from "@/ui/components/Loader/Loader.component.tsx";
-import { LastAtomicSwapsSales } from "@/ui/components/Market/LastAtomicSwapsSales.component.tsx";
-import { LastAtomicSwapsOrders } from "@/ui/components/Market/LastAtomicSwapsOrders.component.tsx";
-import { ChartViewer } from "@/ui/components/Charts/ChartViewer.component.tsx";
+import { Loader } from "../../../../ui/components/Loader/Loader.component.tsx";
+import { LastAtomicSwapsSales } from "../../../../ui/components/Market/LastAtomicSwapsSales.component.tsx";
+import { LastAtomicSwapsOrders } from "../../../../ui/components/Market/LastAtomicSwapsOrders.component.tsx";
+import { ChartViewer } from "../../../../ui/components/Charts/ChartViewer.component.tsx";
 
 export function MarketView() {
   const [lastOrders, setLastOrders] = useState([])

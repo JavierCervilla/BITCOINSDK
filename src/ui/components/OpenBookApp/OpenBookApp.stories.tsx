@@ -1,7 +1,8 @@
+import React from "react";
 import { useState } from "react"
 import { OpenBookApp } from "./OpenBookApp.component.tsx"
-import "@styles/tailwind.css"
-import ThemeSelector from "@/components/ThemeSelector/ThemeSelector.component.tsx"
+import "../../../ui/styles/tailwind.css"
+import ThemeSelector from "../../../ui/components/ThemeSelector/ThemeSelector.component.tsx"
 
 export const OpenBookAppStory = () => {
   const [isOpen, setIsOpen] = useState(false)

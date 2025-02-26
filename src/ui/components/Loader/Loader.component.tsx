@@ -1,4 +1,5 @@
-import { cn } from "@/ui/utils/style.ts";
+import React from "react";
+import { cn } from "../../../ui/utils/style.ts";
 
 export function Loader({ className, size = 80 }: { className?: string; size?: number }) {
   return (

@@ -1,6 +1,7 @@
-import { walletConfig } from "@/ui/index.ts"
+import React from "react";
+import { walletConfig } from "../../../ui/index.ts"
 
-import ConnectWalletButton from "@/ui/components/ConnectWallet/ConnectWallet.component.tsx"
+import ConnectWalletButton from "../../../ui/components/ConnectWallet/ConnectWallet.component.tsx"
 
 export function ConnectWalletCTA() {
   return (
