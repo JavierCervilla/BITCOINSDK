@@ -1,7 +1,8 @@
 // src/providers/UnisatProvider.ts
+import { bitcoinsdk } from "../../core/index.ts";
 
-import type { ConnectWalletReturn } from "@/index.ts";
-import type { signPSBTOptions } from "@/context/walletContext.tsx";
+import type { ConnectWalletReturn } from "../../ui/index.ts";
+import type { SignPSBTOptions } from "../../ui/context/walletContext.tsx";
 
 export const connectWallet = async (): Promise<ConnectWalletReturn | null> => {
   if (typeof globalThis !== "undefined" && globalThis.unisat) {
