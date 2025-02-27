@@ -13,6 +13,7 @@ With built-in support for multiple wallet providers, PSBT signing, and atomic sw
 
 🚀 Get started today and build the next generation of Bitcoin-powered applications!
 
+## ⚙️ Instalation
 To install use your favorite package manager:
 
 `npm install bitcoinsdk`
