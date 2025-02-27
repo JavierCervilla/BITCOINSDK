@@ -80,7 +80,7 @@ export const counterparty = {
         endpoint.searchParams.set("limit", "0")
         const response = await fetch(endpoint)
         const data = await response.json() as { result_count: number }
-        return data.result_count as number;
+        return data.result_count;
     },
     getDispenses: async ({ asset }: { asset: string }) => {
         const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/dispenses`)

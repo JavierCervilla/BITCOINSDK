@@ -46,7 +46,6 @@ exports.getConfig = getConfig;
 function initConfig(customConfig = {}) {
     Object.assign(exports.CONFIG, {
         ...customConfig,
-        VERSION: { ...exports.CONFIG.VERSION, ...customConfig.VERSION },
         OPENBOOK: { ...exports.CONFIG.OPENBOOK, ...customConfig.OPENBOOK },
         COUNTERPARTY: { ...exports.CONFIG.COUNTERPARTY, ...customConfig.COUNTERPARTY },
         BITCOIN: { ...exports.CONFIG.BITCOIN, ...customConfig.BITCOIN },

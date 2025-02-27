@@ -1,8 +1,4 @@
-import { Deno } from "@deno/shim-deno";
-export { Deno } from "@deno/shim-deno";
-const dntGlobals = {
-    Deno,
-};
+const dntGlobals = {};
 export const dntGlobalThis = createMergeProxy(globalThis, dntGlobals);
 function createMergeProxy(baseObj, extObj) {
     return new Proxy(baseObj, {

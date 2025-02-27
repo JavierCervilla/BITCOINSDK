@@ -10,16 +10,6 @@ export interface SignPSBTOptions {
     autoFinalized?: boolean;
     inputsToSign?: InputToSign[];
 }
-interface WalletConfig {
-    label: string;
-    connect: () => Promise<{
-        address: string;
-        publicKey: string;
-    } | null>;
-    signPSBT: (psbt: string, options?: SignPSBTOptions) => Promise<string | null>;
-    signMessage: (message: string) => Promise<string | null>;
-    pushTX: (txHex: string) => Promise<string | null>;
-}
 interface WalletContextProps {
     walletAddress: string | null;
     publicKey: string | null;
@@ -33,9 +23,6 @@ interface WalletContextProps {
 }
 interface WalletProviderProps {
     children: ReactNode;
-    wallets: {
-        [key: string]: WalletConfig;
-    };
     theme: string;
 }
 export declare const WalletProvider: React.FC<WalletProviderProps>;

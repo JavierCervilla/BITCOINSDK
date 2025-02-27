@@ -1,3 +1,4 @@
+import { initConfig } from "./config.js";
 export declare const bitcoinsdk: {
     counterparty: {
         getAsset: ({ asset }: {
@@ -181,6 +182,47 @@ export declare const bitcoinsdk: {
     };
     stamps: {
         getStamps: () => Promise<unknown>;
+        getSRC20Balance: ({ address, limit, page, amt }: {
+            address: string;
+            limit: number;
+            page: number;
+            amt: number;
+        }) => Promise<unknown>;
+        getStampsBalance: ({ address, limit, page }: {
+            address: string;
+            limit: number;
+            page: number;
+        }) => Promise<unknown>;
+    };
+    initConfig: typeof initConfig;
+    getConfig: () => {
+        VERSION: {
+            MAJOR: number;
+            MINOR: number;
+            PATCH: number;
+            STRING: string;
+        };
+        OPENBOOK: {
+            ENDPOINT: string;
+        };
+        COUNTERPARTY: {
+            ENDPOINT: string;
+            RPC_USER: string;
+            RPC_PASSWORD: string;
+        };
+        STAMPS: {
+            ENDPOINT: string;
+        };
+        ELECTRUM: {
+            ENDPOINT: string;
+            RPC_USER: string;
+            RPC_PASSWORD: string;
+        };
+        BITCOIN: {
+            ENDPOINT: string;
+            RPC_USER: string;
+            RPC_PASSWORD: string;
+        };
     };
 };
 export type BitcoinSDK = typeof bitcoinsdk;
@@ -367,6 +409,47 @@ declare const _default: {
     };
     stamps: {
         getStamps: () => Promise<unknown>;
+        getSRC20Balance: ({ address, limit, page, amt }: {
+            address: string;
+            limit: number;
+            page: number;
+            amt: number;
+        }) => Promise<unknown>;
+        getStampsBalance: ({ address, limit, page }: {
+            address: string;
+            limit: number;
+            page: number;
+        }) => Promise<unknown>;
+    };
+    initConfig: typeof initConfig;
+    getConfig: () => {
+        VERSION: {
+            MAJOR: number;
+            MINOR: number;
+            PATCH: number;
+            STRING: string;
+        };
+        OPENBOOK: {
+            ENDPOINT: string;
+        };
+        COUNTERPARTY: {
+            ENDPOINT: string;
+            RPC_USER: string;
+            RPC_PASSWORD: string;
+        };
+        STAMPS: {
+            ENDPOINT: string;
+        };
+        ELECTRUM: {
+            ENDPOINT: string;
+            RPC_USER: string;
+            RPC_PASSWORD: string;
+        };
+        BITCOIN: {
+            ENDPOINT: string;
+            RPC_USER: string;
+            RPC_PASSWORD: string;
+        };
     };
 };
 export default _default;

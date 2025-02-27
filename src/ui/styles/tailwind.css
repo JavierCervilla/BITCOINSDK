@@ -37,11 +37,12 @@
 }
 
 [data-theme="NSID-dark"] {
-  --primary: rgb(3, 114, 92);
+  /*--primary: rgb(57, 255, 20);*/
+  --primary: rgb(176, 38, 255);
   --secondary: rgb(255, 255, 255);
   --light: rgb(0, 9, 7);
   --dark: rgb(255, 255, 255);
-  --hover: rgb(2, 103, 82);
+  --hover: rgb(192, 102, 244);
   --text-hover: rgb(255, 255, 255);
 }
 

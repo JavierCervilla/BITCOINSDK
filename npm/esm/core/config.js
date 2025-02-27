@@ -42,7 +42,6 @@ export const getConfig = () => CONFIG;
 export function initConfig(customConfig = {}) {
     Object.assign(CONFIG, {
         ...customConfig,
-        VERSION: { ...CONFIG.VERSION, ...customConfig.VERSION },
         OPENBOOK: { ...CONFIG.OPENBOOK, ...customConfig.OPENBOOK },
         COUNTERPARTY: { ...CONFIG.COUNTERPARTY, ...customConfig.COUNTERPARTY },
         BITCOIN: { ...CONFIG.BITCOIN, ...customConfig.BITCOIN },

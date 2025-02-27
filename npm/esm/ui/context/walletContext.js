@@ -1,7 +1,8 @@
 import React from "react";
 import { createContext, useState, useContext, useEffect, useMemo } from "react";
+import { walletConfig as wallets } from "../index.js";
 const WalletContext = createContext(undefined);
-export const WalletProvider = ({ children, wallets, theme = "bitcoin-dark", }) => {
+export const WalletProvider = ({ children, theme = "bitcoin-dark", }) => {
     const [walletAddress, setWalletAddress] = useState(null);
     const [publicKey, setPublicKey] = useState(null);
     const [connected, setConnected] = useState(false);
@@ -29,7 +30,10 @@ export const WalletProvider = ({ children, wallets, theme = "bitcoin-dark", }) =
         }
     };
     const connectWallet = useMemo(() => async (providerKey) => {
+        console.log("Connecting wallet:", providerKey);
+        console.log("Wallets:", wallets);
         const walletConfig = wallets[providerKey];
+        console.log("Wallet config:", walletConfig);
         if (walletConfig) {
             const { address, publicKey } = (await walletConfig.connect()) || {};
             if (address && publicKey) {

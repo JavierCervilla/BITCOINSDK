@@ -1,12 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dntGlobalThis = exports.Deno = void 0;
-const shim_deno_1 = require("@deno/shim-deno");
-var shim_deno_2 = require("@deno/shim-deno");
-Object.defineProperty(exports, "Deno", { enumerable: true, get: function () { return shim_deno_2.Deno; } });
-const dntGlobals = {
-    Deno: shim_deno_1.Deno,
-};
+exports.dntGlobalThis = void 0;
+const dntGlobals = {};
 exports.dntGlobalThis = createMergeProxy(globalThis, dntGlobals);
 function createMergeProxy(baseObj, extObj) {
     return new Proxy(baseObj, {

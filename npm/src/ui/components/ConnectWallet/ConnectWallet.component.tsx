@@ -2,7 +2,9 @@ import React from "react";
 import { Wallet, LogOut } from "lucide-react"
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 
+import {cn} from "../../utils/style.js"
 import { useWallet } from "../../context/walletContext.js"
+import { walletConfig } from "../../index.js";
 
 interface ConnectWalletButtonProps {
   readonly className?: string
@@ -15,16 +17,16 @@ function shortenAddress(address: string) {
 
 export function ConnectWalletButton({
   className,
-  wallets,
+  wallets=walletConfig,
 }: Readonly<ConnectWalletButtonProps>) {
   const { walletAddress, connected, connectWallet, disconnectWallet } = useWallet()
 
   return (
-    <div>
+    <div className="z-50">
       {!connected ? (
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
-            <button type="button" className={className}>
+            <button type="button" className={cn("cursor-pointer py-2.5 min-w-fit px-4 border border-primary text-nowrap text-primary hover:scale-105 rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300", className)}>
               <Wallet className="w-5 h-5" />
               <span>Connect Wallet</span>
             </button>
@@ -58,9 +60,9 @@ export function ConnectWalletButton({
           <button
             type="button"
             onClick={disconnectWallet}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl shadow-md bg-primary text-light cursor-pointer hover:bg-hover transition-all duration-300 ease-in-out transform hover:scale-105"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl shadow-md bg-primary text-primary cursor-pointer hover:bg-hover transition-all duration-300 ease-in-out transform hover:scale-105"
           >
-            <LogOut className="w-5 h-5" />
+            <LogOut className="w-5 h-5 text-dark" />
           </button>
         </div>
       )}

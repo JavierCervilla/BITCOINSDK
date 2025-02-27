@@ -30,15 +30,17 @@ exports.ConnectWalletButton = void 0;
 const react_1 = __importDefault(require("react"));
 const lucide_react_1 = require("lucide-react");
 const DropdownMenu = __importStar(require("@radix-ui/react-dropdown-menu"));
+const style_js_1 = require("../../utils/style.js");
 const walletContext_js_1 = require("../../context/walletContext.js");
+const index_js_1 = require("../../index.js");
 function shortenAddress(address) {
     return `${address.slice(0, 6)}...${address.slice(-6)}`;
 }
-function ConnectWalletButton({ className, wallets, }) {
+function ConnectWalletButton({ className, wallets = index_js_1.walletConfig, }) {
     const { walletAddress, connected, connectWallet, disconnectWallet } = (0, walletContext_js_1.useWallet)();
-    return (react_1.default.createElement("div", null, !connected ? (react_1.default.createElement(DropdownMenu.Root, null,
+    return (react_1.default.createElement("div", { className: "z-50" }, !connected ? (react_1.default.createElement(DropdownMenu.Root, null,
         react_1.default.createElement(DropdownMenu.Trigger, { asChild: true },
-            react_1.default.createElement("button", { type: "button", className: className },
+            react_1.default.createElement("button", { type: "button", className: (0, style_js_1.cn)("cursor-pointer py-2.5 min-w-fit px-4 border border-primary text-nowrap text-primary hover:scale-105 rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300", className) },
                 react_1.default.createElement(lucide_react_1.Wallet, { className: "w-5 h-5" }),
                 react_1.default.createElement("span", null, "Connect Wallet"))),
         react_1.default.createElement(DropdownMenu.Portal, null,
@@ -46,8 +48,8 @@ function ConnectWalletButton({ className, wallets, }) {
                 react_1.default.createElement("img", { src: icon || "/placeholder.svg", alt: label, className: "w-6 h-6 mr-3" }),
                 react_1.default.createElement("span", null, label)))))))) : (react_1.default.createElement("div", { className: "flex items-center gap-3 z-10" },
         react_1.default.createElement("div", { className: "px-6 py-3 text-sm font-medium border rounded-lg bg-light text-dark border-primary" }, shortenAddress(walletAddress)),
-        react_1.default.createElement("button", { type: "button", onClick: disconnectWallet, className: "flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl shadow-md bg-primary text-light cursor-pointer hover:bg-hover transition-all duration-300 ease-in-out transform hover:scale-105" },
-            react_1.default.createElement(lucide_react_1.LogOut, { className: "w-5 h-5" }))))));
+        react_1.default.createElement("button", { type: "button", onClick: disconnectWallet, className: "flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl shadow-md bg-primary text-primary cursor-pointer hover:bg-hover transition-all duration-300 ease-in-out transform hover:scale-105" },
+            react_1.default.createElement(lucide_react_1.LogOut, { className: "w-5 h-5 text-dark" }))))));
 }
 exports.ConnectWalletButton = ConnectWalletButton;
 exports.default = ConnectWalletButton;

@@ -1,15 +1,17 @@
 import React from "react";
 import { Wallet, LogOut } from "lucide-react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { cn } from "../../utils/style.js";
 import { useWallet } from "../../context/walletContext.js";
+import { walletConfig } from "../../index.js";
 function shortenAddress(address) {
     return `${address.slice(0, 6)}...${address.slice(-6)}`;
 }
-export function ConnectWalletButton({ className, wallets, }) {
+export function ConnectWalletButton({ className, wallets = walletConfig, }) {
     const { walletAddress, connected, connectWallet, disconnectWallet } = useWallet();
-    return (React.createElement("div", null, !connected ? (React.createElement(DropdownMenu.Root, null,
+    return (React.createElement("div", { className: "z-50" }, !connected ? (React.createElement(DropdownMenu.Root, null,
         React.createElement(DropdownMenu.Trigger, { asChild: true },
-            React.createElement("button", { type: "button", className: className },
+            React.createElement("button", { type: "button", className: cn("cursor-pointer py-2.5 min-w-fit px-4 border border-primary text-nowrap text-primary hover:scale-105 rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300", className) },
                 React.createElement(Wallet, { className: "w-5 h-5" }),
                 React.createElement("span", null, "Connect Wallet"))),
         React.createElement(DropdownMenu.Portal, null,
@@ -17,7 +19,7 @@ export function ConnectWalletButton({ className, wallets, }) {
                 React.createElement("img", { src: icon || "/placeholder.svg", alt: label, className: "w-6 h-6 mr-3" }),
                 React.createElement("span", null, label)))))))) : (React.createElement("div", { className: "flex items-center gap-3 z-10" },
         React.createElement("div", { className: "px-6 py-3 text-sm font-medium border rounded-lg bg-light text-dark border-primary" }, shortenAddress(walletAddress)),
-        React.createElement("button", { type: "button", onClick: disconnectWallet, className: "flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl shadow-md bg-primary text-light cursor-pointer hover:bg-hover transition-all duration-300 ease-in-out transform hover:scale-105" },
-            React.createElement(LogOut, { className: "w-5 h-5" }))))));
+        React.createElement("button", { type: "button", onClick: disconnectWallet, className: "flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl shadow-md bg-primary text-primary cursor-pointer hover:bg-hover transition-all duration-300 ease-in-out transform hover:scale-105" },
+            React.createElement(LogOut, { className: "w-5 h-5 text-dark" }))))));
 }
 export default ConnectWalletButton;

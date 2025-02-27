@@ -20,7 +20,7 @@ __exportStar(require("./Asset/Balance/actions/BalanceControl.component.js"), exp
 __exportStar(require("./Asset/Balance/actions/CancelOrder.component.js"), exports);
 __exportStar(require("./Asset/Balance/actions/UTXOAttach.component.js"), exports);
 __exportStar(require("./Asset/Balance/actions/UTXODetach.component.js"), exports);
-__exportStar(require("./Asset/Balance/actions/UtxoList_2.component.js"), exports);
+__exportStar(require("./Asset/Balance/actions/UTXOList.component.js"), exports);
 __exportStar(require("./Asset/Balance/actions/UTXOSend.component.js"), exports);
 __exportStar(require("./Asset/Markets/MarketInfo.component.js"), exports);
 __exportStar(require("./Asset/Markets/AtomicSwaps/AtomicSwapList.component.js"), exports);

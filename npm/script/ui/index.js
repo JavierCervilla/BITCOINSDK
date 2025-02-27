@@ -32,6 +32,7 @@ Object.defineProperty(exports, "WalletProvider", { enumerable: true, get: functi
 Object.defineProperty(exports, "useWallet", { enumerable: true, get: function () { return walletContext_js_1.useWallet; } });
 const ConnectWallet_component_js_1 = __importDefault(require("./components/ConnectWallet/ConnectWallet.component.js"));
 exports.ConnectWalletButton = ConnectWallet_component_js_1.default;
+require("./components/index.js");
 const LeatherProvider = __importStar(require("./providers/LeatherProvider.js"));
 const UnisatProvider = __importStar(require("./providers/UnisatProvider.js"));
 const OKXProvider = __importStar(require("./providers/OKXProvider.js"));

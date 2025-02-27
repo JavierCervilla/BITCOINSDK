@@ -1,10 +1,12 @@
 import { WalletProvider, useWallet } from './context/walletContext.js';
 import ConnectWalletButton from './components/ConnectWallet/ConnectWallet.component.js';
+import "./components/index.js";
 
 import * as LeatherProvider from './providers/LeatherProvider.js';
 import * as UnisatProvider from './providers/UnisatProvider.js';
 import * as OKXProvider from './providers/OKXProvider.js';
 import * as TapWalletProvider from "./providers/TapWalletProvider.js";
+
 
 import { leatherImg, unisatImg, tapWalletImg, okxImg } from "../assets/index.js";
 

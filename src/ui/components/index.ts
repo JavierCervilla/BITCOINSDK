@@ -4,7 +4,7 @@ export * from "./Asset/Balance/actions/BalanceControl.component.tsx"
 export * from "./Asset/Balance/actions/CancelOrder.component.tsx"
 export * from "./Asset/Balance/actions/UTXOAttach.component.tsx"
 export * from "./Asset/Balance/actions/UTXODetach.component.tsx"
-export * from "./Asset/Balance/actions/UtxoList.component.tsx"
+export * from "./Asset/Balance/actions/UTXOList.component.tsx"
 export * from "./Asset/Balance/actions/UTXOSend.component.tsx"
 
 

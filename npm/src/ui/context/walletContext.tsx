@@ -1,6 +1,7 @@
 import React from "react";
 import { createContext, useState, useContext, useEffect, useMemo } from "react";
 import type { ReactNode } from "react";
+import { walletConfig as wallets } from "../index.js";
 
 export interface InputToSign {
 	index: number;
@@ -12,17 +13,6 @@ export interface SignPSBTOptions {
 	broadcast?: boolean;
 	autoFinalized?: boolean;
 	inputsToSign?: InputToSign[];
-}
-
-interface WalletConfig {
-	label: string;
-	connect: () => Promise<{ address: string; publicKey: string } | null>;
-	signPSBT: (
-		psbt: string,
-		options?: SignPSBTOptions,
-	) => Promise<string | null>;
-	signMessage: (message: string) => Promise<string | null>;
-	pushTX: (txHex: string) => Promise<string | null>;
 }
 
 interface WalletContextProps {
@@ -42,7 +32,6 @@ interface WalletContextProps {
 
 interface WalletProviderProps {
 	children: ReactNode;
-	wallets: { [key: string]: WalletConfig };
 	theme: string;
 }
 interface LocalStoredWallets {
@@ -56,7 +45,6 @@ const WalletContext = createContext<WalletContextProps | undefined>(undefined);
 
 export const WalletProvider: React.FC<WalletProviderProps> = ({
 	children,
-	wallets,
 	theme="bitcoin-dark",
 }: WalletProviderProps) => {
 	const [walletAddress, setWalletAddress] = useState<string | null>(null);
@@ -91,7 +79,10 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({
 	};
 
 	const connectWallet = useMemo(() => async (providerKey: string) => {
+		console.log("Connecting wallet:", providerKey);
+		console.log("Wallets:", wallets);
 		const walletConfig = wallets[providerKey];
+		console.log("Wallet config:", walletConfig);
 		if (walletConfig) {
 			const { address, publicKey } = (await walletConfig.connect()) || {};
 			if (address && publicKey) {

@@ -4,7 +4,7 @@ export * from "./Asset/Balance/actions/BalanceControl.component.js"
 export * from "./Asset/Balance/actions/CancelOrder.component.js"
 export * from "./Asset/Balance/actions/UTXOAttach.component.js"
 export * from "./Asset/Balance/actions/UTXODetach.component.js"
-export * from "./Asset/Balance/actions/UtxoList_2.component.js"
+export * from "./Asset/Balance/actions/UTXOList.component.js"
 export * from "./Asset/Balance/actions/UTXOSend.component.js"
 
 

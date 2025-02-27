@@ -1,7 +1,22 @@
 import { build, emptyDir } from "https://deno.land/x/dnt/mod.ts";
 
+
 async function main() {
     await emptyDir("./npm");
+
+    const tailwindProcess = new Deno.Command(Deno.execPath(), {
+        args: [
+            "run",
+            "-A",
+            "npm:@tailwindcss/cli@latest",
+            "-i", "src/ui/styles/tailwind.css",
+            "-o", "npm/styles.css",
+            "--config", "tailwind.config.js",
+            "--minify",
+        ],
+    });
+    await tailwindProcess.output();
+
 
     await build({
         entryPoints: [
@@ -10,10 +25,10 @@ async function main() {
             { name: "./ui", path: "./src/ui/index.ts" } // Exporta el módulo UI
         ],
         outDir: "./npm",
-        shims: { deno: true },
+        shims: { deno: false },
         package: {
             name: "bitcoinsdk",
-            version: "0.2.0",
+            version: "0.2.19",
             description: "Bitcoin SDK to integrate Bitcoin wallets to your app and get access to The OpenBook Protocol in your project",
             license: "MIT",
             repository: {
@@ -41,7 +56,8 @@ async function main() {
                 "./ui": {
                     "import": "./esm/ui/index.js",
                     "require": "./cjs/ui/index.js"
-                }
+                },
+                "./styles.css": "./styles.css"
             },
             dependencies: {
                 "@leather-wallet/types": "^0.2.1",
@@ -67,13 +83,15 @@ async function main() {
             peerDependencies: {
                 "react": "^19.0.0",
                 "react-dom": "^19.0.0"
-            }
+            },
+            style: "./styles.css"
+
         },
         typeCheck: false,
         declaration: 'inline',
         test: false,
-        postBuild: async () => {
-            //Deno.copyFileSync("LICENSE", "npm/LICENSE");
+        postBuild: () => {
+            Deno.copyFileSync("LICENSE", "npm/LICENSE");
             Deno.copyFileSync("README.md", "npm/README.md");
         }
     });

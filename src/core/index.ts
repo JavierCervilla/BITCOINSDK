@@ -2,6 +2,7 @@ import { counterparty } from "./counterparty/api.ts";
 import { openbook } from "./openbook/api.ts";
 import { bitcoin } from "./bitcoin/api.ts";
 import { stamps } from "./stamps/api.ts";
+import { initConfig, getConfig } from "./config.ts";
 
 /**
  * The Bitcoin SDK object that provides access to various functionalities:
@@ -21,6 +22,8 @@ export const bitcoinsdk = {
     openbook,
     bitcoin,
     stamps,
+    initConfig,
+    getConfig,
 };
 
 export { counterparty, openbook, bitcoin, stamps };

@@ -1,5 +1,6 @@
 import { WalletProvider, useWallet } from './context/walletContext.js';
 import ConnectWalletButton from './components/ConnectWallet/ConnectWallet.component.js';
+import "./components/index.js";
 export declare const UNIVERSE_WALLET_LABEL = "\uD83C\uDD84\uD83C\uDD7D\uD83C\uDD78\uD83C\uDD85\uD83C\uDD74\uD83C\uDD81\uD83C\uDD82\uD83C\uDD74";
 export interface ConnectWalletReturn {
     address: string;

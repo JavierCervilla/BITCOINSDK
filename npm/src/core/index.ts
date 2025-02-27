@@ -2,6 +2,7 @@ import { counterparty } from "./counterparty/api.js";
 import { openbook } from "./openbook/api_2.js";
 import { bitcoin } from "./bitcoin/api.js";
 import { stamps } from "./stamps/api.js";
+import { initConfig, getConfig } from "./config.js";
 
 
 export const bitcoinsdk = {
@@ -9,6 +10,8 @@ export const bitcoinsdk = {
     openbook,
     bitcoin,
     stamps,
+    initConfig,
+    getConfig,
 };
 
 export type BitcoinSDK = typeof bitcoinsdk;
