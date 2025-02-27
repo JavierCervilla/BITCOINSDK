@@ -1,5 +1,5 @@
 import * as dntShim from "../../_dnt.shims.js";
-import bitcoinsdk from "../../core/index.js";
+import { bitcoinsdk } from "../../core/index.js";
 
 import LeatherProvider from "@leather-wallet/types"
 import type { ConnectWalletReturn } from "../index.js";

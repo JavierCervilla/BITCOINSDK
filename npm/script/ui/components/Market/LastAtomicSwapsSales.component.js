@@ -8,7 +8,7 @@ const react_1 = __importDefault(require("react"));
 const react_2 = require("react");
 const react_router_dom_1 = require("react-router-dom");
 const lucide_react_1 = require("lucide-react");
-const index_js_1 = __importDefault(require("../../../core/index.js"));
+const index_js_1 = require("../../../core/index.js");
 const Loader_component_js_1 = require("../Loader/Loader.component.js");
 const Media_component_js_1 = require("../Asset/Media.component.js");
 const Carousel_component_js_1 = require("../Carousel/Carousel.component.js");
@@ -20,7 +20,7 @@ function LastAtomicSwapsSalesComponent({ lastSales, isLoading }) {
     const observer = (0, react_2.useRef)(null);
     const navigate = (0, react_router_dom_1.useNavigate)();
     (0, react_2.useEffect)(() => {
-        index_js_1.default.openbook.getBTCPrice().then((price) => setBtcPrice(price ?? 0));
+        index_js_1.bitcoinsdk.openbook.getBTCPrice().then((price) => setBtcPrice(price ?? 0));
     }, []);
     (0, react_2.useEffect)(() => {
         setAssets(lastSales.flatMap((lastSale) => lastSale.utxo_balance.map((utxo) => ({
@@ -44,7 +44,7 @@ function LastAtomicSwapsSalesComponent({ lastSales, isLoading }) {
         }
         setLoadingAssets((prev) => new Set(prev).add(index));
         try {
-            const asset = await index_js_1.default.counterparty.getAsset({ asset: assetId });
+            const asset = await index_js_1.bitcoinsdk.counterparty.getAsset({ asset: assetId });
             assetCache.set(assetId, asset);
             setAssets((prev) => prev.map((item) => item.asset || item.assetId !== assetId ? item : { ...item, asset }));
         }

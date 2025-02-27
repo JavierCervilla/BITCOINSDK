@@ -22,13 +22,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.pushTX = exports.signPSBT = exports.signMessage = exports.connectWallet = void 0;
 const dntShim = __importStar(require("../../_dnt.shims.js"));
-const index_js_1 = __importDefault(require("../../core/index.js"));
+const index_js_1 = require("../../core/index.js");
 const connectWallet = async () => {
     const tapwallet = dntShim.dntGlobalThis.tapwallet;
     if (typeof dntShim.dntGlobalThis !== "undefined" && tapwallet) {
@@ -92,6 +89,6 @@ const signPSBT = async (psbt, options) => {
 };
 exports.signPSBT = signPSBT;
 const pushTX = async (txHex) => {
-    return await index_js_1.default.bitcoin.sendRawTransaction({ txHex });
+    return await index_js_1.bitcoinsdk.bitcoin.sendRawTransaction({ txHex });
 };
 exports.pushTX = pushTX;

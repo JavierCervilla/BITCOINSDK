@@ -1,5 +1,5 @@
 import * as dntShim from "../../_dnt.shims.js";
-import bitcoinsdk from "../../core/index.js";
+import { bitcoinsdk } from "../../core/index.js";
 
 import type { ConnectWalletReturn } from "../index.js";
 import type { SignPSBTOptions } from "../context/walletContext.js";

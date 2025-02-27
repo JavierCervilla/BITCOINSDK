@@ -13,12 +13,14 @@ declare const walletConfig: {
         connect: () => Promise<ConnectWalletReturn | null>;
         signMessage: (message: string) => Promise<any>;
         signPSBT: (psbt: string, options: import("./context/walletContext.js").SignPSBTOptions) => Promise<string | null>;
-        pushTX: (txHex: string) => Promise<unknown>;
+        pushTX: (txHex: string) => Promise<{
+            result: string;
+        }>;
     };
     Unisat: {
         label: string;
         icon: string;
-        connect: () => Promise<any>;
+        connect: () => Promise<ConnectWalletReturn | null>;
         signMessage: (message: string) => Promise<any>;
         signPSBT: (psbt: string, options: signPSBTOptions) => Promise<string | null>;
         pushTX: (txHex: string) => Promise<string | null>;
@@ -29,7 +31,9 @@ declare const walletConfig: {
         connect: () => Promise<ConnectWalletReturn | null>;
         signMessage: (message: string) => Promise<any>;
         signPSBT: (psbt: string, options: import("./context/walletContext.js").SignPSBTOptions) => Promise<string | null>;
-        pushTX: (txHex: string) => Promise<unknown>;
+        pushTX: (txHex: string) => Promise<{
+            result: string;
+        }>;
     };
     "\uD83C\uDD84\uD83C\uDD7D\uD83C\uDD78\uD83C\uDD85\uD83C\uDD74\uD83C\uDD81\uD83C\uDD82\uD83C\uDD74": {
         label: string;
@@ -37,7 +41,9 @@ declare const walletConfig: {
         connect: () => Promise<ConnectWalletReturn | null>;
         signMessage: (message: string) => Promise<any>;
         signPSBT: (psbt: string, options: import("./context/walletContext.js").SignPSBTOptions) => Promise<string | null>;
-        pushTX: (txHex: string) => Promise<unknown>;
+        pushTX: (txHex: string) => Promise<{
+            result: string;
+        }>;
     };
 };
 export { WalletProvider, useWallet, ConnectWalletButton, walletConfig };

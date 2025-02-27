@@ -1,5 +1,5 @@
 import * as dntShim from "../../_dnt.shims.js";
-import bitcoinsdk from "../../core/index.js";
+import { bitcoinsdk } from "../../core/index.js";
 export const connectWallet = async () => {
     const LeatherProvider = dntShim.dntGlobalThis.LeatherProvider;
     if (typeof dntShim.dntGlobalThis !== "undefined" && LeatherProvider) {
