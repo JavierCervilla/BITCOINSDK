@@ -5,11 +5,11 @@ With built-in support for multiple wallet providers, PSBT signing, and atomic sw
 
 ✅ Features:
 
-Multi-wallet support: Connect, sign transactions, and manage wallets effortlessly.
-Bitcoin RPC utilities: Fetch balances, send raw transactions, and interact with the Bitcoin blockchain.
-OpenBook Protocol Integration: Easily list and trade Counterparty assets via atomic swaps.
-React-ready UI components: Prebuilt components to accelerate wallet integrations.
-TailwindCSS compatible: Fully customizable UI with Tailwind support.
+✅ Multi-wallet support: Connect, sign transactions, and manage wallets effortlessly.
+✅ Bitcoin RPC utilities: Fetch balances, send raw transactions, and interact with the Bitcoin blockchain.
+✅ OpenBook Protocol Integration: Easily list and trade Counterparty assets via atomic swaps.
+✅ React-ready UI components: Prebuilt components to accelerate wallet integrations.
+✅ TailwindCSS compatible: Fully customizable UI with Tailwind support.
 🔗 GitHub Repository: BitcoinSDK on GitHub
 
 🚀 Get started today and build the next generation of Bitcoin-powered applications!
