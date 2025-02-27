@@ -1,4 +1,4 @@
-import bitcoinsdk from "../../core/index.ts";
+import { bitcoinsdk } from "../../core/index.ts";
 
 import LeatherProvider from "@leather-wallet/types"
 import type { ConnectWalletReturn } from "../index.ts";

@@ -3,7 +3,7 @@ import { memo, useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChartNoAxesCombined } from "lucide-react";
 
-import bitcoinsdk from "../../../core/index.ts";
+import { bitcoinsdk } from "../../../core/index.ts";
 
 import { Loader } from "../../../ui/components/Loader/Loader.component.tsx";
 import { Media } from "../../../ui/components/Asset/Media.component.tsx";
@@ -41,7 +41,7 @@ function LastAtomicSwapsSalesComponent({ lastSales, isLoading }: Readonly<LastAt
   const navigate = useNavigate();
 
   useEffect(() => {
-    bitcoinsdk.openbook.getBTCPrice().then((price: number|undefined ) => setBtcPrice(price ?? 0));
+    bitcoinsdk.openbook.getBTCPrice().then((price: number | undefined) => setBtcPrice(price ?? 0));
   }, []);
 
   useEffect(() => {

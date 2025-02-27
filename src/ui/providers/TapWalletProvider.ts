@@ -1,4 +1,4 @@
-import bitcoinsdk from "../../core/index.ts";
+import { bitcoinsdk } from "../../core/index.ts";
 
 import type { ConnectWalletReturn } from "../../ui/index.ts";
 import type { SignPSBTOptions } from "../../ui/context/walletContext.tsx";
