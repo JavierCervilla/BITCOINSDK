@@ -1,5 +1,12 @@
 import { getConfig } from '../config.ts'
 
+/**
+ * Realiza una llamada RPC a un nodo Electrum.
+ *
+ * @param {string} method - Método RPC a invocar.
+ * @param {unknown[]} params - Parámetros del método RPC.
+ * @returns {Promise<any>} - Promesa con la respuesta RPC.
+ */
 export async function callRPC(method: string, params: unknown[]) {
     try {
         const rpcCall = {

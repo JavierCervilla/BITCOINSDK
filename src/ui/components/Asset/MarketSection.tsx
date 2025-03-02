@@ -7,13 +7,12 @@ import { RecentSales } from "../../../ui/components/Asset/RecentSales/RecentSale
 import { MarketInfo } from "../../../ui/components/Asset/Markets/MarketInfo.component.tsx";
 
 import type * as XCPAPI from "../../../core/counterparty/api.d.ts";
-import type * as BTCAPI from "../../../core/bitcoin/api.d.ts";
 import type * as OpenbookAPI from "../../../core/openbook/api.d.ts";
 
 interface MarketSectionProps {
   asset: string
   supply: number
-  btcPrice: BTCAPI.BTCPrice
+  btcPrice: number
 }
 
 
@@ -85,8 +84,8 @@ function getBTCVolume({ atomicSwapSales, dispenses }: Readonly<GetBTCVolumeParam
 
 export function MarketSection({ asset, supply, btcPrice }: Readonly<MarketSectionProps>) {
   const [swapSales, setSwapSales] = useState<OpenbookAPI.OpenbookAtomicSwap[]>([]);
-  const [swapOrders, setSwapOrders] = useState<OpenbookAPI.OpenbookAtomicSwap[]>([]);
-  const [dispenses, setDispenses] = useState<XCPAPI.XCPAPIDispenser[]>([]);
+  const [swapOrders, setSwapOrders] = useState<OpenbookAPI.OpenbookAtomicSwapOrder[]>([]);
+  const [dispenses, setDispenses] = useState<XCPAPI.XCPAPIDispense[]>([]);
   const [dispensers, setDispensers] = useState<XCPAPI.XCPAPIDispenser[]>([]);
 
   const [mcap, setMcap] = useState<number | null>(null);
@@ -107,14 +106,16 @@ export function MarketSection({ asset, supply, btcPrice }: Readonly<MarketSectio
       setDispenses(dispensesData);
       setSwapOrders(swapOrdersData.result.filter(order => order.status === "active"));
       setDispensers(dispensersData);
-      setMcap(getMarketCap({
+      const mcap = getMarketCap({
         asset,
         supply,
         dispensers: dispensersData,
         dispenses: dispensesData,
         atomicSwapSales: swapSalesData.result,
         atomicSwapOrders: swapOrdersData.result
-      }));
+      })
+      console.log({mcap})
+      setMcap(mcap);
       setVolume(getBTCVolume({
         atomicSwapSales: swapSalesData.result,
         dispenses: dispensesData,
