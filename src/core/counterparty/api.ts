@@ -86,7 +86,7 @@ export const counterparty = {
      * @param {string} params.asset - The asset identifier.
      * @returns {Promise<XCPAPI.XCPAPIAsset>} The asset information.
      */
-    getAsset: async ({ asset }: { asset: string }) => {
+    getAsset: async ({ asset }: { asset: string }): Promise<XCPAPI.XCPAPIAsset> => {
         const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}`)
         endpoint.searchParams.set("verbose", "true")
         const response = await fetch(endpoint)
@@ -99,7 +99,7 @@ export const counterparty = {
      * @param {string} params.asset - The asset identifier.
      * @returns {Promise<number>} The number of holders.
      */
-    getHoldersCount: async ({ asset }: { asset: string }) => {
+    getHoldersCount: async ({ asset }: { asset: string }): Promise<number> => {
         const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/holders`)
         endpoint.searchParams.set("verbose", "true")
         endpoint.searchParams.set("limit", "0")
@@ -113,7 +113,7 @@ export const counterparty = {
      * @param {string} params.asset - The asset identifier.
      * @returns {Promise<XCPAPI.XCPAPIDispense[]>} The list of dispenses.
      */
-    getDispenses: async ({ asset }: { asset: string }) => {
+    getDispenses: async ({ asset }: { asset: string }): Promise<XCPAPI.XCPAPIDispense[]> => {
         const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/dispenses`)
         endpoint.searchParams.set("verbose", "true")
         endpoint.searchParams.set("limit", "10000")
@@ -127,7 +127,7 @@ export const counterparty = {
      * @param {string} params.asset - The asset identifier.
      * @returns {Promise<XCPAPI.XCPAPIDispenser[]>} The list of dispensers.
      */
-    getDispensers: async ({ asset }: { asset: string }) => {
+    getDispensers: async ({ asset }: { asset: string }): Promise<XCPAPI.XCPAPIDispenser[]> => {
         const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/assets/${asset}/dispensers`)
         endpoint.searchParams.set("verbose", "true")
         endpoint.searchParams.set("limit", "10000")
@@ -142,7 +142,7 @@ export const counterparty = {
      * @param {string} params.address - The address to query.
      * @returns {Promise<XCPAPI.Balance[]>} The balance information.
      */
-    getBalance: async ({ address }: { address: string }) => {
+    getBalance: async ({ address }: { address: string }): Promise<XCPAPI.Balance[]> => {
         const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/balances`)
         endpoint.searchParams.set("verbose", "true")
         const data = await fetch(endpoint)
@@ -156,7 +156,7 @@ export const counterparty = {
      * @param {string} params.address - The address to query.
      * @returns {Promise<XCPAPI.Balance[]>} The token balance information.
      */
-    getTokenBalance: async ({ asset, address }: { asset: string, address: string }) => {
+    getTokenBalance: async ({ asset, address }: { asset: string, address: string }): Promise<XCPAPI.Balance[]> => {
         const endpoint = new URL(`${getConfig().COUNTERPARTY.ENDPOINT}/v2/addresses/${address}/balances/${asset}`);
         endpoint.searchParams.set("verbose", "true")
         const data = await fetch(endpoint)
