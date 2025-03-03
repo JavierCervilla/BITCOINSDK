@@ -25,6 +25,9 @@ function btcPriceAdapter(data: OpenbookAPI.MarketData[]) {
     const btc = data.find((item: OpenbookAPI.MarketData) => item.id === "bitcoin")
     return btc?.current_price
 }
+/**
+ * API for Openbook interaction
+ */
 
 export const openbook = {
     getMarketData: async () => {

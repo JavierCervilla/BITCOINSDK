@@ -1,4 +1,7 @@
 import type * as OpenbookAPI from "./api";
+/**
+ * API for Openbook interaction
+ */
 export declare const openbook: {
     getMarketData: () => Promise<{
         icon: string;

@@ -1,8 +1,18 @@
 {
+  "name": "@universelle/bitcoinsdk",
+  "version": "0.2.22",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts",
+    "./core": "./src/core/index.ts",
+    "./ui": "./src/ui/index.ts"
+  },
   "tasks": {
     "dev": "deno run -A npm:vite --mode dev",
     "ladle": "deno run -A npm:@ladle/react dev",
     "build": "deno run -A src/build.ts",
+    "core-docs": "deno doc src/core/index.ts > docs/core.md",
+    "ui-docs": "deno doc  --output=docs/ui src/ui/index.ts",
     "npm": "deno task build && cd npm && npm publish --access public",
     "lint": "deno lint"
   },

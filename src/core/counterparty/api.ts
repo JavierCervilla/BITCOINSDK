@@ -5,11 +5,6 @@ import { bitcoin as rpc } from "../bitcoin/api.ts";
 import type * as XCPAPI from "../counterparty/api.d.ts";
 import * as hex from "../utils/hex.ts";
 
-interface InputToSign {
-    address: string
-    index: number
-    sighashTypes: number[]
-}
 
 /**
  * Adapts the balance data from the Counterparty API to the internal format.
@@ -43,7 +38,7 @@ async function composeAdapter(rawTransaction: string) {
     try {
         const psbt = new bitcoin.Psbt()
         const tx = bitcoin.Transaction.fromHex(rawTransaction)
-        const inputsToSign: InputToSign[] = []
+        const inputsToSign: XCPAPI.InputToSign[] = []
         let index = 0;
         for (const input of tx.ins) {
             const txid = hex.bin2hex(input.hash.reverse());
@@ -81,7 +76,9 @@ async function composeAdapter(rawTransaction: string) {
         throw error
     }
 }
-
+/**
+ * A collection of Counterparty API methods.
+ */
 export const counterparty = {
     /**
      * Retrieves asset information from the Counterparty API.

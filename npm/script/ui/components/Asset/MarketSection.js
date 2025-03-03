@@ -71,14 +71,16 @@ function MarketSection({ asset, supply, btcPrice }) {
             setDispenses(dispensesData);
             setSwapOrders(swapOrdersData.result.filter(order => order.status === "active"));
             setDispensers(dispensersData);
-            setMcap(getMarketCap({
+            const mcap = getMarketCap({
                 asset,
                 supply,
                 dispensers: dispensersData,
                 dispenses: dispensesData,
                 atomicSwapSales: swapSalesData.result,
                 atomicSwapOrders: swapOrdersData.result
-            }));
+            });
+            console.log({ mcap });
+            setMcap(mcap);
             setVolume(getBTCVolume({
                 atomicSwapSales: swapSalesData.result,
                 dispenses: dispensesData,

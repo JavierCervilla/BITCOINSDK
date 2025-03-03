@@ -113,3 +113,16 @@ export interface XCPAssetBalance {
     utxo: string | null
     utxo_address: string | null
 }
+
+export interface UTXO {
+    txid: string;
+    vout: number;
+    status: {
+        confirmed: boolean;
+        block_height: number;
+    },
+    value: number;
+    height: number;
+    balance?: boolean;
+    utxo_balance?: unknown;
+}

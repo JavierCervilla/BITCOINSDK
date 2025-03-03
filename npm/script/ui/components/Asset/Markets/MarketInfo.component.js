@@ -46,6 +46,10 @@ function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mc
     if (isLoading) {
         return react_1.default.createElement(Loader_component_js_1.Loader, null);
     }
+    console.log({
+        mcap,
+        volume
+    });
     return (react_1.default.createElement("div", { className: "bg-light p-4 rounded-lg shadow-md text-dark w-full border border-secondary sm:min-h-[calc(100vh-358px)] md:min-h-[358px]" },
         react_1.default.createElement("h2", { className: "font-bold text-lg" },
             react_1.default.createElement("span", { className: "text-primary" }, asset),
@@ -54,7 +58,7 @@ function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mc
             react_1.default.createElement("p", { className: "text-sm text-secondary" },
                 "BTC Volume: ",
                 react_1.default.createElement("span", { className: "text-primary" },
-                    volume.toLocaleString(),
+                    volume?.toLocaleString(),
                     " BTC ",
                     react_1.default.createElement("span", { className: "text-xs text-secondary" },
                         "(",
@@ -63,7 +67,7 @@ function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mc
             react_1.default.createElement("p", { className: "text-sm text-secondary" },
                 "MarketCap: ",
                 react_1.default.createElement("span", { className: "text-primary" },
-                    mcap.toLocaleString(),
+                    mcap?.toLocaleString(),
                     " BTC ",
                     react_1.default.createElement("span", { className: "text-secondary text-xs" },
                         "(",

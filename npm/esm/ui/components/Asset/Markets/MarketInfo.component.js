@@ -17,6 +17,10 @@ function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mc
     if (isLoading) {
         return React.createElement(Loader, null);
     }
+    console.log({
+        mcap,
+        volume
+    });
     return (React.createElement("div", { className: "bg-light p-4 rounded-lg shadow-md text-dark w-full border border-secondary sm:min-h-[calc(100vh-358px)] md:min-h-[358px]" },
         React.createElement("h2", { className: "font-bold text-lg" },
             React.createElement("span", { className: "text-primary" }, asset),
@@ -25,7 +29,7 @@ function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mc
             React.createElement("p", { className: "text-sm text-secondary" },
                 "BTC Volume: ",
                 React.createElement("span", { className: "text-primary" },
-                    volume.toLocaleString(),
+                    volume?.toLocaleString(),
                     " BTC ",
                     React.createElement("span", { className: "text-xs text-secondary" },
                         "(",
@@ -34,7 +38,7 @@ function MarketInfoComponent({ asset, btcPrice, swaps, dispensers, isLoading, mc
             React.createElement("p", { className: "text-sm text-secondary" },
                 "MarketCap: ",
                 React.createElement("span", { className: "text-primary" },
-                    mcap.toLocaleString(),
+                    mcap?.toLocaleString(),
                     " BTC ",
                     React.createElement("span", { className: "text-secondary text-xs" },
                         "(",

@@ -3,17 +3,17 @@ BitcoinSDK is a powerful and modular JavaScript/TypeScript SDK designed to seaml
 
 With built-in support for multiple wallet providers, PSBT signing, and atomic swaps via OpenBook, BitcoinSDK provides developers with an efficient and scalable way to interact with the Bitcoin ecosystem.
 
-✅ Features:
+## ✨ Features
+- ✅ Multi-wallet support: Connect, sign transactions, and manage wallets effortlessly.
+- ✅ Bitcoin RPC utilities: Fetch balances, send raw transactions, and interact with the Bitcoin blockchain.
+- ✅ OpenBook Protocol Integration: Easily list and trade Counterparty assets via atomic swaps.
+- ✅ React-ready UI components: Prebuilt components for fast integration.
+- ✅ TailwindCSS compatible: Fully customizable UI with Tailwind support.
 
-Multi-wallet support: Connect, sign transactions, and manage wallets effortlessly.
-Bitcoin RPC utilities: Fetch balances, send raw transactions, and interact with the Bitcoin blockchain.
-OpenBook Protocol Integration: Easily list and trade Counterparty assets via atomic swaps.
-React-ready UI components: Prebuilt components to accelerate wallet integrations.
-TailwindCSS compatible: Fully customizable UI with Tailwind support.
-🔗 GitHub Repository: BitcoinSDK on GitHub
 
 🚀 Get started today and build the next generation of Bitcoin-powered applications!
 
+## ⚙️ Instalation
 To install use your favorite package manager:
 
 `npm install bitcoinsdk`
@@ -46,8 +46,8 @@ const orderbook = await bitcoinsdk.openbook.getAtomicSales({
 });
 
 ```
-🔹 Provides access to Bitcoin, Counterparty, and OpenBook APIs.
-🔹 No UI dependencies—perfect for backend use or custom UI projects.
+- 🔹 Provides access to Bitcoin, Counterparty, and OpenBook APIs.
+- 🔹 No UI dependencies—perfect for backend use or custom UI projects.
 
 
 ### 2️⃣ bitcoinsdk/ui - Prebuilt UI Components
@@ -65,16 +65,9 @@ function App() {
 }
 
 ```
-🔹 Includes prebuilt UI components for React.
-🔹 Integrates seamlessly with multiple wallet providers.
-🔹 Uses TailwindCSS for styling (customizable).
-
-## ✨ Features
-✅ Multi-wallet support: Connect, sign transactions, and manage wallets effortlessly.
-✅ Bitcoin RPC utilities: Fetch balances, send raw transactions, and interact with the Bitcoin blockchain.
-✅ OpenBook Protocol Integration: Easily list and trade Counterparty assets via atomic swaps.
-✅ React-ready UI components: Prebuilt components for fast integration.
-✅ TailwindCSS compatible: Fully customizable UI with Tailwind support.
+- 🔹 Includes prebuilt UI components for React.
+- 🔹 Integrates seamlessly with multiple wallet providers.
+- 🔹 Uses TailwindCSS for styling (customizable).
 
 
 
