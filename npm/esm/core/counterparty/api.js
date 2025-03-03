@@ -72,6 +72,9 @@ async function composeAdapter(rawTransaction) {
         throw error;
     }
 }
+/**
+ * A collection of Counterparty API methods.
+ */
 export const counterparty = {
     /**
      * Retrieves asset information from the Counterparty API.

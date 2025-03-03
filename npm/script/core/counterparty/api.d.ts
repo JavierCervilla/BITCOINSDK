@@ -1,4 +1,7 @@
 import type * as XCPAPI from "./api_2";
+/**
+ * A collection of Counterparty API methods.
+ */
 export declare const counterparty: {
     /**
      * Retrieves asset information from the Counterparty API.
@@ -80,12 +83,7 @@ export declare const counterparty: {
         btc_fee: number;
         data: string;
         lock_scripts: string[];
-        inputs_values: number[]; /**
-         * Retrieves asset information from the Counterparty API.
-         * @param {Object} params - The parameters for the request.
-         * @param {string} params.asset - The asset identifier.
-         * @returns {Promise<XCPAPI.XCPAPIAsset>} The asset information.
-         */
+        inputs_values: number[];
         signed_tx_estimated_size: XCPAPI.EstimatedSize;
         params: XCPAPI.SendAssetParams;
         name: string;
@@ -110,12 +108,7 @@ export declare const counterparty: {
         btc_fee: number;
         data: string;
         lock_scripts: string[];
-        inputs_values: number[]; /**
-         * Retrieves asset information from the Counterparty API.
-         * @param {Object} params - The parameters for the request.
-         * @param {string} params.asset - The asset identifier.
-         * @returns {Promise<XCPAPI.XCPAPIAsset>} The asset information.
-         */
+        inputs_values: number[];
         signed_tx_estimated_size: XCPAPI.EstimatedSize;
         params: XCPAPI.SendAssetParams;
         name: string;
@@ -137,12 +130,7 @@ export declare const counterparty: {
         inputsToSign: XCPAPI.InputToSign[];
         rawtransaction: string;
         btc_in: number;
-        btc_out: number; /**
-         * Retrieves the count of holders for a specific asset.
-         * @param {Object} params - The parameters for the request.
-         * @param {string} params.asset - The asset identifier.
-         * @returns {Promise<number>} The number of holders.
-         */
+        btc_out: number;
         btc_change: number;
         btc_fee: number;
         data: string;
@@ -172,12 +160,7 @@ export declare const counterparty: {
         btc_fee: number;
         data: string;
         lock_scripts: string[];
-        inputs_values: number[]; /**
-         * Retrieves asset information from the Counterparty API.
-         * @param {Object} params - The parameters for the request.
-         * @param {string} params.asset - The asset identifier.
-         * @returns {Promise<XCPAPI.XCPAPIAsset>} The asset information.
-         */
+        inputs_values: number[];
         signed_tx_estimated_size: XCPAPI.EstimatedSize;
         params: XCPAPI.SendAssetParams;
         name: string;

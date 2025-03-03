@@ -114,19 +114,10 @@ export declare const bitcoinsdk: {
         }>;
     };
     openbook: {
-        getMarketData: () => Promise<{
-            icon: string;
-            id: string;
-            name: string;
-            symbol: string;
-            current_price: number;
-            price_change_percentage_24h: number;
-            total_volume: number;
-            market_cap: number;
-        }[]>;
+        getMarketData: () => Promise<import("./openbook/api.js").MarketData[]>;
         getUTXOS: ({ address }: {
             address: string;
-        }) => Promise<any>;
+        }) => Promise<import("./openbook/api.js").UTXO[]>;
         getBTCBalance: ({ address }: {
             address: string;
         }) => Promise<number>;
@@ -180,7 +171,7 @@ export declare const bitcoinsdk: {
         utils: {
             getCIP25JSON: ({ cip25Url }: {
                 cip25Url: string;
-            }) => Promise<unknown>;
+            }) => Promise<any>;
             getMempoolFees: () => Promise<import("./openbook/api.js").OpenbookMempoolFees | null>;
         };
     };
