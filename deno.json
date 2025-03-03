@@ -1,7 +1,7 @@
 {
   "name": "@universelle/bitcoinsdk",
   "description": "A Deno SDK for bitcoin and other bitcoin protocols as Counterparty",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "license": "MIT",
   "exports": {
     ".": "./src/mod.ts",
@@ -16,6 +16,7 @@
     "ui-docs": "deno doc  --output=docs/ui src/ui/index.ts",
     "npm": "deno task build && cd npm && npm publish --access public",
     "jsr": "deno publish --no-check --allow-slow-types",
+    "publish": "deno task npm && deno task jsr",
     "lint": "deno lint"
   },
   "compilerOptions": {
