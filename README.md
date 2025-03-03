@@ -34,7 +34,9 @@ If you only need blockchain interaction, use the core package:
 import { bitcoinsdk } from "bitcoinsdk/core";
 
 // Get Bitcoin balance
-const balance = await bitcoinsdk.bitcoin.getBalance({ address: "your-bitcoin-address" });
+const balance = await const balance = await bitcoinsdk.openbook.getBTCBalance({
+  address: "your_bitcoin_address"
+})
 
 // Fetch Counterparty asset details
 const asset = await bitcoinsdk.counterparty.getAsset({ asset: "XCP" });
