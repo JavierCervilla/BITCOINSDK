@@ -3,7 +3,7 @@
   "version": "0.2.23",
   "license": "MIT",
   "exports": {
-    ".": "./src/index.ts",
+    ".": "./src/mod.ts",
     "./core": "./src/core/index.ts",
     "./ui": "./src/ui/index.ts"
   },
