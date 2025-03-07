@@ -1,7 +1,7 @@
 {
   "name": "@universelle/bitcoinsdk",
   "description": "A Deno SDK for bitcoin and other bitcoin protocols as Counterparty",
-  "version": "0.2.24",
+  "version": "0.2.26",
   "license": "MIT",
   "exports": {
     ".": "./src/mod.ts",
@@ -28,7 +28,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "types": ["react", "react-dom"]
-
   },
   "nodeModulesDir":"auto",
   "imports": {
