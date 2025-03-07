@@ -39,17 +39,6 @@ async function callRPC(method: string, params: unknown[]) {
  */
 export const bitcoin = {
     /**
-     * Retrieves the balance of a given Bitcoin address.
-     * 
-     * @param {Object} params - The parameters object.
-     * @param {string} params.address - The Bitcoin address to check.
-     * @returns {Promise<any>} A promise resolving to the balance information.
-     */
-    getBalance: async ({ address }: { address: string }) => {
-        return await callRPC("scantxoutset", ["start", address]);
-    },
-
-    /**
      * Fetches a raw Bitcoin transaction by its transaction ID.
      *
      * @param {Object} params - The parameters object.
