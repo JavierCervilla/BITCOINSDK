@@ -28,7 +28,7 @@ async function main() {
         shims: { deno: false },
         package: {
             name: "bitcoinsdk",
-            version: "0.2.26",
+            version: "0.2.27",
             description: "Bitcoin SDK to integrate Bitcoin wallets to your app and get access to The OpenBook Protocol in your project",
             license: "MIT",
             repository: {

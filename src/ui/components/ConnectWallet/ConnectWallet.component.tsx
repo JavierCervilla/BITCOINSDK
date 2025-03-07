@@ -38,7 +38,7 @@ export function ConnectWalletButton({
 
           <DropdownMenu.Portal>
             <DropdownMenu.Content
-              className={cn("z-50 min-w-[12rem] overflow-hidden rounded-xl border border-primary bg-light p-1 shadow-md bg-primary", dropdownClassName)}
+              className={cn("z-50 min-w-[12rem] overflow-hidden rounded-xl border border-primary bg-light p-1 shadow-md", dropdownClassName)}
               sideOffset={5}
             >
               {Object.entries(wallets).map(([key, { label, icon }], index) => (
