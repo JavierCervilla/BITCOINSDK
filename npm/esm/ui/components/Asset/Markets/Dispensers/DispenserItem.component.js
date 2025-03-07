@@ -1,0 +1,35 @@
+import React from "react";
+import { memo } from "react";
+function DispenserItemComponent({ dispenser, btcPrice }) {
+    return (React.createElement("div", { className: "flex flex-col p-4 space-y-4 transition-colors border rounded-lg border-primary hover:bg-light/5 md:flex-row md:space-y-0 md:gap-2 md:justify-between" },
+        React.createElement("div", { className: "flex justify-between items-center md:flex-col md:w-1/4 md:items-start md:m-auto" },
+            React.createElement("span", { className: "text-sm font-medium text-secondary md:hidden" }, "Quantity"),
+            React.createElement("div", { className: "text-right md:text-left" },
+                React.createElement("span", { className: "text-base sm:text-xs font-mono font-semibold truncate", title: dispenser.give_quantity_normalized }, Number(dispenser.give_quantity_normalized).toLocaleString()))),
+        React.createElement("div", { className: "flex justify-between items-center md:flex-col md:w-1/4 md:items-start md:m-auto" },
+            React.createElement("span", { className: "text-sm font-medium text-secondary md:hidden" }, "Remaining"),
+            React.createElement("div", { className: "text-right md:text-left" },
+                React.createElement("span", { className: "text-base sm:text-xs font-mono font-semibold truncate", title: dispenser.give_remaining_normalized }, Number(dispenser.give_remaining_normalized).toLocaleString()))),
+        React.createElement("div", { className: "flex justify-between items-center md:flex-col md:w-1/4 md:items-start md:m-auto" },
+            React.createElement("span", { className: "text-sm font-medium text-secondary md:hidden" }, "Unit Price"),
+            React.createElement("div", { className: "text-right md:text-left" },
+                React.createElement("span", { className: "text-base sm:text-xs font-mono font-semibold truncate block", title: dispenser.price.toString() },
+                    dispenser.satoshi_price.toLocaleString(),
+                    " sats"),
+                React.createElement("span", { className: "text-xs font-mono text-secondary truncate block", title: dispenser.price.toString() },
+                    "$",
+                    (dispenser.satoshi_price * 10 ** -8 * btcPrice).toLocaleString()))),
+        React.createElement("div", { className: "flex justify-between items-center md:flex-col md:w-1/4 md:items-start md:m-auto" },
+            React.createElement("span", { className: "text-sm font-medium text-secondary md:hidden" }, "Price"),
+            React.createElement("div", { className: "text-right md:text-left" },
+                React.createElement("span", { className: "text-base sm:text-xs font-mono font-semibold truncate block", title: dispenser.satoshirate.toString() },
+                    dispenser.satoshirate.toLocaleString(),
+                    " sats"),
+                React.createElement("span", { className: "text-xs font-mono text-secondary truncate block", title: dispenser.price.toString() },
+                    "$",
+                    (dispenser.satoshirate * 10 ** -8 * btcPrice).toLocaleString()))),
+        React.createElement("div", { className: "flex justify-between items-center md:flex-col md:w-1/4 md:items-start md:m-auto" },
+            React.createElement("span", { className: "text-sm font-medium text-secondary md:hidden" }, "Date"),
+            React.createElement("span", { className: "text-base sm:text-xs font-mono truncate", title: new Date(dispenser.block_time * 1000).toLocaleString() }, new Date(dispenser.block_time * 1000).toLocaleDateString()))));
+}
+export const DispenserItem = memo(DispenserItemComponent);
