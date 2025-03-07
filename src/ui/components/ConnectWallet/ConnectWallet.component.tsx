@@ -2,12 +2,14 @@ import React from "react";
 import { Wallet, LogOut } from "lucide-react"
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 
-import {cn} from "../../../ui/utils/style.ts"
+import { cn } from "../../../ui/utils/style.ts"
 import { useWallet } from "../../../ui/context/walletContext.tsx"
 import { walletConfig } from "../../../ui/index.ts";
 
 interface ConnectWalletButtonProps {
-  readonly className?: string
+  readonly buttonClassName?: string
+  readonly dropdownClassName?: string
+  readonly dropdownItemClassName?: string
   readonly wallets: Readonly<{ [key: string]: { label: string; icon: string } }>
 }
 
@@ -16,8 +18,10 @@ function shortenAddress(address: string) {
 }
 
 export function ConnectWalletButton({
-  className,
-  wallets=walletConfig,
+  buttonClassName,
+  dropdownClassName,
+  dropdownItemClassName,
+  wallets = walletConfig,
 }: Readonly<ConnectWalletButtonProps>) {
   const { walletAddress, connected, connectWallet, disconnectWallet } = useWallet()
 
@@ -26,7 +30,7 @@ export function ConnectWalletButton({
       {!connected ? (
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
-            <button type="button" className={cn("cursor-pointer py-2.5 min-w-fit px-4 border border-primary text-nowrap text-primary hover:scale-105 rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300", className)}>
+            <button type="button" className={cn("cursor-pointer py-2.5 min-w-fit px-4 border border-primary text-nowrap text-primary hover:scale-105 rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300", buttonClassName)}>
               <Wallet className="w-5 h-5" />
               <span>Connect Wallet</span>
             </button>
@@ -34,16 +38,15 @@ export function ConnectWalletButton({
 
           <DropdownMenu.Portal>
             <DropdownMenu.Content
-              className="z-50 min-w-[12rem] overflow-hidden rounded-xl border border-primary bg-light p-1 shadow-md bg-black"
+              className={cn("z-50 min-w-[12rem] overflow-hidden rounded-xl border border-primary bg-light p-1 shadow-md bg-primary", dropdownClassName)}
               sideOffset={5}
             >
               {Object.entries(wallets).map(([key, { label, icon }], index) => (
                 <DropdownMenu.Item
                   key={key}
                   onClick={async () => await connectWallet(key)}
-                  className={`flex items-center px-4 py-3 text-sm font-medium cursor-pointer hover:bg-primary hover:border-none hover:text-light text-primary transition-all duration-300 ease-in-out transform hover:scale-105 ${
-                    index < Object.entries(wallets).length - 1 ? "border-b border-primary" : ""
-                  }`}
+                  className={cn(`flex items-center px-4 py-3 text-sm font-medium cursor-pointer hover:bg-primary hover:border-none hover:text-light text-primary transition-all duration-300 ease-in-out transform hover:scale-105 ${index < Object.entries(wallets).length - 1 ? "border-b border-primary" : ""
+                    }`, dropdownItemClassName)}
                 >
                   <img src={icon || "/placeholder.svg"} alt={label} className="w-6 h-6 mr-3" />
                   <span>{label}</span>
