@@ -1,5 +1,3 @@
-import React from "react";
-import type { ReactNode } from "react";
 export interface InputToSign {
     index: number;
     address: string;
@@ -10,7 +8,7 @@ export interface SignPSBTOptions {
     autoFinalized?: boolean;
     inputsToSign?: InputToSign[];
 }
-interface WalletContextProps {
+export interface WalletManagerInterface {
     walletAddress: string | null;
     publicKey: string | null;
     connected: boolean;
@@ -21,10 +19,18 @@ interface WalletContextProps {
     signMessage: (message: string) => Promise<string | null>;
     pushTX?: (txHex: string) => Promise<string | null>;
 }
-interface WalletProviderProps {
-    children: ReactNode;
-    theme: string;
+declare class WalletManager implements WalletManagerInterface {
+    walletAddress: string | null;
+    publicKey: string | null;
+    connected: boolean;
+    walletProvider: string | null;
+    constructor();
+    private connectWalletFromLocalStorage;
+    connectWallet(providerKey: string): Promise<void>;
+    disconnectWallet(): void;
+    signMessage(message: string): Promise<string | null>;
+    signPSBT(psbt: string, options?: SignPSBTOptions): Promise<string | null>;
+    pushTX(txHex: string): Promise<string | null>;
 }
-export declare const WalletProvider: React.FC<WalletProviderProps>;
-export declare const useWallet: () => WalletContextProps;
-export {};
+declare function useWallet(): WalletManager;
+export { WalletManager, useWallet };

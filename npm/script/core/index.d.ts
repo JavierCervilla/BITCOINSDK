@@ -1,5 +1,5 @@
 import { counterparty } from "./counterparty/api.js";
-import { openbook } from "./openbook/api_2.js";
+import { openbook } from "./openbook/api.js";
 import { bitcoin } from "./bitcoin/api.js";
 import { stamps } from "./stamps/api.js";
 import { initConfig } from "./config.js";
@@ -114,65 +114,65 @@ export declare const bitcoinsdk: {
         }>;
     };
     openbook: {
-        getMarketData: () => Promise<import("./openbook/api.js").MarketData[]>;
+        getMarketData: () => Promise<import("./openbook/api_2.js").MarketData[]>;
         getUTXOS: ({ address }: {
             address: string;
-        }) => Promise<import("./openbook/api.js").UTXO[]>;
+        }) => Promise<import("./openbook/api_2.js").UTXO[]>;
         getBTCBalance: ({ address }: {
             address: string;
         }) => Promise<number>;
         getAtomicSales: ({ limit, page }: {
             limit?: number | undefined;
             page?: number | undefined;
-        }) => Promise<import("./openbook/api.js").PaginatedResponse<import("./openbook/api.js").OpenbookAtomicSwap>>;
+        }) => Promise<import("./openbook/api_2.js").PaginatedResponse<import("./openbook/api_2.js").OpenbookAtomicSwap>>;
         getAtomicSalesByAsset: ({ asset, limit, page }: {
             asset: string;
             limit?: number | undefined;
             page?: number | undefined;
-        }) => Promise<import("./openbook/api.js").PaginatedResponse<import("./openbook/api.js").OpenbookAtomicSwap>>;
+        }) => Promise<import("./openbook/api_2.js").PaginatedResponse<import("./openbook/api_2.js").OpenbookAtomicSwap>>;
         getAtomicSalesByAddress: ({ address, limit, page }: {
             address: string;
             limit?: number | undefined;
             page?: number | undefined;
-        }) => Promise<import("./openbook/api.js").PaginatedResponse<import("./openbook/api.js").OpenbookAtomicSwap>>;
+        }) => Promise<import("./openbook/api_2.js").PaginatedResponse<import("./openbook/api_2.js").OpenbookAtomicSwap>>;
         getAtomicSaleByTxId: ({ txid }: {
             txid: string;
-        }) => Promise<import("./openbook/api.js").PaginatedResponse<import("./openbook/api.js").OpenbookAtomicSwap>>;
+        }) => Promise<import("./openbook/api_2.js").PaginatedResponse<import("./openbook/api_2.js").OpenbookAtomicSwap>>;
         getAtomicSwapOrders: ({ limit, page }: {
             limit?: number | undefined;
             page?: number | undefined;
-        }) => Promise<import("./openbook/api.js").PaginatedResponse<import("./openbook/api.js").OpenbookAtomicSwapOrder>>;
+        }) => Promise<import("./openbook/api_2.js").PaginatedResponse<import("./openbook/api_2.js").OpenbookAtomicSwapOrder>>;
         getAtomicSwapOrdersByAsset: ({ asset }: {
             asset: string;
-        }) => Promise<import("./openbook/api.js").PaginatedResponse<import("./openbook/api.js").OpenbookAtomicSwapOrder>>;
+        }) => Promise<import("./openbook/api_2.js").PaginatedResponse<import("./openbook/api_2.js").OpenbookAtomicSwapOrder>>;
         cancelAtomicSwap: ({ id, feeRate }: {
             id: string;
             feeRate: number;
-        }) => Promise<import("./openbook/api.js").OpenbookCancelOrder>;
+        }) => Promise<import("./openbook/api_2.js").OpenbookCancelOrder>;
         getPsbtForListOrder: ({ utxo, seller, price }: {
             utxo: string;
             seller: string;
             price: number;
-        }) => Promise<import("./openbook/api.js").OpenbookPsbtForListOrder>;
+        }) => Promise<import("./openbook/api_2.js").OpenbookPsbtForListOrder>;
         getPsbtForSubmitOrderOnchain: ({ utxo, seller, price, feeRate, psbt }: {
             utxo: string;
             seller: string;
             price: number;
             feeRate: number;
             psbt: string;
-        }) => Promise<import("./openbook/api.js").OpenbookPsbtForListOrder>;
+        }) => Promise<import("./openbook/api_2.js").OpenbookPsbtForListOrder>;
         getBuyOrderPSBT: ({ id, buyer, feeRate, serviceFee }: {
             buyer: string;
             id: string;
             feeRate: number;
-            serviceFee: [] | import("./openbook/api.js").ServiceFee[];
-        }) => Promise<import("./openbook/api.js").OpenbookPsbtForBuyOrder>;
+            serviceFee: [] | import("./openbook/api_2.js").ServiceFee[];
+        }) => Promise<import("./openbook/api_2.js").OpenbookPsbtForBuyOrder>;
         getBTCPrice: () => Promise<number | undefined>;
         utils: {
             getCIP25JSON: ({ cip25Url }: {
                 cip25Url: string;
             }) => Promise<any>;
-            getMempoolFees: () => Promise<import("./openbook/api.js").OpenbookMempoolFees | null>;
+            getMempoolFees: () => Promise<import("./openbook/api_2.js").OpenbookMempoolFees | null>;
         };
     };
     bitcoin: {

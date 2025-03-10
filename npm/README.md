@@ -53,24 +53,29 @@ const orderbook = await bitcoinsdk.openbook.getAtomicSales({
 
 
 ### 2️⃣ bitcoinsdk/ui - Prebuilt UI Components
-If you want to quickly integrate wallets and UI components, use:
+If you want to quickly integrate wallet connect button use the web component
 
-```tsx
-import { WalletProvider, ConnectWalletButton } from "bitcoinsdk/ui";
-
-function App() {
-  return (
-    <WalletProvider>
-      <ConnectWalletButton />
-    </WalletProvider>
-  );
-}
+```ts
+<connect-wallet-button></connect-wallet-button>
 
 ```
+
 - 🔹 Includes prebuilt UI components for React.
 - 🔹 Integrates seamlessly with multiple wallet providers.
-- 🔹 Uses TailwindCSS for styling (customizable).
 
+if you want to customize the wallet connect button you have this css variables accessible:
+
+```css
+:host {
+    --wallet-button-bg: #fefefe;
+    --wallet-button-text: #000;
+    --wallet-button-border: #ff9900;
+    --wallet-button-hover-bg: #ff9900;
+    --wallet-font-family: "Arial", sans-serif;
+    --wallet-width: 184px;
+    --wallet-height: 48px;
+}
+```
 
 
 ## 📖 Documentation

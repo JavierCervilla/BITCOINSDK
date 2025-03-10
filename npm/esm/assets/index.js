@@ -5,3 +5,5 @@ export const okxImg = "https://openbook.0.srcpad.pro/static/assets/okx.png";
 export const tapWalletImg = "https://openbook.0.srcpad.pro/static/assets/tapwallet.png";
 export const unisatImg = "https://openbook.0.srcpad.pro/static/assets/unisat.png";
 export const phantomImg = "https://openbook.0.srcpad.pro/static/assets/phantom.svg";
+export const walletImg = "https://openbook.0.srcpad.pro/static/assets/wallet.svg";
+export const logoutImg = "https://openbook.0.srcpad.pro/static/assets/logout.svg";

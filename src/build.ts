@@ -20,15 +20,15 @@ async function main() {
 
     await build({
         entryPoints: [
-            { name: ".", path: "./src/mod.ts" }, // Exporta el módulo principal
-            { name: "./core", path: "./src/core/index.ts" }, // Exporta el módulo core
-            { name: "./ui", path: "./src/ui/index.ts" } // Exporta el módulo UI
+            { name: ".", path: "./src/mod.ts" },
+            { name: "./core", path: "./src/core/index.ts" },
+            { name: "./ui", path: "./src/ui/index.ts" }
         ],
         outDir: "./npm",
         shims: { deno: false },
         package: {
             name: "bitcoinsdk",
-            version: "0.2.27",
+            version: "0.2.28",
             description: "Bitcoin SDK to integrate Bitcoin wallets to your app and get access to The OpenBook Protocol in your project",
             license: "MIT",
             repository: {

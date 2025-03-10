@@ -25,4 +25,4 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ui = exports.core = void 0;
 exports.core = __importStar(require("./core/index.js"));
-exports.ui = __importStar(require("./ui/components/index.js"));
+exports.ui = __importStar(require("./ui/index.js"));

@@ -1,60 +1,67 @@
-import React from "react";
-import { createContext, useState, useContext, useEffect, useMemo } from "react";
-import { walletConfig as wallets } from "../index.js";
-const WalletContext = createContext(undefined);
-export const WalletProvider = ({ children, theme = "bitcoin-dark", }) => {
-    const [walletAddress, setWalletAddress] = useState(null);
-    const [publicKey, setPublicKey] = useState(null);
-    const [connected, setConnected] = useState(false);
-    const [walletProvider, setWalletProvider] = useState(null);
-    useEffect(() => {
-        // Al inicializar el proveedor, intentar reconectar desde localStorage
-        connectWalletFromLocalStorage();
-    }, []);
-    useEffect(() => {
-        document.documentElement.setAttribute("data-theme", theme);
-    }, [theme]);
-    // Connect wallet from local storage
-    const connectWalletFromLocalStorage = () => {
+import { walletConfig } from "../providers/index.js";
+class WalletManager {
+    constructor() {
+        Object.defineProperty(this, "walletAddress", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: null
+        });
+        Object.defineProperty(this, "publicKey", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: null
+        });
+        Object.defineProperty(this, "connected", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: false
+        });
+        Object.defineProperty(this, "walletProvider", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: null
+        });
+        this.connectWalletFromLocalStorage();
+    }
+    connectWalletFromLocalStorage() {
         const storedWallets = localStorage.getItem("wallets");
         const activeProvider = localStorage.getItem("activeProvider");
         if (storedWallets && activeProvider) {
             const parsedWallets = JSON.parse(storedWallets);
             const providerData = parsedWallets[activeProvider];
-            if (providerData && wallets[activeProvider]) {
-                setWalletProvider(wallets[activeProvider].label);
-                setWalletAddress(providerData.address);
-                setPublicKey(providerData.publicKey);
-                setConnected(true);
+            if (providerData && walletConfig[activeProvider]) {
+                this.walletProvider = walletConfig[activeProvider].label;
+                this.walletAddress = providerData.address;
+                this.publicKey = providerData.publicKey;
+                this.connected = true;
             }
         }
-    };
-    const connectWallet = useMemo(() => async (providerKey) => {
-        console.log("Connecting wallet:", providerKey);
-        console.log("Wallets:", wallets);
-        const walletConfig = wallets[providerKey];
-        console.log("Wallet config:", walletConfig);
-        if (walletConfig) {
-            const { address, publicKey } = (await walletConfig.connect()) || {};
+    }
+    async connectWallet(providerKey) {
+        const config = walletConfig[providerKey];
+        if (config) {
+            const { address, publicKey } = (await config.connect()) || {};
             if (address && publicKey) {
-                setWalletProvider(walletConfig.label);
-                setWalletAddress(address);
-                setPublicKey(publicKey);
-                setConnected(true);
+                this.walletProvider = config.label;
+                this.walletAddress = address;
+                this.publicKey = publicKey;
+                this.connected = true;
                 const storedWallets = localStorage.getItem("wallets");
-                const parsedWallets = storedWallets
-                    ? JSON.parse(storedWallets)
-                    : {};
+                const parsedWallets = storedWallets ? JSON.parse(storedWallets) : {};
                 parsedWallets[providerKey] = { address, publicKey };
                 localStorage.setItem("wallets", JSON.stringify(parsedWallets));
                 localStorage.setItem("activeProvider", providerKey);
             }
         }
-    }, [wallets]);
-    const disconnectWallet = () => {
-        setWalletAddress(null);
-        setConnected(false);
-        setWalletProvider(null);
+    }
+    disconnectWallet() {
+        this.walletAddress = null;
+        this.connected = false;
+        this.walletProvider = null;
         const storedWallets = localStorage.getItem("wallets");
         const activeProvider = localStorage.getItem("activeProvider");
         if (storedWallets && activeProvider) {
@@ -63,88 +70,57 @@ export const WalletProvider = ({ children, theme = "bitcoin-dark", }) => {
             localStorage.setItem("wallets", JSON.stringify(parsedWallets));
         }
         localStorage.removeItem("activeProvider");
-    };
-    const signMessage = async (message) => {
-        if (!walletProvider) {
+    }
+    async signMessage(message) {
+        if (!this.walletProvider) {
             console.error("Wallet provider is not defined");
             return null;
         }
-        return await wallets[walletProvider].signMessage(message);
-    };
-    const signPSBT = async (psbt, options) => {
+        return await walletConfig[this.walletProvider].signMessage(message);
+    }
+    async signPSBT(psbt, options = {}) {
         try {
-            // Verifica que el proveedor de la billetera esté definido
-            if (!walletProvider) {
+            if (!this.walletProvider) {
                 console.error("Wallet provider is not defined");
                 return null;
             }
-            // Obtén la configuración de la billetera
-            const walletConfig = wallets[walletProvider];
-            if (!walletConfig) {
-                console.error("Wallet configuration not found for provider:", walletProvider);
+            const config = walletConfig[this.walletProvider];
+            if (!config) {
+                console.error("Wallet configuration not found for provider:", this.walletProvider);
                 return null;
             }
-            // Llama a la función signPSBT de la configuración de la billetera
-            return await walletConfig.signPSBT(psbt, options);
+            return await config.signPSBT(psbt, options);
         }
         catch (error) {
             console.error("Error signing PSBT:", error);
             return null;
         }
-    };
-    const pushTX = async (txHex) => {
+    }
+    async pushTX(txHex) {
         try {
-            if (!walletProvider) {
+            if (!this.walletProvider) {
                 console.error("Wallet provider is not defined");
                 return null;
             }
-            const walletConfig = wallets[walletProvider];
-            if (!walletConfig) {
-                console.error("Wallet configuration not found for provider:", walletProvider);
+            const config = walletConfig[this.walletProvider];
+            if (!config) {
+                console.error("Wallet configuration not found for provider:", this.walletProvider);
                 return null;
             }
-            return await walletConfig.pushTX(txHex);
+            const result = await config.pushTX(txHex);
+            return typeof result === 'string' ? result : result?.result || null;
         }
         catch (error) {
             console.error("Error pushing TX:", error);
             return null;
         }
-    };
-    const contextValue = useMemo(() => ({
-        walletAddress,
-        publicKey,
-        connected,
-        walletProvider,
-        connectWallet,
-        disconnectWallet,
-        connectWalletFromLocalStorage,
-        signPSBT,
-        signMessage,
-        pushTX,
-    }), [
-        walletAddress,
-        publicKey,
-        connected,
-        walletProvider,
-        connectWallet,
-        disconnectWallet,
-        connectWalletFromLocalStorage,
-        signPSBT,
-        signMessage,
-        pushTX
-    ]);
-    return (React.createElement(WalletContext.Provider, { value: contextValue }, children));
-};
-// Hook para usar el contexto
-export const useWallet = () => {
-    const context = useContext(WalletContext);
-    if (!context) {
-        throw new Error("useWallet must be used within a WalletProvider");
     }
-    useEffect(() => {
-        if (!context.connected) {
-            context.connectWalletFromLocalStorage();
-        }
-    }, [context]);
-    return context;
-};
+}
+let walletManagerInstance = null;
+function useWallet() {
+    if (!walletManagerInstance) {
+        walletManagerInstance = new WalletManager();
+    }
+    return walletManagerInstance;
+}
+export { WalletManager, useWallet };

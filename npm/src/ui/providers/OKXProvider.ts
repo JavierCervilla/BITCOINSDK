@@ -1,8 +1,8 @@
 import * as dntShim from "../../_dnt.shims.js";
 import { bitcoinsdk } from "../../core/index.js";
 
-import type { ConnectWalletReturn } from "../index.js";
 import type { SignPSBTOptions } from "../context/walletContext.js";
+import type { ConnectWalletReturn } from "./index.js";
 
 export const connectWallet = async (): Promise<ConnectWalletReturn | null> => {
   const okxwallet = (dntShim.dntGlobalThis as GlobalThis).okxwallet;
