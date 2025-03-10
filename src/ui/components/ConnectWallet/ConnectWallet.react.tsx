@@ -1,10 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { getWalletManagerInstance } from "../../context/walletContext.ts";
-import { walletConfig } from "../../providers/index.ts";
-import "./connectWalletButton.css";
+import "./connectWallet.styles.css?inline";
 
-// Inicializar WalletManager antes de usar el componente
-getWalletManagerInstance(walletConfig);
 
 const ConnectWalletButton: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
