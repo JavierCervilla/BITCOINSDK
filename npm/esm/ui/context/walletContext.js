@@ -121,7 +121,16 @@ class WalletManager {
         }
     }
 }
-Object.defineProperty(dntShim.dntGlobalThis, "walletManagerInstance", new WalletManager());
+const walletManager = new WalletManager();
+try {
+    Object.defineProperty(dntShim.dntGlobalThis, "walletManagerInstance", {
+        get: () => walletManager,
+        set: () => { },
+    });
+}
+catch (e) {
+    console.warn("unable to register walletManagerInstance on window object");
+}
 function useWallet() {
     return globalThis.walletManagerInstance;
 }

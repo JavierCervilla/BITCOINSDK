@@ -103,7 +103,7 @@ class WalletManager implements WalletManagerInterface {
 			console.log("walletProvider:", this.walletProvider);
 			console.log("walletAddress:", this.walletAddress);
 			console.log("Connected:", this.connected);
-	
+
 			if (!this.walletProvider) {
 				console.error("❌ Wallet provider is not defined (signPSBT)");
 				return null;
@@ -118,7 +118,7 @@ class WalletManager implements WalletManagerInterface {
 			console.error("❌ Error signing PSBT:", error);
 			return null;
 		}
-	}	
+	}
 
 	async pushTX(txHex: string): Promise<string | null> {
 		try {
@@ -140,10 +140,18 @@ class WalletManager implements WalletManagerInterface {
 	}
 }
 
-Object.defineProperty(dntShim.dntGlobalThis, "walletManagerInstance", new WalletManager());
+const walletManager = new WalletManager();
+try {
+	Object.defineProperty(dntShim.dntGlobalThis, "walletManagerInstance", {
+		get: () => walletManager,
+		set: () => { },
+	});
+} catch (e) {
+	console.warn("unable to register walletManagerInstance on window object");
+}
 
 function useWallet(): WalletManager {
-    return globalThis.walletManagerInstance!;
+	return globalThis.walletManagerInstance!;
 }
 
 

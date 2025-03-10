@@ -102,11 +102,17 @@ class WalletManager implements WalletManagerInterface {
 			console.log("walletProvider:", this.walletProvider);
 			console.log("walletAddress:", this.walletAddress);
 			console.log("Connected:", this.connected);
-
+	
 			if (!this.walletProvider) {
-				console.error("❌ Wallet provider is not defined (signPSBT)");
+				console.warn("⚠️ `walletProvider` es undefined en `signPSBT()`, intentando obtenerlo...");
+				this.walletProvider = globalThis.walletManagerInstance?.walletProvider ?? null;
+			}
+	
+			if (!this.walletProvider) {
+				console.error("❌ `walletProvider` sigue siendo undefined (signPSBT)");
 				return null;
 			}
+	
 			const config = walletConfig[this.walletProvider as keyof WalletConfig];
 			if (!config) {
 				console.error("❌ Wallet configuration not found for provider:", this.walletProvider);
@@ -118,6 +124,7 @@ class WalletManager implements WalletManagerInterface {
 			return null;
 		}
 	}
+	
 
 	async pushTX(txHex: string): Promise<string | null> {
 		try {
@@ -150,8 +157,13 @@ try {
 }
 
 function useWallet(): WalletManager {
-	return globalThis.walletManagerInstance!;
+    if (!globalThis.walletManagerInstance) {
+        console.warn("⚠️ walletManagerInstance no existe en globalThis, creándolo ahora...");
+        globalThis.walletManagerInstance = new WalletManager();
+    }
+    return globalThis.walletManagerInstance;
 }
+
 
 
 
