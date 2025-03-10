@@ -134,11 +134,18 @@ class WalletManager implements WalletManagerInterface {
 	}
 }
 
-const walletManagerInstance: WalletManager = new WalletManager();
+let walletManagerInstance: WalletManager | null = null;
 
 function useWallet(): WalletManager {
+    if (!walletManagerInstance) {
+        walletManagerInstance = new WalletManager();
+        console.log("🟢 WalletManager creado");
+    } else {
+        console.log("🔄 Reutilizando WalletManager existente");
+    }
     return walletManagerInstance;
 }
+
 
 
 export { WalletManager, useWallet };

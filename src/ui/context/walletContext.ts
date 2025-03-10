@@ -98,21 +98,26 @@ class WalletManager implements WalletManagerInterface {
 
 	async signPSBT(psbt: string, options: SignPSBTOptions = {}): Promise<string | null> {
 		try {
+			console.log("🔍 Checking WalletManager instance before signing");
+			console.log("walletProvider:", this.walletProvider);
+			console.log("walletAddress:", this.walletAddress);
+			console.log("Connected:", this.connected);
+	
 			if (!this.walletProvider) {
-				console.error("Wallet provider is not defined");
+				console.error("❌ Wallet provider is not defined (signPSBT)");
 				return null;
 			}
 			const config = walletConfig[this.walletProvider as keyof WalletConfig];
 			if (!config) {
-				console.error("Wallet configuration not found for provider:", this.walletProvider);
+				console.error("❌ Wallet configuration not found for provider:", this.walletProvider);
 				return null;
 			}
 			return await config.signPSBT(psbt, options);
 		} catch (error) {
-			console.error("Error signing PSBT:", error);
+			console.error("❌ Error signing PSBT:", error);
 			return null;
 		}
-	}
+	}	
 
 	async pushTX(txHex: string): Promise<string | null> {
 		try {
