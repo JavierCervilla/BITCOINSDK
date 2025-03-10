@@ -120,11 +120,8 @@ class WalletManager {
     }
 }
 exports.WalletManager = WalletManager;
-let walletManagerInstance = null;
+const walletManagerInstance = new WalletManager();
 function useWallet() {
-    if (!walletManagerInstance) {
-        walletManagerInstance = new WalletManager();
-    }
     return walletManagerInstance;
 }
 exports.useWallet = useWallet;

@@ -27,7 +27,8 @@ class ConnectWalletButton extends globalThis.HTMLElement {
         if (!Object.keys(this.wallets).length) {
             return;
         }
-        const { walletAddress, connected } = useWallet();
+        const walletManager = useWallet();
+        const { walletAddress, connected } = walletManager;
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = "";
         }
@@ -46,7 +47,6 @@ class ConnectWalletButton extends globalThis.HTMLElement {
                 item.className = "wallet-dropdown-item";
                 item.innerHTML = `<img src="${icon || "/placeholder.svg"}" class="wallet-item-icon"/> <span>${label}</span>`;
                 item.onclick = async () => {
-                    const walletManager = useWallet();
                     await walletManager.connectWallet(key);
                     this.render();
                 };
@@ -65,7 +65,6 @@ class ConnectWalletButton extends globalThis.HTMLElement {
             logoutButton.className = "wallet-logout-button";
             logoutButton.innerHTML = `<img src=${logoutImg} class="logout-icon"/>`;
             logoutButton.onclick = () => {
-                const walletManager = useWallet();
                 walletManager.disconnectWallet();
                 this.render();
             };

@@ -116,11 +116,8 @@ class WalletManager {
         }
     }
 }
-let walletManagerInstance = null;
+const walletManagerInstance = new WalletManager();
 function useWallet() {
-    if (!walletManagerInstance) {
-        walletManagerInstance = new WalletManager();
-    }
     return walletManagerInstance;
 }
 export { WalletManager, useWallet };
