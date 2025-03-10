@@ -1,5 +1,5 @@
-import type { WalletConfig } from "../providers/index.ts";
-import { walletConfig } from "../providers/index.ts";
+import type { WalletConfig } from "../providers/index.js";
+import { walletConfig } from "../providers/index.js";
 
 export interface InputToSign {
 	index: number;
@@ -139,22 +139,18 @@ class WalletManager implements WalletManagerInterface {
 	}
 }
 
-declare global {
-    interface GlobalThis {
-        walletManagerInstance?: WalletManager;
-    }
-}
-
-if (!globalThis.walletManagerInstance) {
-    console.log("🆕 Creando instancia global de WalletManager");
-    globalThis.walletManagerInstance = new WalletManager();
-} else {
-    console.log("✅ Usando instancia global de WalletManager");
-}
+let walletManagerInstance: WalletManager | null = null;
 
 function useWallet(): WalletManager {
-    return globalThis.walletManagerInstance!;
+    if (!walletManagerInstance) {
+        walletManagerInstance = new WalletManager();
+        console.log("🟢 WalletManager creado");
+    } else {
+        console.log("🔄 Reutilizando WalletManager existente");
+    }
+    return walletManagerInstance;
 }
+
 
 
 export { WalletManager, useWallet };
