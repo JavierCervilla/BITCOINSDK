@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import "./connectWallet.styles.css?inline";
-
 
 const ConnectWalletButton: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
