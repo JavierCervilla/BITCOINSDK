@@ -1,3 +1,4 @@
+import * as dntShim from "../../_dnt.shims.js";
 import type { WalletConfig } from "../providers/index.js";
 import { walletConfig } from "../providers/index.js";
 
@@ -139,17 +140,12 @@ class WalletManager implements WalletManagerInterface {
 	}
 }
 
-
-if (!globalThis.walletManagerInstance) {
-    console.log("🆕 Creando instancia global de WalletManager");
-    globalThis.walletManagerInstance = new WalletManager();
-} else {
-    console.log("✅ Usando instancia global de WalletManager");
-}
+Object.defineProperty(dntShim.dntGlobalThis, "walletManagerInstance", new WalletManager());
 
 function useWallet(): WalletManager {
     return globalThis.walletManagerInstance!;
 }
+
 
 
 export { WalletManager, useWallet };
