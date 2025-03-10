@@ -1,3 +1,5 @@
+/// <reference lib="dom" />
+
 import { type WalletConfig, walletConfig } from "../../providers/index.ts";
 import { useWallet } from "../../context/walletContext.ts";
 
@@ -8,11 +10,7 @@ function shortenAddress(address: string): string {
     return `${address.slice(0, 6)}...${address.slice(-6)}`;
 }
 
-declare global {
-    interface HTMLElement { }
-}
-
-class ConnectWalletButton extends HTMLElement {
+class ConnectWalletButton extends globalThis.HTMLElement {
     private readonly wallets: WalletConfig = walletConfig;
 
     constructor() {
