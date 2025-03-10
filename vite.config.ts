@@ -1,20 +1,22 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import dts from "vite-plugin-dts";
-import path from 'node:path';
+import path from "node:path";
 
-export default defineConfig(({ mode: _mode }) => {
-  return {
-    plugins: [react(), tailwindcss(), dts({ insertTypesEntry: true })],
-    css: {
-      postcss: "./postcss.config.js",
-    },
-    resolve: {
-      alias: {
-        "@": path.resolve(__dirname, "./src"),
-        "@styles": path.resolve(__dirname, "./styles"),
+export default defineConfig({
+  root: "src/ui", // Establece el directorio raíz en `src/ui`
+  publicDir: "public", // Permite acceso a archivos en `public/`
+  build: {
+    outDir: "../../dist", // Carpeta donde se generará la compilación
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"), // Página principal
+        connectWalletTest: path.resolve(__dirname, "components/ConnectWallet/connectWallet.test.html"), // Página de prueba
       },
     },
-  };
+  },
+  server: {
+    watch: {
+      usePolling: true,
+    },
+    open: "/components/ConnectWallet/connectWallet.test.html", // Abre la página de prueba al iniciar Vite
+  },
 });
