@@ -14,11 +14,18 @@ class ConnectWalletButton extends globalThis.HTMLElement {
             writable: true,
             value: walletConfig
         });
+        Object.defineProperty(this, "walletManager", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         this.attachShadow({ mode: "open" });
         const styleElement = document.createElement("style");
         styleElement.textContent = styles;
         if (this.shadowRoot)
             this.shadowRoot.appendChild(styleElement);
+        this.walletManager = useWallet();
     }
     connectedCallback() {
         this.render();
@@ -27,7 +34,7 @@ class ConnectWalletButton extends globalThis.HTMLElement {
         if (!Object.keys(this.wallets).length) {
             return;
         }
-        const walletManager = useWallet();
+        const walletManager = this.walletManager;
         const { walletAddress, connected } = walletManager;
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = "";

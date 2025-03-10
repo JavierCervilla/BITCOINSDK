@@ -120,15 +120,14 @@ class WalletManager {
         }
     }
 }
-let walletManagerInstance = null;
+if (!globalThis.walletManagerInstance) {
+    console.log("🆕 Creando instancia global de WalletManager");
+    globalThis.walletManagerInstance = new WalletManager();
+}
+else {
+    console.log("✅ Usando instancia global de WalletManager");
+}
 function useWallet() {
-    if (!walletManagerInstance) {
-        walletManagerInstance = new WalletManager();
-        console.log("🟢 WalletManager creado");
-    }
-    else {
-        console.log("🔄 Reutilizando WalletManager existente");
-    }
-    return walletManagerInstance;
+    return globalThis.walletManagerInstance;
 }
 export { WalletManager, useWallet };

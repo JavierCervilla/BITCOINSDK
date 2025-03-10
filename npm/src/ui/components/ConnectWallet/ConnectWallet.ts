@@ -1,5 +1,5 @@
 import { type WalletConfig, walletConfig } from "../../providers/index.js";
-import { useWallet } from "../../context/walletContext.js";
+import { useWallet, type WalletManagerInterface } from "../../context/walletContext.js";
 
 import { styles } from "./ConnectWallet.styles.js";
 import { walletImg, logoutImg } from "../../../assets/index.js";
@@ -10,6 +10,7 @@ function shortenAddress(address: string): string {
 
 class ConnectWalletButton extends globalThis.HTMLElement {
     private readonly wallets: WalletConfig = walletConfig;
+    walletManager: WalletManagerInterface
 
     constructor() {
         super();
@@ -18,6 +19,7 @@ class ConnectWalletButton extends globalThis.HTMLElement {
         styleElement.textContent = styles;
         if (this.shadowRoot)
             this.shadowRoot.appendChild(styleElement);
+        this.walletManager = useWallet();
     }
 
     connectedCallback() {
@@ -29,7 +31,7 @@ class ConnectWalletButton extends globalThis.HTMLElement {
             return;
         }
 
-        const walletManager = useWallet();
+        const walletManager = this.walletManager;
         const { walletAddress, connected } = walletManager;
 
         if (this.shadowRoot) {
