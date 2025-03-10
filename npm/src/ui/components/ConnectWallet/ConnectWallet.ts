@@ -1,15 +1,11 @@
-import { type WalletConfig, walletConfig } from "../../providers/index.ts";
-import { useWallet } from "../../context/walletContext.ts";
+import { type WalletConfig, walletConfig } from "../../providers/index.js";
+import { useWallet } from "../../context/walletContext.js";
 
-import { styles } from "./ConnectWallet.styles.ts";
-import { walletImg, logoutImg } from "../../../assets/index.ts";
+import { styles } from "./ConnectWallet.styles.js";
+import { walletImg, logoutImg } from "../../../assets/index.js";
 
 function shortenAddress(address: string): string {
     return `${address.slice(0, 6)}...${address.slice(-6)}`;
-}
-
-declare global {
-    interface HTMLElement { }
 }
 
 class ConnectWalletButton extends HTMLElement {
