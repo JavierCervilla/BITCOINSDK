@@ -1,8 +1,8 @@
 import { bitcoinsdk } from "../../core/index.ts";
+import type LeatherProvider from "@leather-wallet/types"
 
-import LeatherProvider from "@leather-wallet/types"
-import type { ConnectWalletReturn } from "../index.ts";
-import type { SignPSBTOptions } from "../context/walletContext.tsx";
+import type { SignPSBTOptions } from "../context/walletContext.ts";
+import type { ConnectWalletReturn } from "./index.ts";
 
 
 

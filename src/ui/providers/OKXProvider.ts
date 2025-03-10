@@ -1,7 +1,7 @@
 import { bitcoinsdk } from "../../core/index.ts";
 
-import type { ConnectWalletReturn } from "../../ui/index.ts";
-import type { SignPSBTOptions } from "../../ui/context/walletContext.tsx";
+import type { SignPSBTOptions } from "../context/walletContext.ts";
+import type { ConnectWalletReturn } from "./index.ts";
 
 export const connectWallet = async (): Promise<ConnectWalletReturn | null> => {
   const okxwallet = (globalThis as GlobalThis).okxwallet;

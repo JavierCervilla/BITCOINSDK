@@ -44,4 +44,9 @@ export const walletConfig = {
     },
 };
 
+export interface ConnectWalletReturn {
+    address: string;
+    publicKey: string;
+}
+
 export type WalletConfig = typeof walletConfig;
