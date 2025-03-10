@@ -1,3 +1,4 @@
+export const styles = `
 :host {
     --wallet-button-bg: #fefefe;
     --wallet-button-text: #000;
@@ -131,3 +132,4 @@
     width: 24px;
     height: 24px;
 }
+`;

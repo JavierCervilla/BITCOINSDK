@@ -1,7 +1,7 @@
 import { type WalletConfig, walletConfig } from "../../providers/index.ts";
 import { useWallet } from "../../context/walletContext.ts";
 
-import styles from "./connectWallet.styles.css?inline"; // 🔹 Importamos los estilos como string
+import { styles } from "./ConnectWallet.styles.ts";
 import { walletImg, logoutImg } from "../../../assets/index.ts";
 
 function shortenAddress(address: string): string {
@@ -25,11 +25,11 @@ class ConnectWalletButton extends HTMLElement {
     }
 
     private render() {
-        if (!Object.keys(this.wallets).length) {    
+        if (!Object.keys(this.wallets).length) {
             return;
         }
 
-        const { walletAddress, connected} = useWallet();
+        const { walletAddress, connected } = useWallet();
 
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = "";

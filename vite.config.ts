@@ -9,7 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, "index.html"), // Página principal
-        connectWalletTest: path.resolve(__dirname, "components/ConnectWallet/connectWallet.test.html"), // Página de prueba
+        connectWalletTest: path.resolve(__dirname, "components/ConnectWallet/ConnectWallet.test.html"), // Página de prueba
       },
     },
   },
@@ -17,6 +17,6 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
-    open: "/components/ConnectWallet/connectWallet.test.html", // Abre la página de prueba al iniciar Vite
+    open: "/components/ConnectWallet/ConnectWallet.test.html", // Abre la página de prueba al iniciar Vite
   },
 });
