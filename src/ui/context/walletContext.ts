@@ -139,11 +139,6 @@ class WalletManager implements WalletManagerInterface {
 	}
 }
 
-declare global {
-    interface GlobalThis {
-        walletManagerInstance?: WalletManager;
-    }
-}
 
 if (!globalThis.walletManagerInstance) {
     console.log("🆕 Creando instancia global de WalletManager");
