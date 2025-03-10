@@ -1,5 +1,5 @@
-import { WalletManager, getWalletManagerInstance, useWallet } from './context/walletContext.tsx';
+import { WalletManager, useWallet } from './context/walletContext.ts';
 import { default as ConnectWalletButtonReact } from './components/ConnectWallet/ConnectWallet.react.tsx';
 import { walletConfig } from './providers/index.ts';
 
-export { WalletManager, getWalletManagerInstance, useWallet, ConnectWalletButtonReact, walletConfig };
+export { WalletManager, useWallet, ConnectWalletButtonReact, walletConfig };
