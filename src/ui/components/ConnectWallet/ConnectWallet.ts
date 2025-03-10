@@ -1,5 +1,3 @@
-/// <reference lib="dom" />
-
 import { type WalletConfig, walletConfig } from "../../providers/index.ts";
 import { useWallet } from "../../context/walletContext.ts";
 
