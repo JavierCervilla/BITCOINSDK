@@ -5,7 +5,7 @@ import { walletImg, logoutImg } from "../../../assets/index.js";
 function shortenAddress(address) {
     return `${address.slice(0, 6)}...${address.slice(-6)}`;
 }
-class ConnectWalletButton extends HTMLElement {
+class ConnectWalletButton extends globalThis.HTMLElement {
     constructor() {
         super();
         Object.defineProperty(this, "wallets", {
