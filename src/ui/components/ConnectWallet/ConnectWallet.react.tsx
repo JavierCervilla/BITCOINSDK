@@ -1,5 +1,5 @@
 import  React, { useEffect, useRef } from "react";
-import { useWallet } from "../../context/walletInstance.ts";
+import { useWallet } from "../../context/walletContext.ts";
 
 
 const ConnectWalletButton: React.FC = () => {
