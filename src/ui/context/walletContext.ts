@@ -33,6 +33,10 @@ export class WalletManager implements WalletManagerInterface {
 
 	constructor() {
 		this.connectWalletFromLocalStorage();
+
+		this.signPSBT = this.signPSBT.bind(this);
+		this.signMessage = this.signMessage.bind(this);
+		this.pushTX = this.pushTX.bind(this);
 	}
 
 	private connectWalletFromLocalStorage(): void {
@@ -99,9 +103,6 @@ export class WalletManager implements WalletManagerInterface {
 	}
 
 	async signPSBT(psbt: string, options: SignPSBTOptions = {}): Promise<string | null> {
-		console.error("🔴 WalletContext:")
-		console.error("this.walletProvider", this.walletProvider);
-		console.error("walletConfig", walletConfig);
 		try {
 			if (!this.walletProvider) {
 				console.error("Wallet provider is not defined");
