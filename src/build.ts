@@ -28,7 +28,7 @@ async function main() {
         shims: { deno: false },
         package: {
             name: "bitcoinsdk",
-            version: "0.2.45",
+            version: "0.2.46",
             description: "Bitcoin SDK to integrate Bitcoin wallets to your app and get access to The OpenBook Protocol in your project",
             license: "MIT",
             repository: {
@@ -90,11 +90,31 @@ async function main() {
         typeCheck: false,
         declaration: 'inline',
         test: false,
-        postBuild: () => {
+        postBuild: async () => {
             Deno.copyFileSync("LICENSE", "npm/LICENSE");
             Deno.copyFileSync("README.md", "npm/README.md");
+            await Deno.writeTextFile("npm/package.json", JSON.stringify({
+                ...JSON.parse(await Deno.readTextFile("npm/package.json")),
+                "scripts": {
+                    "postinstall": "node patch-wallet.js"
+                }
+            }, null, 2));
         }
     });
+
+    Deno.writeTextFileSync(
+        "npm/patch-wallet.js",
+        `
+            console.log("🔍 Ejecutando postinstall para inyectar WalletManager en globalThis...");
+    
+            if (!globalThis.__WALLET_MANAGER_INSTANCE__) {
+                const { useWallet } = require("./cjs/ui/context/walletContext.js");
+                globalThis.__WALLET_MANAGER_INSTANCE__ = useWallet();
+                console.log("🟢 WalletManager inyectado en globalThis después de build");
+            }
+        `
+    );
+    
 
     console.log("✅ Build completado. Ahora puedes publicar en NPM.");
 }
