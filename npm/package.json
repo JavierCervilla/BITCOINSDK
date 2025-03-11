@@ -1,6 +1,6 @@
 {
   "name": "bitcoinsdk",
-  "version": "0.2.47",
+  "version": "0.2.48",
   "description": "Bitcoin SDK to integrate Bitcoin wallets to your app and get access to The OpenBook Protocol in your project",
   "repository": {
     "type": "git",
@@ -51,7 +51,8 @@
     "react-window": "^1.8.11",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^4.0.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^5.0.3"
   },
   "peerDependencies": {
     "react": "^19.0.0",
