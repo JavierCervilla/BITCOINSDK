@@ -78,7 +78,8 @@ async function main() {
                 "react-window": "^1.8.11",
                 "tailwind-merge": "^2.6.0",
                 "tailwindcss": "^4.0.0",
-                "tailwindcss-animate": "^1.0.7"
+                "tailwindcss-animate": "^1.0.7",
+                "zustand": "^5.0.3"
             },
             peerDependencies: {
                 "react": "^19.0.0",
