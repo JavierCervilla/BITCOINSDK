@@ -1,5 +1,6 @@
 import { type WalletConfig, walletConfig } from "../../providers/index.ts";
-import { useWallet, type WalletManagerInterface } from "../../context/walletContext.ts";
+import type { WalletManagerInterface } from "../../context/walletContext.ts";
+import { useWallet } from "../../context/walletInstance.ts";
 
 import { styles } from "./ConnectWallet.styles.ts";
 import { walletImg, logoutImg } from "../../../assets/index.ts";
