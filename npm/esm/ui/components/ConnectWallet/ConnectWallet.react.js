@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { useWallet } from "../../context/walletInstance.js";
+import { useWallet } from "../../context/walletContext.js";
 const ConnectWalletButton = () => {
     const containerRef = useRef(null);
-    const wallet = useWallet(); // 🚀 Obtiene la instancia única de WalletManager
+    const wallet = useWallet(); // 🚀 Accede a la instancia global
     useEffect(() => {
         if (wallet && containerRef.current) {
             console.log("🟢 React: Montando el Web Component connect-wallet-button");
@@ -12,6 +12,11 @@ const ConnectWalletButton = () => {
                 containerRef.current.appendChild(webComponent);
             }
         }
+        const updateUI = () => containerRef.current?.firstChild?.remove();
+        document.addEventListener("wallet-updated", updateUI);
+        return () => {
+            document.removeEventListener("wallet-updated", updateUI);
+        };
     }, [wallet]);
     return React.createElement("div", { ref: containerRef });
 };

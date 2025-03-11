@@ -57,6 +57,7 @@ export class WalletManager {
                 localStorage.setItem("activeProvider", providerKey);
             }
         }
+        document.dispatchEvent(new CustomEvent("wallet-updated"));
     }
     disconnectWallet() {
         this.walletAddress = null;
@@ -70,6 +71,7 @@ export class WalletManager {
             localStorage.setItem("wallets", JSON.stringify(parsedWallets));
         }
         localStorage.removeItem("activeProvider");
+        document.dispatchEvent(new CustomEvent("wallet-updated"));
     }
     async signMessage(message) {
         if (!this.walletProvider) {
@@ -115,4 +117,8 @@ export class WalletManager {
             return null;
         }
     }
+}
+globalThis.walletManagerInstance = globalThis.walletManagerInstance || new WalletManager();
+export function useWallet() {
+    return globalThis.walletManagerInstance;
 }

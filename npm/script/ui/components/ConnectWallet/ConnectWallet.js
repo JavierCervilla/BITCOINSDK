@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConnectWalletButton = void 0;
 const index_js_1 = require("../../providers/index.js");
-const walletInstance_js_1 = require("../../context/walletInstance.js");
+const walletContext_js_1 = require("../../context/walletContext.js");
 const ConnectWallet_styles_js_1 = require("./ConnectWallet.styles.js");
 const index_js_2 = require("../../../assets/index.js");
 function shortenAddress(address) {
@@ -28,10 +28,11 @@ class ConnectWalletButton extends globalThis.HTMLElement {
         styleElement.textContent = ConnectWallet_styles_js_1.styles;
         if (this.shadowRoot)
             this.shadowRoot.appendChild(styleElement);
-        this.walletManager = (0, walletInstance_js_1.useWallet)();
+        this.walletManager = (0, walletContext_js_1.useWallet)();
     }
     connectedCallback() {
         this.render();
+        document.addEventListener("wallet-updated", () => this.render());
     }
     render() {
         if (!Object.keys(this.wallets).length) {

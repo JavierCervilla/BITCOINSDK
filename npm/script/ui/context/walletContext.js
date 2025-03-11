@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WalletManager = void 0;
+exports.useWallet = exports.WalletManager = void 0;
 const index_js_1 = require("../providers/index.js");
 class WalletManager {
     constructor() {
@@ -60,6 +60,7 @@ class WalletManager {
                 localStorage.setItem("activeProvider", providerKey);
             }
         }
+        document.dispatchEvent(new CustomEvent("wallet-updated"));
     }
     disconnectWallet() {
         this.walletAddress = null;
@@ -73,6 +74,7 @@ class WalletManager {
             localStorage.setItem("wallets", JSON.stringify(parsedWallets));
         }
         localStorage.removeItem("activeProvider");
+        document.dispatchEvent(new CustomEvent("wallet-updated"));
     }
     async signMessage(message) {
         if (!this.walletProvider) {
@@ -120,3 +122,8 @@ class WalletManager {
     }
 }
 exports.WalletManager = WalletManager;
+globalThis.walletManagerInstance = globalThis.walletManagerInstance || new WalletManager();
+function useWallet() {
+    return globalThis.walletManagerInstance;
+}
+exports.useWallet = useWallet;

@@ -32,3 +32,4 @@ export declare class WalletManager implements WalletManagerInterface {
     signPSBT(psbt: string, options?: SignPSBTOptions): Promise<string | null>;
     pushTX(txHex: string): Promise<string | null>;
 }
+export declare function useWallet(): WalletManager;

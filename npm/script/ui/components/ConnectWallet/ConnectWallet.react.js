@@ -24,10 +24,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-const walletInstance_js_1 = require("../../context/walletInstance.js");
+const walletContext_js_1 = require("../../context/walletContext.js");
 const ConnectWalletButton = () => {
     const containerRef = (0, react_1.useRef)(null);
-    const wallet = (0, walletInstance_js_1.useWallet)(); // 🚀 Obtiene la instancia única de WalletManager
+    const wallet = (0, walletContext_js_1.useWallet)(); // 🚀 Accede a la instancia global
     (0, react_1.useEffect)(() => {
         if (wallet && containerRef.current) {
             console.log("🟢 React: Montando el Web Component connect-wallet-button");
@@ -37,6 +37,11 @@ const ConnectWalletButton = () => {
                 containerRef.current.appendChild(webComponent);
             }
         }
+        const updateUI = () => containerRef.current?.firstChild?.remove();
+        document.addEventListener("wallet-updated", updateUI);
+        return () => {
+            document.removeEventListener("wallet-updated", updateUI);
+        };
     }, [wallet]);
     return react_1.default.createElement("div", { ref: containerRef });
 };

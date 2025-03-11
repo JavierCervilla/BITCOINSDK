@@ -1,5 +1,5 @@
 import { walletConfig } from "../../providers/index.js";
-import { useWallet } from "../../context/walletInstance.js";
+import { useWallet } from "../../context/walletContext.js";
 import { styles } from "./ConnectWallet.styles.js";
 import { walletImg, logoutImg } from "../../../assets/index.js";
 function shortenAddress(address) {
@@ -29,6 +29,7 @@ class ConnectWalletButton extends globalThis.HTMLElement {
     }
     connectedCallback() {
         this.render();
+        document.addEventListener("wallet-updated", () => this.render());
     }
     render() {
         if (!Object.keys(this.wallets).length) {

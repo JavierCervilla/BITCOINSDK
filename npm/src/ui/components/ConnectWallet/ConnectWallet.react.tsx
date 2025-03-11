@@ -1,10 +1,10 @@
 import  React, { useEffect, useRef } from "react";
-import { useWallet } from "../../context/walletInstance.js";
+import { useWallet } from "../../context/walletContext.js";
 
 
 const ConnectWalletButton: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const wallet = useWallet(); // 🚀 Obtiene la instancia única de WalletManager
+    const wallet = useWallet(); // 🚀 Accede a la instancia global
 
     useEffect(() => {
         if (wallet && containerRef.current) {
@@ -16,6 +16,13 @@ const ConnectWalletButton: React.FC = () => {
                 containerRef.current.appendChild(webComponent);
             }
         }
+
+        const updateUI = () => containerRef.current?.firstChild?.remove();
+        document.addEventListener("wallet-updated", updateUI);
+
+        return () => {
+            document.removeEventListener("wallet-updated", updateUI);
+        };
     }, [wallet]);
 
     return <div ref={containerRef} />;

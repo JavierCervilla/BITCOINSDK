@@ -1,6 +1,6 @@
 import { type WalletConfig, walletConfig } from "../../providers/index.js";
 import type { WalletManagerInterface } from "../../context/walletContext.js";
-import { useWallet } from "../../context/walletInstance.js";
+import { useWallet } from "../../context/walletContext.js";
 
 import { styles } from "./ConnectWallet.styles.js";
 import { walletImg, logoutImg } from "../../../assets/index.js";
@@ -25,6 +25,7 @@ class ConnectWalletButton extends globalThis.HTMLElement {
 
     connectedCallback() {
         this.render();
+        document.addEventListener("wallet-updated", () => this.render());
     }
 
     private render() {
