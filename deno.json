@@ -1,7 +1,7 @@
 {
   "name": "@universelle/bitcoinsdk",
   "description": "A Deno SDK for bitcoin and other bitcoin protocols as Counterparty",
-  "version": "0.2.51",
+  "version": "0.2.52",
   "license": "MIT",
   "exports": {
     ".": "./src/mod.ts",
