@@ -25,7 +25,9 @@ export interface WalletManagerInterface {
 	pushTX?: (txHex: string) => Promise<string | null>;
 }
 
-export class WalletManager implements WalletManagerInterface {
+const globalWalletKey = "__WALLET_MANAGER_INSTANCE__";
+
+class WalletManager implements WalletManagerInterface {
 	walletAddress: string | null = null;
 	publicKey: string | null = null;
 	connected = false;
@@ -140,8 +142,12 @@ export class WalletManager implements WalletManagerInterface {
 	}
 }
 
-const walletManagerInstance = new WalletManager();
-
-export function useWallet(): WalletManager {
-	return walletManagerInstance;
+if (!(globalThis)[globalWalletKey]) {
+	(globalThis)[globalWalletKey] = new WalletManager();
 }
+
+function useWallet(): WalletManager {
+	return (globalThis)[globalWalletKey] as WalletManager;
+}
+
+export { WalletManager, useWallet };
