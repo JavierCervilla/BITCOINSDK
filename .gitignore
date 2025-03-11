@@ -6,3 +6,4 @@ scripts/imports.ts
 .vite
 .cache
 npm/node_modules
+npm

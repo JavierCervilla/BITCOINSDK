@@ -25,7 +25,7 @@ export interface WalletManagerInterface {
 	pushTX?: (txHex: string) => Promise<string | null>;
 }
 
-class WalletManager implements WalletManagerInterface {
+export class WalletManager implements WalletManagerInterface {
 	walletAddress: string | null = null;
 	publicKey: string | null = null;
 	connected = false;
@@ -98,33 +98,21 @@ class WalletManager implements WalletManagerInterface {
 
 	async signPSBT(psbt: string, options: SignPSBTOptions = {}): Promise<string | null> {
 		try {
-			console.log("🔍 Checking WalletManager instance before signing");
-			console.log("walletProvider:", this.walletProvider);
-			console.log("walletAddress:", this.walletAddress);
-			console.log("Connected:", this.connected);
-	
 			if (!this.walletProvider) {
-				console.warn("⚠️ `walletProvider` es undefined en `signPSBT()`, intentando obtenerlo...");
-				this.walletProvider = globalThis.walletManagerInstance?.walletProvider ?? null;
-			}
-	
-			if (!this.walletProvider) {
-				console.error("❌ `walletProvider` sigue siendo undefined (signPSBT)");
+				console.error("Wallet provider is not defined");
 				return null;
 			}
-	
 			const config = walletConfig[this.walletProvider as keyof WalletConfig];
 			if (!config) {
-				console.error("❌ Wallet configuration not found for provider:", this.walletProvider);
+				console.error("Wallet configuration not found for provider:", this.walletProvider);
 				return null;
 			}
 			return await config.signPSBT(psbt, options);
 		} catch (error) {
-			console.error("❌ Error signing PSBT:", error);
+			console.error("Error signing PSBT:", error);
 			return null;
 		}
 	}
-	
 
 	async pushTX(txHex: string): Promise<string | null> {
 		try {
@@ -145,26 +133,3 @@ class WalletManager implements WalletManagerInterface {
 		}
 	}
 }
-
-const walletManager = new WalletManager();
-try {
-	Object.defineProperty(window, "walletManagerInstance", {
-		get: () => walletManager,
-		set: () => { },
-	});
-} catch (e) {
-	console.warn("unable to register walletManagerInstance on window object");
-}
-
-function useWallet(): WalletManager {
-    if (!globalThis.walletManagerInstance) {
-        console.warn("⚠️ walletManagerInstance no existe en globalThis, creándolo ahora...");
-        globalThis.walletManagerInstance = new WalletManager();
-    }
-    return globalThis.walletManagerInstance;
-}
-
-
-
-
-export { WalletManager, useWallet };

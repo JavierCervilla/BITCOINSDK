@@ -86,7 +86,11 @@ class WalletManager {
             console.log("walletAddress:", this.walletAddress);
             console.log("Connected:", this.connected);
             if (!this.walletProvider) {
-                console.error("❌ Wallet provider is not defined (signPSBT)");
+                console.warn("⚠️ `walletProvider` es undefined en `signPSBT()`, intentando obtenerlo...");
+                this.walletProvider = globalThis.walletManagerInstance?.walletProvider ?? null;
+            }
+            if (!this.walletProvider) {
+                console.error("❌ `walletProvider` sigue siendo undefined (signPSBT)");
                 return null;
             }
             const config = walletConfig[this.walletProvider];
@@ -132,6 +136,10 @@ catch (e) {
     console.warn("unable to register walletManagerInstance on window object");
 }
 function useWallet() {
+    if (!globalThis.walletManagerInstance) {
+        console.warn("⚠️ walletManagerInstance no existe en globalThis, creándolo ahora...");
+        globalThis.walletManagerInstance = new WalletManager();
+    }
     return globalThis.walletManagerInstance;
 }
 export { WalletManager, useWallet };
