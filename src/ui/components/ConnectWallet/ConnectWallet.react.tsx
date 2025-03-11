@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import { useWallet } from "./context/walletInstance.ts";
+import  React, { useEffect, useRef } from "react";
+import { useWallet } from "../../context/walletInstance.ts";
+
 
 const ConnectWalletButton: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
