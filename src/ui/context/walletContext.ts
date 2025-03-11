@@ -70,6 +70,7 @@ export class WalletManager implements WalletManagerInterface {
 				localStorage.setItem("activeProvider", providerKey);
 			}
 		}
+		document.dispatchEvent(new CustomEvent("wallet-updated"));
 	}
 
 	disconnectWallet(): void {
@@ -86,6 +87,7 @@ export class WalletManager implements WalletManagerInterface {
 			localStorage.setItem("wallets", JSON.stringify(parsedWallets));
 		}
 		localStorage.removeItem("activeProvider");
+		document.dispatchEvent(new CustomEvent("wallet-updated"));
 	}
 
 	async signMessage(message: string): Promise<string | null> {
@@ -132,4 +134,10 @@ export class WalletManager implements WalletManagerInterface {
 			return null;
 		}
 	}
+}
+
+globalThis.walletManagerInstance = globalThis.walletManagerInstance || new WalletManager();
+
+export function useWallet(): WalletManager {
+	return globalThis.walletManagerInstance;
 }

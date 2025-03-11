@@ -25,6 +25,7 @@ class ConnectWalletButton extends globalThis.HTMLElement {
 
     connectedCallback() {
         this.render();
+        document.addEventListener("wallet-updated", () => this.render());
     }
 
     private render() {

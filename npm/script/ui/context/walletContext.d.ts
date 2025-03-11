@@ -19,7 +19,7 @@ export interface WalletManagerInterface {
     signMessage: (message: string) => Promise<string | null>;
     pushTX?: (txHex: string) => Promise<string | null>;
 }
-declare class WalletManager implements WalletManagerInterface {
+export declare class WalletManager implements WalletManagerInterface {
     walletAddress: string | null;
     publicKey: string | null;
     connected: boolean;
@@ -32,5 +32,3 @@ declare class WalletManager implements WalletManagerInterface {
     signPSBT(psbt: string, options?: SignPSBTOptions): Promise<string | null>;
     pushTX(txHex: string): Promise<string | null>;
 }
-declare function useWallet(): WalletManager;
-export { WalletManager, useWallet };

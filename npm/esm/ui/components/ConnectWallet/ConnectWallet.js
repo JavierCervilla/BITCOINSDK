@@ -1,5 +1,5 @@
 import { walletConfig } from "../../providers/index.js";
-import { useWallet } from "../../context/walletContext.js";
+import { useWallet } from "../../context/walletInstance.js";
 import { styles } from "./ConnectWallet.styles.js";
 import { walletImg, logoutImg } from "../../../assets/index.js";
 function shortenAddress(address) {
