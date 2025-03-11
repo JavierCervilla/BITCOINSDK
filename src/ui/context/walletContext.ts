@@ -56,7 +56,7 @@ export class WalletManager implements WalletManagerInterface {
 		}
 	}
 
-	async connectWallet(providerKey: string): Promise<void> {
+	connectWallet = async (providerKey: string): Promise<void> => {
 		const config = walletConfig[providerKey as keyof typeof walletConfig];
 
 		if (config) {
@@ -77,7 +77,7 @@ export class WalletManager implements WalletManagerInterface {
 		document.dispatchEvent(new CustomEvent("wallet-updated"));
 	}
 
-	disconnectWallet(): void {
+	disconnectWallet = (): void => {
 		this.walletAddress = null;
 		this.connected = false;
 		this.walletProvider = null;
@@ -94,7 +94,7 @@ export class WalletManager implements WalletManagerInterface {
 		document.dispatchEvent(new CustomEvent("wallet-updated"));
 	}
 
-	async signMessage(message: string): Promise<string | null> {
+	signMessage = async (message: string): Promise<string | null> => {
 		if (!this.walletProvider) {
 			console.error("Wallet provider is not defined");
 			return null;
@@ -102,7 +102,7 @@ export class WalletManager implements WalletManagerInterface {
 		return await walletConfig[this.walletProvider as keyof WalletConfig].signMessage(message);
 	}
 
-	async signPSBT(psbt: string, options: SignPSBTOptions = {}): Promise<string | null> {
+	signPSBT = async (psbt: string, options: SignPSBTOptions = {}): Promise<string | null> => {
 		try {
 			if (!this.walletProvider) {
 				console.error("Wallet provider is not defined");
@@ -120,7 +120,7 @@ export class WalletManager implements WalletManagerInterface {
 		}
 	}
 
-	async pushTX(txHex: string): Promise<string | null> {
+	pushTX = async (txHex: string): Promise<string | null> => {
 		try {
 			if (!this.walletProvider) {
 				console.error("Wallet provider is not defined");
@@ -140,8 +140,8 @@ export class WalletManager implements WalletManagerInterface {
 	}
 }
 
-globalThis.walletManagerInstance = globalThis.walletManagerInstance || new WalletManager();
+const walletManagerInstance = new WalletManager();
 
 export function useWallet(): WalletManager {
-	return globalThis.walletManagerInstance;
+	return walletManagerInstance;
 }
