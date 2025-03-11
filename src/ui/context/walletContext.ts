@@ -1,153 +1,134 @@
+import { create } from "zustand";
 import type { WalletConfig } from "../providers/index.ts";
 import { walletConfig } from "../providers/index.ts";
 
 export interface InputToSign {
-	index: number;
-	address: string;
-	sighashTypes: number[];
+    index: number;
+    address: string;
+    sighashTypes: number[];
 }
 
 export interface SignPSBTOptions {
-	broadcast?: boolean;
-	autoFinalized?: boolean;
-	inputsToSign?: InputToSign[];
+    broadcast?: boolean;
+    autoFinalized?: boolean;
+    inputsToSign?: InputToSign[];
 }
 
 export interface WalletManagerInterface {
-	walletAddress: string | null;
-	publicKey: string | null;
-	connected: boolean;
-	walletProvider: string | null;
-	connectWallet: (providerKey: string) => Promise<void>;
-	disconnectWallet: () => void;
-	signPSBT: (psbt: string, options?: SignPSBTOptions) => Promise<string | null>;
-	signMessage: (message: string) => Promise<string | null>;
-	pushTX?: (txHex: string) => Promise<string | null>;
+    walletAddress: string | null;
+    publicKey: string | null;
+    connected: boolean;
+    walletProvider: string | null;
+    connectWallet: (providerKey: string) => Promise<void>;
+    disconnectWallet: () => void;
+    signPSBT: (psbt: string, options?: SignPSBTOptions) => Promise<string | null>;
+    signMessage: (message: string) => Promise<string | null>;
+    pushTX?: (txHex: string) => Promise<string | { result: string; } | null>;
 }
 
-const globalWalletKey = "__WALLET_MANAGER_INSTANCE__";
-
+// ✅ Mantiene la sintaxis de WalletManager pero con Zustand internamente
 class WalletManager implements WalletManagerInterface {
-	walletAddress: string | null = null;
-	publicKey: string | null = null;
-	connected = false;
-	walletProvider: string | null = null;
+    walletAddress: string | null = null;
+    publicKey: string | null = null;
+    connected = false;
+    walletProvider: string | null = null;
 
-	constructor() {
-		this.connectWalletFromLocalStorage();
+    constructor() {
+        this.connectWalletFromLocalStorage();
 
-		this.signPSBT = this.signPSBT.bind(this);
-		this.signMessage = this.signMessage.bind(this);
-		this.pushTX = this.pushTX.bind(this);
-	}
+        // 🔥 Enlazar métodos para evitar problemas de contexto
+        this.connectWallet = this.connectWallet.bind(this);
+        this.disconnectWallet = this.disconnectWallet.bind(this);
+        this.signPSBT = this.signPSBT.bind(this);
+        this.signMessage = this.signMessage.bind(this);
+        this.pushTX = this.pushTX.bind(this);
+    }
 
-	private connectWalletFromLocalStorage(): void {
-		const storedWallets = localStorage.getItem("wallets");
-		const activeProvider = localStorage.getItem("activeProvider");
+    private connectWalletFromLocalStorage(): void {
+        const storedWallets = localStorage.getItem("wallets");
+        const activeProvider = localStorage.getItem("activeProvider");
 
-		if (storedWallets && activeProvider) {
-			const parsedWallets = JSON.parse(storedWallets);
-			const providerData = parsedWallets[activeProvider as keyof typeof walletConfig];
+        if (storedWallets && activeProvider) {
+            const parsedWallets = JSON.parse(storedWallets);
+            const providerData = parsedWallets[activeProvider as keyof typeof walletConfig];
 
-			if (providerData && walletConfig[activeProvider as keyof typeof walletConfig]) {
-				this.walletProvider = walletConfig[activeProvider as keyof typeof walletConfig].label;
-				this.walletAddress = providerData.address;
-				this.publicKey = providerData.publicKey;
-				this.connected = true;
-			}
-		}
-	}
+            if (providerData && walletConfig[activeProvider as keyof typeof walletConfig]) {
+                useWalletStore.setState({
+                    walletProvider: walletConfig[activeProvider].label,
+                    walletAddress: providerData.address,
+                    publicKey: providerData.publicKey,
+                    connected: true,
+                });
+            }
+        }
+    }
 
-	connectWallet = async (providerKey: string): Promise<void> => {
-		const config = walletConfig[providerKey as keyof typeof walletConfig];
+    async connectWallet(providerKey: string): Promise<void> {
+        console.log("🔗 Conectando a la wallet:", providerKey);
+        const config = walletConfig[providerKey as keyof typeof walletConfig];
 
-		if (config) {
-			const { address, publicKey } = (await config.connect()) || {};
-			if (address && publicKey) {
-				this.walletProvider = config.label;
-				this.walletAddress = address;
-				this.publicKey = publicKey;
-				this.connected = true;
+        if (config) {
+            const { address, publicKey } = (await config.connect()) || {};
+            if (address && publicKey) {
+                useWalletStore.setState({
+                    walletProvider: config.label,
+                    walletAddress: address,
+                    publicKey: publicKey,
+                    connected: true,
+                });
 
-				const storedWallets = localStorage.getItem("wallets");
-				const parsedWallets = storedWallets ? JSON.parse(storedWallets) : {};
-				parsedWallets[providerKey] = { address, publicKey };
-				localStorage.setItem("wallets", JSON.stringify(parsedWallets));
-				localStorage.setItem("activeProvider", providerKey);
-			}
-		}
-		document.dispatchEvent(new CustomEvent("wallet-updated"));
-	}
+                localStorage.setItem("wallets", JSON.stringify({ [providerKey]: { address, publicKey } }));
+                localStorage.setItem("activeProvider", providerKey);
+                document.dispatchEvent(new CustomEvent("wallet-updated"));
+            }
+        }
+    }
 
-	disconnectWallet = (): void => {
-		this.walletAddress = null;
-		this.connected = false;
-		this.walletProvider = null;
+    disconnectWallet(): void {
+        useWalletStore.setState({
+            walletAddress: null,
+            publicKey: null,
+            connected: false,
+            walletProvider: null,
+        });
 
-		const storedWallets = localStorage.getItem("wallets");
-		const activeProvider = localStorage.getItem("activeProvider");
+        localStorage.removeItem("wallets");
+        localStorage.removeItem("activeProvider");
+        document.dispatchEvent(new CustomEvent("wallet-updated"));
+    }
 
-		if (storedWallets && activeProvider) {
-			const parsedWallets = JSON.parse(storedWallets);
-			delete parsedWallets[activeProvider];
-			localStorage.setItem("wallets", JSON.stringify(parsedWallets));
-		}
-		localStorage.removeItem("activeProvider");
-		document.dispatchEvent(new CustomEvent("wallet-updated"));
-	}
+    async signMessage(message: string): Promise<string | null> {
+        const { walletProvider } = useWalletStore.getState();
+        if (!walletProvider) {
+            console.error("❌ Wallet provider no definido en signMessage()");
+            return null;
+        }
+        return await walletConfig[walletProvider as keyof WalletConfig].signMessage(message);
+    }
 
-	signMessage = async (message: string): Promise<string | null> => {
-		if (!this.walletProvider) {
-			console.error("Wallet provider is not defined");
-			return null;
-		}
-		return await walletConfig[this.walletProvider as keyof WalletConfig].signMessage(message);
-	}
+    async signPSBT(psbt: string, options: SignPSBTOptions = {}): Promise<string | null> {
+        const { walletProvider } = useWalletStore.getState();
+        if (!walletProvider) {
+            console.error("❌ Wallet provider no definido en signPSBT()");
+            return null;
+        }
+        return await walletConfig[walletProvider as keyof WalletConfig].signPSBT(psbt, options);
+    }
 
-	signPSBT = async (psbt: string, options: SignPSBTOptions = {}): Promise<string | null> => {
-		try {
-			if (!this.walletProvider) {
-				console.error("Wallet provider is not defined");
-				return null;
-			}
-			const config = walletConfig[this.walletProvider as keyof WalletConfig];
-			if (!config) {
-				console.error("Wallet configuration not found for provider:", this.walletProvider);
-				return null;
-			}
-			return await config.signPSBT(psbt, options);
-		} catch (error) {
-			console.error("Error signing PSBT:", error);
-			return null;
-		}
-	}
-
-	pushTX = async (txHex: string): Promise<string | null> => {
-		try {
-			if (!this.walletProvider) {
-				console.error("Wallet provider is not defined");
-				return null;
-			}
-			const config = walletConfig[this.walletProvider as keyof WalletConfig];
-			if (!config) {
-				console.error("Wallet configuration not found for provider:", this.walletProvider);
-				return null;
-			}
-			const result = await config.pushTX(txHex);
-			return typeof result === 'string' ? result : result?.result || null;
-		} catch (error) {
-			console.error("Error pushing TX:", error);
-			return null;
-		}
-	}
+    async pushTX(txHex: string): Promise<string | { result: string; } | null> {
+        const { walletProvider } = useWalletStore.getState();
+        if (!walletProvider) {
+            console.error("❌ Wallet provider no definido en pushTX()");
+            return null;
+        }
+        return await walletConfig[walletProvider as keyof WalletConfig].pushTX(txHex);
+    }
 }
 
-if (!(globalThis)[globalWalletKey]) {
-	(globalThis)[globalWalletKey] = new WalletManager();
-}
+const useWalletStore = create<WalletManagerInterface>(() => new WalletManager());
 
-function useWallet(): WalletManager {
-	return (globalThis)[globalWalletKey] as WalletManager;
+function useWallet(): WalletManagerInterface {
+    return useWalletStore();
 }
 
 export { WalletManager, useWallet };
