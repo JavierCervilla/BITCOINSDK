@@ -5,8 +5,7 @@
   "license": "MIT",
   "exports": {
     ".": "./src/mod.ts",
-    "./core": "./src/core/index.ts",
-    "./ui": "./src/ui/index.ts"
+    "./core": "./src/core/index.ts"
   },
   "tasks": {
     "build": "deno run -A src/build.ts",
