@@ -9,10 +9,8 @@
     "./ui": "./src/ui/index.ts"
   },
   "tasks": {
-    "dev": "deno run -A npm:vite --mode dev",
     "build": "deno run -A src/build.ts",
     "core-docs": "deno doc src/core/index.ts > docs/core.md",
-    "ui-docs": "deno doc  --output=docs/ui src/ui/index.ts",
     "npm": "deno task build && cd npm && npm publish --access public",
     "jsr": "deno publish --no-check --allow-slow-types",
     "publish": "deno task jsr && deno task npm",
@@ -31,11 +29,8 @@
   "nodeModulesDir":"auto",
   "imports": {
     "@/": "./src/",
-    "@styles/": "./src/ui/styles/",
     "@leather-wallet/types": "npm:@leather-wallet/types@^0.2.1",
     "@leather.io/rpc": "npm:@leather.io/rpc@^2.5.13",
-    "bitcoinjs-lib": "npm:bitcoinjs-lib@^7.0.0-rc.0",
-    "vite": "npm:vite@^6.2.1",
-    "zustand": "npm:zustand@^5.0.3"
+    "bitcoinjs-lib": "npm:bitcoinjs-lib@^7.0.0-rc.0"
   }
 }
