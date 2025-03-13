@@ -1,18 +1,15 @@
 {
   "name": "@universelle/bitcoinsdk",
   "description": "A Deno SDK for bitcoin and other bitcoin protocols as Counterparty",
-  "version": "0.2.39",
+  "version": "0.2.54",
   "license": "MIT",
   "exports": {
     ".": "./src/mod.ts",
-    "./core": "./src/core/index.ts",
-    "./ui": "./src/ui/index.ts"
+    "./core": "./src/core/index.ts"
   },
   "tasks": {
-    "dev": "deno run -A npm:vite --mode dev",
     "build": "deno run -A src/build.ts",
     "core-docs": "deno doc src/core/index.ts > docs/core.md",
-    "ui-docs": "deno doc  --output=docs/ui src/ui/index.ts",
     "npm": "deno task build && cd npm && npm publish --access public",
     "jsr": "deno publish --no-check --allow-slow-types",
     "publish": "deno task jsr && deno task npm",
@@ -31,18 +28,8 @@
   "nodeModulesDir":"auto",
   "imports": {
     "@/": "./src/",
-    "@styles/": "./src/ui/styles/",
     "@leather-wallet/types": "npm:@leather-wallet/types@^0.2.1",
     "@leather.io/rpc": "npm:@leather.io/rpc@^2.5.13",
-    "@types/react": "npm:@types/react@^19.0.10",
-    "@types/react-dom": "npm:@types/react-dom@^19.0.4",
-    "bitcoinjs-lib": "npm:bitcoinjs-lib@^7.0.0-rc.0",
-    "class-variance-authority": "npm:class-variance-authority@^0.7.1",
-    "lucide-react": "npm:lucide-react@^0.474.0",
-    "react": "npm:react@^19.0.0",
-    "react-dom": "npm:react-dom@^19.0.0",
-    "react-hot-toast": "npm:react-hot-toast@^2.5.1",
-    "react-router-dom": "npm:react-router-dom@^7.1.3",
-    "vite": "npm:vite@^6.2.1"
+    "bitcoinjs-lib": "npm:bitcoinjs-lib@^7.0.0-rc.0"
   }
 }

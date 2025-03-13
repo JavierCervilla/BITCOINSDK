@@ -4,7 +4,6 @@ BitcoinSDK is a powerful and modular JavaScript/TypeScript SDK designed to seaml
 With built-in support for multiple wallet providers, PSBT signing, and atomic swaps via OpenBook, BitcoinSDK provides developers with an efficient and scalable way to interact with the Bitcoin ecosystem.
 
 ## ✨ Features
-- ✅ Multi-wallet support: Connect, sign transactions, and manage wallets effortlessly.
 - ✅ Bitcoin RPC utilities: Fetch balances, send raw transactions, and interact with the Bitcoin blockchain.
 - ✅ OpenBook Protocol Integration: Easily list and trade Counterparty assets via atomic swaps.
 - ✅ React-ready UI components: Prebuilt components for fast integration.
@@ -50,32 +49,6 @@ const orderbook = await bitcoinsdk.openbook.getAtomicSales({
 ```
 - 🔹 Provides access to Bitcoin, Counterparty, and OpenBook APIs.
 - 🔹 No UI dependencies—perfect for backend use or custom UI projects.
-
-
-### 2️⃣ bitcoinsdk/ui - Prebuilt UI Components
-If you want to quickly integrate wallet connect button use the web component
-
-```ts
-<connect-wallet-button></connect-wallet-button>
-
-```
-
-- 🔹 Includes prebuilt UI components for React.
-- 🔹 Integrates seamlessly with multiple wallet providers.
-
-if you want to customize the wallet connect button you have this css variables accessible:
-
-```css
-:host {
-    --wallet-button-bg: #fefefe;
-    --wallet-button-text: #000;
-    --wallet-button-border: #ff9900;
-    --wallet-button-hover-bg: #ff9900;
-    --wallet-font-family: "Arial", sans-serif;
-    --wallet-width: 184px;
-    --wallet-height: 48px;
-}
-```
 
 
 ## 📖 Documentation
